@@ -1,0 +1,25 @@
+---
+// Responsive <picture> (AVIF → WebP) from the image manifest. Width/height always set → zero CLS.
+import { img, srcset, src } from '../lib/img.js';
+interface Props {
+  k: string; alt: string; sizes?: string; class?: string; eager?: boolean;
+  pos?: string; style?: string; imgClass?: string; fetchpriority?: 'high' | 'low' | 'auto';
+}
+const { k, alt, sizes = '100vw', class: cls, eager = false, pos, style, imgClass, fetchpriority } = Astro.props;
+const m = img(k);
+---
+<picture class={cls} style={style}>
+  <source type="image/avif" srcset={srcset(k, 'avif')} sizes={sizes} />
+  <source type="image/webp" srcset={srcset(k, 'webp')} sizes={sizes} />
+  <img
+    src={src(k, 'webp')}
+    width={m.w}
+    height={m.h}
+    alt={alt}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding={eager ? 'sync' : 'async'}
+    fetchpriority={fetchpriority ?? (eager ? 'high' : undefined)}
+    class={imgClass}
+    style={`background:${m.bg};${pos ? `object-position:${pos};` : ''}`}
+  />
+</picture>

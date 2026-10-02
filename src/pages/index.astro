@@ -1,0 +1,437 @@
+---
+import Base from '../layouts/Base.astro';
+import Pic from '../components/Pic.astro';
+import Lines from '../components/Lines.astro';
+import GownCard from '../components/GownCard.astro';
+import JournalCard from '../components/JournalCard.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import Rail from '../components/Rail.astro';
+import gowns from '../data/gowns.js';
+import posts from '../data/posts.js';
+import { designers } from '../data/designers.js';
+import { testimonials } from '../data/testimonials.js';
+import { site } from '../data/site.js';
+
+const featuredSlugs = ['jess', 'hypnolia', 'margo', 'cordelia', 'palace', 'konstantsia', 'claire', 'rosario', 'lika', 'savina', 'procella', 'elison'];
+const featured = featuredSlugs.map((s) => gowns.find((g) => g.slug === s)).filter(Boolean);
+const journal = ['wedding-dress-shopping-guide', 'wedding-gowns-based-on-venue', 'bridal-alterations'].map((s) => posts.find((p) => p.slug === s));
+---
+<Base
+  title="La Soirée Bridal | Kalamazoo, Michigan Bridal Boutique"
+  description="Private bridal salon near Kalamazoo, Michigan. European wedding gowns by Eva Lendel, Anna Sposa, DAMA Couture and Luce Sposa, by appointment."
+  header="transparent"
+  image="s/boutique-salon"
+  preload={[{ href: '/video/poster-1280.avif', as: 'image', type: 'image/avif', media: '(min-width: 768px)' }, { href: '/video/poster-720.avif', as: 'image', type: 'image/avif', media: '(max-width: 767.98px)' }]}
+>
+  <!-- 1 · HERO -->
+  <section class="hero on-dark" aria-labelledby="hero-title">
+    <div class="hero-media" data-hero-media>
+      <picture>
+        <source media="(min-width: 768px)" type="image/avif" srcset="/video/poster-1280.avif" />
+        <source media="(min-width: 768px)" type="image/webp" srcset="/video/poster-1280.webp" />
+        <source type="image/avif" srcset="/video/poster-720.avif" />
+        <img src="/video/poster-720.webp" alt="" width="720" height="1280" fetchpriority="high" class="hero-poster" />
+      </picture>
+      <video class="hero-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"
+        data-src-desktop="/video/hero-1280.mp4" data-src-mobile="/video/hero-720x1280.mp4"></video>
+    </div>
+    <div class="wrap hero-content">
+      <p class="eyebrow hero-eyebrow">Richland, MI · By appointment</p>
+      <Lines tag="h1" id="hero-title" class="hero-title" lines={['For the bride who', 'wants something <em>different.</em>']} delay={0.25} />
+      <div class="hero-foot">
+        <p class="hero-sub">European bridal gowns. Private appointments.<br />An experience entirely your own.</p>
+        <div class="btn-row">
+          <a class="btn btn-light" href="/book/" data-track="book_click" data-track-label="hero">Book an appointment <span class="arrow" aria-hidden="true"></span></a>
+          <a class="link hero-link" href="/collection/">Explore the collection</a>
+        </div>
+      </div>
+    </div>
+    <button class="hero-pause" type="button" data-video-toggle aria-pressed="false" hidden>
+      <span class="sr-only">Pause background video</span>
+      <svg viewBox="0 0 16 16" aria-hidden="true"><rect class="i-pause" x="4" y="3" width="2" height="10" /><rect class="i-pause" x="10" y="3" width="2" height="10" /><path class="i-play" d="M5 3l8 5-8 5z" /></svg>
+    </button>
+    <a class="scroll-cue" href="#statement" aria-label="Scroll to content"><span></span></a>
+  </section>
+
+  <!-- 2 · STATEMENT -->
+  <section class="section statement" id="statement" aria-labelledby="statement-title">
+    <div class="wrap grid-12">
+      <div class="st-text">
+        <p class="eyebrow" data-reveal>La Soirée</p>
+        <Lines id="statement-title" class="display st-title" lines={['Your dress should', 'feel as unforgettable', 'as the moment', 'you <em>find it.</em>']} />
+        <div class="body-copy st-copy" data-reveal style="--d:.2s">
+          <p>La Soirée is a small, private bridal salon outside Kalamazoo. We carry a tightly edited collection of European gowns — chosen for their construction, their detail and the way they move — and we show them one bride at a time.</p>
+          <p>No crowded showroom. No rush. Just you, the people you love, and a stylist whose only job that afternoon is you.</p>
+        </div>
+        <a class="link" href="/about/" data-reveal style="--d:.3s">Our story</a>
+      </div>
+      <figure class="st-img-a media" data-reveal="mask">
+        <Pic k="s/boutique-display" alt="A lace gown displayed on a form beside a wall of white flowers inside La Soirée Bridal" sizes="(min-width: 900px) 34vw, 70vw" pos="50% 40%" />
+      </figure>
+      <figure class="st-img-b media" data-reveal="mask" style="--d:.15s">
+        <Pic k="s/boutique-bodice" alt="Close view of a beaded lace bodice on the boutique rail" sizes="(min-width: 900px) 18vw, 40vw" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- 3 · EXPERIENCE: PRIVATE · CURATED · PERSONAL -->
+  <section class="section-sm pillars" aria-labelledby="pillars-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-title">
+          <p class="eyebrow" data-reveal>The La Soirée experience</p>
+          <Lines id="pillars-title" class="h2" lines={['Three things', 'we never <em>compromise.</em>']} />
+        </div>
+      </div>
+      <ol class="pillar-list" role="list">
+        {[
+          { n: 'I', t: 'Private', k: 's/boutique-interior', pos: '45% 50%', alt: 'The salon floor at La Soirée Bridal with chandeliers and gowns on brass rails', c: 'Appointments are scheduled so the salon revolves around one bride — never a crowded showroom floor.' },
+          { n: 'II', t: 'Curated', k: 's/boutique-rack', pos: '50% 30%', alt: 'Lace and tulle gowns hanging on the boutique rail', c: 'European houses chosen for construction, detail and something you won’t see in every other shop.' },
+          { n: 'III', t: 'Personal', k: 's/boutique-florals', pos: '50% 55%', alt: 'Pink and blush florals arranged on a white console in the boutique', c: 'A dedicated stylist, the gowns you choose plus a few she knows you shouldn’t miss.' },
+        ].map((p, i) => (
+          <li class="pillar" data-reveal style={`--d:${i * 0.12}s`}>
+            <div class="media pillar-media"><Pic k={p.k} alt={p.alt} sizes="(min-width: 900px) 30vw, 88vw" pos={p.pos} /></div>
+            <div class="pillar-text">
+              <span class="numeral pillar-n" aria-hidden="true">{p.n}</span>
+              <h3 class="h3">{p.t}</h3>
+              <p class="muted">{p.c}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 4 · FEATURED COLLECTION -->
+  <section class="section collection-teaser bg-cream" aria-labelledby="collection-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-title">
+          <p class="eyebrow" data-reveal>The collection</p>
+          <Lines id="collection-title" class="h2" lines={['Gowns with a', '<em>point of view.</em>']} />
+        </div>
+        <div class="sh-aside" data-reveal style="--d:.2s">
+          <p class="body-copy">Sculpted satin, hand-placed lace, overskirts that turn one gown into two. Most of our gowns are $2,500–$3,000; the full range is $1,500–$6,000.</p>
+        </div>
+      </div>
+    </div>
+    <Rail label="Featured gowns">
+      {featured.map((g, i) => <GownCard gown={g} sizes="(min-width: 1100px) 26vw, (min-width: 700px) 40vw, 72vw" />)}
+    </Rail>
+    <div class="wrap" style="margin-top: 2.5rem">
+      <a class="btn btn-ghost" href="/collection/">Explore the collection <span class="arrow" aria-hidden="true"></span></a>
+    </div>
+  </section>
+
+  <!-- 5 · DESIGNERS -->
+  <section class="section designers-index" aria-labelledby="designers-title">
+    <div class="wrap grid-12">
+      <div class="di-head">
+        <p class="eyebrow" data-reveal>Our designers</p>
+        <Lines id="designers-title" class="h2" lines={['From Europe,', 'with <em>intention.</em>']} />
+        <p class="body-copy" data-reveal style="--d:.2s">Five houses from Ukraine and Poland — chosen for artistry, fit and fabric rather than volume.</p>
+      </div>
+      <ul class="di-list" role="list" data-designer-list>
+        {designers.map((d, i) => (
+          <li data-reveal style={`--d:${i * 0.06}s`}>
+            <a href={`/designers/${d.slug}/`} data-img={i} data-cursor="Discover">
+              <span class="di-name serif">{d.name}</span>
+              <span class="di-origin">{d.origin}</span>
+              <span class="di-price">{d.price}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="di-preview media" aria-hidden="true">
+        {designers.map((d, i) => <Pic k={d.hero} alt="" sizes="30vw" class={i === 0 ? 'on' : ''} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · PRIVATE APPOINTMENT -->
+  <section class="appt-feature on-dark" aria-labelledby="appt-title">
+    <div class="media af-media"><Pic k="s/boutique-salon" alt="" sizes="100vw" pos="50% 55%" imgClass="af-img" /></div>
+    <div class="wrap af-content">
+      <p class="eyebrow" data-reveal>Your appointment</p>
+      <Lines id="appt-title" class="display" lines={['Your appointment.', 'Your people.', 'Your <em>moment.</em>']} />
+      <p class="lede" data-reveal style="--d:.2s">Bring the people whose opinion matters. Choose eight to twelve gowns from the salon, and let your stylist add the few she knows you shouldn’t leave without trying.</p>
+      <div class="facts" style="--n:3;--d:.3s" data-reveal>
+        <div class="fact"><span class="big">1</span><span class="lbl">Dedicated stylist</span></div>
+        <div class="fact"><span class="big">4</span><span class="lbl">Guests welcome</span></div>
+        <div class="fact"><span class="big">1–2<small style="font-size:.4em"> hrs</small></span><span class="lbl">Unhurried time</span></div>
+      </div>
+      <div class="btn-row" data-reveal style="--d:.35s">
+        <a class="btn btn-light" href="/book/" data-track="book_click" data-track-label="appointment_section">Book your appointment <span class="arrow" aria-hidden="true"></span></a>
+        <a class="link" href="/experience/">What to expect</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · VIP -->
+  <section class="section vip-teaser on-dark" aria-labelledby="vip-title">
+    <div class="vip-bg" aria-hidden="true"><Pic k="s/chandelier" alt="" sizes="100vw" /></div>
+    <div class="wrap grid-12 vt-grid">
+      <div class="vt-text">
+        <p class="eyebrow" data-reveal>The Champagne VIP</p>
+        <Lines id="vip-title" class="display" lines={['Make an', 'afternoon <em>of it.</em>']} />
+        <p class="lede" data-reveal style="--d:.2s">The entire boutique, closed to everyone but you and your party. Champagne poured, two unhurried hours, every gown within reach.</p>
+        <dl class="vip-facts" data-reveal style="--d:.3s">
+          <div><dt>Champagne</dt><dd>poured for your party</dd></div>
+          <div><dt>You + 6</dt><dd>guests</dd></div>
+          <div><dt>The boutique</dt><dd>reserved entirely for you</dd></div>
+          <div><dt>2 hours</dt><dd>· $125</dd></div>
+        </dl>
+        <div class="btn-row" data-reveal style="--d:.4s">
+          <a class="btn btn-light" href="/vip/">Explore VIP appointments <span class="arrow" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <figure class="vt-img media" data-reveal="mask">
+        <Pic k="s/champagne" alt="Champagne glasses raised in a toast" sizes="(min-width: 900px) 34vw, 90vw" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- 8 · SOCIAL PROOF -->
+  <section class="section proof" aria-labelledby="proof-title">
+    <div class="wrap grid-12">
+      <figure class="proof-img media" data-reveal="mask">
+        <Pic k="s/boutique-rack-ivory" alt="Ivory lace gowns on the boutique rail" sizes="(min-width: 900px) 45vw, 100vw" pos="50% 40%" />
+      </figure>
+      <div class="proof-text">
+        <p class="eyebrow" data-reveal>In their words</p>
+        <h2 id="proof-title" class="sr-only">What brides say about La Soirée</h2>
+        <div class="quotes" data-quotes>
+          {testimonials.map((t, i) => (
+            <figure class="quote" data-reveal style={`--d:${i * 0.12}s`}>
+              <blockquote class="serif">“{t.quote}”</blockquote>
+              <figcaption class="caps muted">{t.name} · {t.source}</figcaption>
+            </figure>
+          ))}
+        </div>
+        <a class="link" href={site.social.instagram} target="_blank" rel="noopener" data-reveal>Our brides on Instagram · {site.social.instagramHandle}<span class="sr-only"> (opens in a new tab)</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · THE BOUTIQUE -->
+  <section class="section boutique bg-cream" aria-labelledby="boutique-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-title">
+          <p class="eyebrow" data-reveal>The salon</p>
+          <Lines id="boutique-title" class="h2" lines={['A bridal salon designed', 'to feel entirely <em>yours.</em>']} />
+        </div>
+        <div class="sh-aside" data-reveal style="--d:.2s">
+          <p class="body-copy">3,000 square feet of light, chandeliers and gowns on brass rails — with private dressing rooms and a lounge for the people you bring.</p>
+        </div>
+      </div>
+      <div class="mosaic">
+        <figure class="m1 media" data-reveal="mask"><Pic k="s/boutique-lounge" alt="The guest lounge: tufted white armchair, sofa and a marble table with blush flowers" sizes="(min-width: 900px) 58vw, 100vw" /></figure>
+        <figure class="m2 media" data-reveal="mask" style="--d:.1s"><Pic k="s/boutique-flowers" alt="Blush flowers and a gown displayed in the boutique" sizes="(min-width: 900px) 30vw, 50vw" /></figure>
+        <figure class="m3 media" data-reveal="mask" style="--d:.2s"><Pic k="s/boutique-rail" alt="A rail of embellished ivory gowns" sizes="(min-width: 900px) 24vw, 50vw" /></figure>
+        <figure class="m4 media" data-reveal="mask" style="--d:.25s"><Pic k="s/acc-pearls" alt="Pearl and crystal bridal hair accessories on a glass shelf" sizes="(min-width: 900px) 20vw, 50vw" /></figure>
+        <figure class="m5 media" data-reveal="mask" style="--d:.3s"><Pic k="s/boutique-gowns" alt="Ivory gowns hanging side by side" sizes="(min-width: 900px) 24vw, 50vw" /></figure>
+      </div>
+      <div class="boutique-foot" data-reveal>
+        <p class="small muted">{site.address.street}, {site.address.suite}, Richland · minutes from Kalamazoo and Portage · about an hour from Grand Rapids</p>
+        <a class="link" href="/contact/">Plan your visit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · JOURNAL -->
+  <section class="section journal-teaser" aria-labelledby="journal-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-title">
+          <p class="eyebrow" data-reveal>The journal</p>
+          <Lines id="journal-title" class="h2" lines={['Before you <em>visit.</em>']} />
+        </div>
+        <div class="sh-aside" data-reveal><a class="link" href="/journal/">All articles</a></div>
+      </div>
+      <div class="jt-grid">
+        {journal.map((p, i) => <div data-reveal style={`--d:${i * 0.1}s`}><JournalCard post={p} /></div>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · FINAL CTA -->
+  <FinalCTA image="s/editorial-staircase" pos="68% 50%" />
+</Base>
+
+<style is:global>
+  /* HERO */
+  .hero { position: relative; height: 100svh; min-height: 620px; max-height: 1200px; overflow: hidden; display: grid; align-items: end; background: var(--charcoal); }
+  .hero-media, .hero-media picture, .hero-poster, .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-video { opacity: 0; transition: opacity 1.4s var(--ease); }
+  .hero-video.playing { opacity: 1; }
+  .hero-media::after { content: ''; position: absolute; inset: 0; background:
+    linear-gradient(180deg, rgba(18,15,13,.5) 0%, rgba(18,15,13,.12) 20%, rgba(18,15,13,.18) 45%, rgba(18,15,13,.78) 100%),
+    linear-gradient(90deg, rgba(18,15,13,.55) 0%, rgba(18,15,13,.15) 55%, rgba(18,15,13,0) 100%); }
+  .hero-poster { animation: kb 12s var(--ease-out) both; }
+  .hero-content { position: relative; z-index: 1; padding-bottom: clamp(2.5rem, 6vh, 5rem); }
+  .hero-title { font-size: clamp(3.1rem, 7.6vw, 8.25rem); line-height: .94; letter-spacing: -.02em; max-width: 13ch; text-shadow: 0 2px 40px rgba(18,15,13,.25); }
+  .hero-eyebrow { margin-bottom: 1.75rem; animation: fadeUp 1.2s var(--ease-out) .1s both; }
+  .hero-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 1.75rem 3rem; margin-top: clamp(1.75rem, 4vh, 3rem); border-top: 1px solid rgba(247,243,236,.28); padding-top: 1.75rem; animation: fadeUp 1.4s var(--ease-out) .9s both; }
+  .hero-sub { font-size: clamp(1rem, 1.25vw, 1.15rem); line-height: 1.6; color: rgba(247,243,236,.88); font-weight: 300; }
+  .hero-link { color: var(--ivory); }
+  .js .hero .split-line > span { transition-duration: 1.6s; }
+  .hero-pause { position: absolute; z-index: 2; right: var(--gutter); top: calc(var(--header-h) + 1rem); width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(247,243,236,.45); color: var(--ivory); display: grid; place-items: center; opacity: .75; transition: opacity .3s; }
+  .hero-pause:hover { opacity: 1; }
+  .hero-pause svg { width: 14px; height: 14px; fill: currentColor; }
+  .hero-pause .i-play { display: none; }
+  .hero-pause[aria-pressed='true'] .i-play { display: block; }
+  .hero-pause[aria-pressed='true'] .i-pause { display: none; }
+  .scroll-cue { position: absolute; z-index: 2; left: 50%; bottom: 0; width: 44px; height: 64px; transform: translateX(-50%); display: grid; place-items: end center; }
+  .scroll-cue span { width: 1px; height: 46px; background: rgba(247,243,236,.35); position: relative; overflow: hidden; }
+  .scroll-cue span::after { content: ''; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: var(--ivory); animation: cue 2.6s var(--ease) infinite; }
+  @keyframes cue { to { top: 100%; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } }
+  @media (max-width: 760px) {
+    .hero-title { font-size: clamp(2.75rem, 12.5vw, 4.5rem); }
+    .hero-eyebrow::before { display: none; }
+    .hero-foot { border-top: 0; padding-top: 0; }
+    .hero-foot .btn-row { width: 100%; }
+    .hero-foot .btn { flex: 1 1 100%; }
+    .scroll-cue { display: none; }
+  }
+
+  /* STATEMENT */
+  .st-text { grid-column: 1 / span 6; align-self: center; display: grid; gap: 2rem; justify-items: start; }
+  .st-title { font-size: clamp(2.4rem, 4.6vw, 5rem); }
+  .st-img-a { grid-column: 8 / span 5; grid-row: 1; aspect-ratio: 3/4; }
+  .st-img-b { grid-column: 7 / span 3; grid-row: 1; align-self: end; aspect-ratio: 3/4; margin-bottom: -4rem; z-index: 1; border: 10px solid var(--ivory); border-width: 10px 10px 0 0; }
+  @media (max-width: 900px) {
+    .st-text, .st-img-a { grid-column: 1 / -1; grid-row: auto; }
+    .st-img-a { margin-top: 3rem; width: 78%; justify-self: end; }
+    .st-img-b { grid-column: 1 / span 6; grid-row: auto; margin-top: -9rem; margin-bottom: 0; }
+  }
+
+  /* PILLARS */
+  .pillar-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.25rem, 3vw, 3rem); list-style: none; padding: 0; }
+  .pillar:nth-child(2) { margin-top: clamp(3rem, 8vw, 7rem); }
+  .pillar:nth-child(3) { margin-top: clamp(1.5rem, 4vw, 3.5rem); }
+  .pillar-media { aspect-ratio: 3 / 4; }
+  .pillar-media img { transition: transform 1.6s var(--ease-out); }
+  .pillar:hover .pillar-media img { transform: scale(1.04); }
+  .pillar-text { display: grid; grid-template-columns: auto 1fr; column-gap: 1.25rem; row-gap: .6rem; padding-top: 1.5rem; }
+  .pillar-n { grid-row: span 2; font-size: 1.2rem; color: var(--brass-text); padding-top: .4rem; min-width: 2rem; }
+  .pillar h3 { font-size: clamp(2rem, 3vw, 2.75rem); }
+  .pillar p { max-width: 24rem; }
+  @media (max-width: 900px) {
+    .pillar-list { grid-template-columns: 1fr; gap: 3.5rem; }
+    .pillar:nth-child(n) { margin-top: 0; }
+    .pillar:nth-child(2) { width: 84%; margin-left: auto; }
+  }
+  @media (min-width: 600px) and (max-width: 900px) { .pillar-media { aspect-ratio: 4 / 3; } }
+
+  /* DESIGNERS INDEX */
+  .di-head { grid-column: 1 / span 4; display: grid; gap: 1.5rem; align-content: start; }
+  .di-list { grid-column: 5 / span 5; list-style: none; padding: 0; border-top: 1px solid var(--line); align-self: start; }
+  .di-list li { border-bottom: 1px solid var(--line); }
+  .di-list a { display: grid; grid-template-columns: 1fr auto; grid-template-areas: 'name price' 'origin price'; align-items: center; gap: .1rem 1.5rem; padding: 1.5rem 0; text-decoration: none; transition: padding .5s var(--ease), color .4s; }
+  .di-name { grid-area: name; font-size: clamp(2rem, 3.6vw, 3.3rem); line-height: 1.05; }
+  .di-origin { grid-area: origin; font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .di-price { grid-area: price; font-size: .85rem; color: var(--muted); }
+  .di-list a:hover, .di-list a:focus-visible { padding-left: 1rem; }
+  .di-list a:hover .di-name { font-style: italic; }
+  .di-preview { grid-column: 10 / -1; aspect-ratio: 2/3; position: sticky; top: calc(var(--header-h) + 2rem); align-self: start; }
+  .di-preview picture { position: absolute; inset: 0; opacity: 0; transition: opacity .7s var(--ease); }
+  .di-preview picture.on { opacity: 1; }
+  .di-preview img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+  @media (max-width: 1000px) {
+    .di-head, .di-list { grid-column: 1 / -1; }
+    .di-list { margin-top: 2.5rem; }
+    .di-preview { display: none; }
+  }
+
+  /* APPOINTMENT FEATURE */
+  .appt-feature { position: relative; min-height: min(110svh, 1100px); display: grid; align-items: end; overflow: hidden; }
+  .af-media { position: absolute; inset: -6% 0; }
+  .af-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,17,15,.82) 0%, rgba(20,17,15,.55) 45%, rgba(20,17,15,.15) 100%); }
+  .af-content { position: relative; padding-block: var(--section); display: grid; gap: 2.25rem; max-width: var(--maxw); }
+  .af-content > * { max-width: 46rem; }
+  .af-content .display { font-size: clamp(2.6rem, 6vw, 6.25rem); }
+  @media (max-width: 760px) { .af-media::after { background: linear-gradient(180deg, rgba(20,17,15,.35), rgba(20,17,15,.85) 60%); } }
+
+  /* VIP */
+  .vip-teaser { position: relative; overflow: hidden; background: #1a1613; --mask-bg: #1a1613; }
+  .vip-bg { position: absolute; inset: 0; opacity: .22; }
+  .vip-bg img { width: 100%; height: 100%; object-fit: cover; filter: sepia(.5) contrast(1.1); }
+  .vt-grid { position: relative; align-items: center; row-gap: 3.5rem; }
+  .vt-text { grid-column: 1 / span 6; display: grid; gap: 2rem; justify-items: start; }
+  .vt-text .display { font-size: clamp(2.8rem, 6.4vw, 6.75rem); color: #f3e9d8; }
+  .vt-img { grid-column: 8 / -1; aspect-ratio: 4/5; }
+  .vip-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0; width: 100%; max-width: 34rem; border-top: 1px solid var(--line-light); }
+  .vip-facts div { padding: 1.1rem 0; border-bottom: 1px solid var(--line-light); }
+  .vip-facts div:nth-child(odd) { padding-right: 1rem; }
+  .vip-facts div:nth-child(even) { padding-left: 1rem; border-left: 1px solid var(--line-light); }
+  .vip-facts dt { font-family: var(--serif); font-size: 1.55rem; line-height: 1.1; color: #f3e9d8; }
+  .vip-facts dd { margin: .25rem 0 0; font-size: .82rem; color: rgba(247,243,236,.7); }
+  @media (max-width: 900px) { .vt-text, .vt-img { grid-column: 1 / -1; } .vt-img { width: 80%; justify-self: end; } }
+
+  /* PROOF */
+  .proof-img { grid-column: 1 / span 5; aspect-ratio: 4/5; align-self: start; }
+  .proof-text { grid-column: 7 / -1; display: grid; gap: 2.5rem; align-content: center; justify-items: start; }
+  .quotes { display: grid; gap: 2.75rem; }
+  .quote blockquote { font-size: clamp(1.6rem, 2.7vw, 2.6rem); line-height: 1.22; font-style: italic; }
+  .quote:first-child blockquote { font-size: clamp(2rem, 3.6vw, 3.5rem); font-style: normal; }
+  .quote figcaption { margin-top: 1rem; }
+  @media (max-width: 900px) { .proof-img, .proof-text { grid-column: 1 / -1; } .proof-img { margin-bottom: 3rem; width: 85%; } }
+
+  /* BOUTIQUE MOSAIC */
+  .mosaic { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: clamp(70px, 8.5vw, 125px); gap: clamp(.75rem, 1.5vw, 1.5rem); }
+  .mosaic figure { margin: 0; }
+  .m1 { grid-column: 1 / span 7; grid-row: 1 / span 5; }
+  .m2 { grid-column: 8 / span 5; grid-row: 1 / span 4; }
+  .m3 { grid-column: 8 / span 2; grid-row: 5 / span 3; }
+  .m4 { grid-column: 10 / span 3; grid-row: 5 / span 3; }
+  .m5 { grid-column: 3 / span 5; grid-row: 6 / span 3; }
+  @media (max-width: 760px) {
+    .mosaic { grid-auto-rows: 22vw; }
+    .m1 { grid-column: 1 / -1; grid-row: span 4; }
+    .m2 { grid-column: 1 / span 7; grid-row: span 4; }
+    .m3 { grid-column: 8 / -1; grid-row: span 2; }
+    .m4 { grid-column: 8 / -1; grid-row: span 2; }
+    .m5 { display: none; }
+  }
+  .boutique-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem 2rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+
+  /* JOURNAL */
+  .jt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.25rem, 3vw, 3rem); }
+  .jt-grid > :nth-child(2) { margin-top: clamp(2rem, 5vw, 4.5rem); }
+  @media (max-width: 900px) { .jt-grid { grid-template-columns: 1fr; gap: 3rem; } .jt-grid > :nth-child(2) { margin-top: 0; } }
+</style>
+
+<script>
+  // Hero video: only on capable connections, honours reduced motion + Save-Data, falls back to poster.
+  const v = document.querySelector<HTMLVideoElement>('.hero-video');
+  const btn = document.querySelector<HTMLButtonElement>('[data-video-toggle]');
+  const conn = (navigator as any).connection;
+  const slow = conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ''));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (v && !slow && !reduce) {
+    const desktop = matchMedia('(min-width: 768px)').matches;
+    const base = desktop ? v.dataset.srcDesktop! : v.dataset.srcMobile!;
+    // H.264 where supported (Safari, Chrome, Edge); VP9 WebM otherwise (e.g. Chromium builds without H.264)
+    v.src = v.canPlayType('video/mp4; codecs="avc1.42E01E"') ? base : base.replace('.mp4', '.webm');
+    v.addEventListener('playing', () => { v.classList.add('playing'); if (btn) btn.hidden = false; }, { once: true });
+    v.play().catch(() => { /* autoplay blocked — poster stays */ });
+    btn?.addEventListener('click', () => {
+      const paused = btn.getAttribute('aria-pressed') === 'true';
+      if (paused) { v.play(); btn.setAttribute('aria-pressed', 'false'); btn.querySelector('.sr-only')!.textContent = 'Pause background video'; }
+      else { v.pause(); btn.setAttribute('aria-pressed', 'true'); btn.querySelector('.sr-only')!.textContent = 'Play background video'; }
+    });
+    // pause when off-screen to save battery
+    new IntersectionObserver(([e]) => { if (btn?.getAttribute('aria-pressed') === 'true') return; e.isIntersecting ? v.play().catch(() => {}) : v.pause(); }).observe(v);
+  }
+
+  // Designer index: hover/focus swaps the preview portrait
+  const list = document.querySelector('[data-designer-list]');
+  const previews = document.querySelectorAll('.di-preview picture');
+  list?.querySelectorAll<HTMLAnchorElement>('a[data-img]').forEach((a) => {
+    const show = () => previews.forEach((p, i) => p.classList.toggle('on', String(i) === a.dataset.img));
+    a.addEventListener('mouseenter', show);
+    a.addEventListener('focus', show);
+  });
+</script>

@@ -1,0 +1,21 @@
+---
+import Pic from './Pic.astro';
+import Lines from './Lines.astro';
+import { site } from '../data/site.js';
+import { ratio } from '../lib/img.js';
+interface Props { image?: string; lines?: string[]; pos?: string }
+const { image = 'g/anna-sposa--maritam--0', lines = ['Your dress', 'is <em>waiting.</em>'], pos = '50% 30%' } = Astro.props;
+const split = ratio(image) < 1.1; // portrait imagery sits beside the copy instead of under it
+---
+<section class:list={['final-cta on-dark', { split }]} aria-labelledby="final-cta-title" data-hide-bookbar>
+  <div class="media fc-media"><Pic k={image} alt="" sizes={split ? '(min-width: 900px) 45vw, 100vw' : '100vw'} pos={pos} imgClass="fc-img" /></div>
+  <div class="wrap fc-content">
+    <p class="eyebrow">Open by appointment</p>
+    <Lines lines={lines} class="display" id="final-cta-title" />
+    <div class="btn-row" data-reveal style="--d:.3s">
+      <a class="btn btn-light" href="/book/" data-track="book_click" data-track-label="final_cta">Book your appointment <span class="arrow" aria-hidden="true"></span></a>
+      <a class="link" href="/contact/">Ask us a question</a>
+    </div>
+    <p class="fc-address small" data-reveal style="--d:.45s">{site.address.street}, {site.address.suite} · {site.address.city}, Michigan · <a href={site.mapsUrl} target="_blank" rel="noopener">Directions</a></p>
+  </div>
+</section>

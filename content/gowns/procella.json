@@ -1,0 +1,15 @@
+{
+  "name": "Procella",
+  "designer": "dama-couture",
+  "silhouette": "Mermaid",
+  "neckline": "V-Neck",
+  "images": [
+    "/media-source/gowns/dama-couture--procella--0.jpg",
+    "/media-source/gowns/dama-couture--procella--1.jpg",
+    "/media-source/gowns/dama-couture--procella--2.jpg",
+    "/media-source/gowns/dama-couture--procella--3.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/procella/",
+  "order": 8
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Palace",
+  "designer": "eva-lendel",
+  "silhouette": "Sheath",
+  "neckline": "Scoop",
+  "images": [
+    "/media-source/gowns/eva-lendel--palace--0.jpg",
+    "/media-source/gowns/eva-lendel--palace--1.jpg",
+    "/media-source/gowns/eva-lendel--palace--2.jpg",
+    "/media-source/gowns/eva-lendel--palace--3.jpg",
+    "/media-source/gowns/eva-lendel--palace--4.jpg",
+    "/media-source/gowns/eva-lendel--palace--5.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/palace/",
+  "order": 7
+}

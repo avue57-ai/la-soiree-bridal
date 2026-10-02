@@ -1,0 +1,112 @@
+---
+import Base from '../layouts/Base.astro';
+import Lines from '../components/Lines.astro';
+import { appointments, site } from '../data/site.js';
+---
+<Base
+  title="Book a Bridal Appointment"
+  description="Book a private bridal appointment near Kalamazoo, Michigan: one-hour, two-hour or Champagne VIP, each with a dedicated stylist."
+  bookBar={false}
+  image="s/boutique-salon"
+>
+  <section class="page-intro wrap book-intro">
+    <div>
+      <p class="eyebrow" data-reveal>Book an appointment</p>
+      <Lines tag="h1" lines={['Reserve your', '<em>time with us.</em>']} delay={0.1} />
+    </div>
+    <ul class="assure" role="list" data-reveal style="--d:.3s">
+      <li>A dedicated stylist for your whole visit</li>
+      <li>8–12 gowns of your choosing, plus her suggestions</li>
+      <li>Confirmation by email from Square</li>
+    </ul>
+  </section>
+
+  <section class="wrap" aria-labelledby="choose">
+    <h2 id="choose" class="caps step-h"><span>01</span> Choose your appointment</h2>
+    <div class="appt-grid" data-appts>
+      {appointments.map((a) => (
+        <div class:list={['appt', { featured: a.featured }]} id={`appt-${a.id}`} data-appt={a.id}>
+          {a.featured ? <span class="tag">Most requested</span> : <span class="tag" style="visibility:hidden">·</span>}
+          <h3 class="serif">{a.name}</h3>
+          <ul>{a.lines.map((l) => <li>{l}</li>)}</ul>
+          <div>
+            <p class="price">{a.price ? `$${a.price}` : 'Free'}<small>{a.minutes >= 60 ? `${a.minutes / 60} hr` : `${a.minutes} min`}</small></p>
+            <p class="sq small">In the calendar: “{a.square}”</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap section-sm" aria-labelledby="time">
+    <h2 id="time" class="caps step-h"><span>02</span> Pick a date &amp; time</h2>
+    <div class="widget" data-widget>
+      <div class="widget-loading" data-widget-loading>
+        <p class="serif" style="font-size:1.4rem">Opening the calendar…</p>
+      </div>
+      <iframe
+        title="La Soirée Bridal appointment calendar (Square)"
+        data-src={site.booking.squareWidget}
+        loading="lazy"
+        allow="payment"
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
+    </div>
+    <p class="small muted fallback">
+      Calendar not loading? <a href={site.booking.squareServices} target="_blank" rel="noopener" data-track="book_click" data-track-label="square_direct">Open booking in a new tab</a>
+      · or call <a href={site.phoneHref}>{site.phone}</a>.
+    </p>
+  </section>
+
+  <section class="wrap section-sm notes" data-hide-bookbar>
+    <div>
+      <h2 class="caps step-h"><span>03</span> Before you arrive</h2>
+      <p class="muted">Bring nude or skin-tone undergarments and up to 4 guests (6 for VIP; no children under 12). If you’ve saved gowns from the collection, tell us their names in the booking notes.</p>
+    </div>
+    <div>
+      <p class="caps muted" style="font-size:.64rem">Find us</p>
+      <p>{site.address.street}, <span style="white-space:nowrap">{site.address.suite}</span><br />{site.address.city}, Michigan {site.address.zip}</p>
+      <p><a class="link" href={site.mapsUrl} target="_blank" rel="noopener">Directions</a></p>
+    </div>
+    <div>
+      <p class="caps muted" style="font-size:.64rem">Good to know</p>
+      <p class="muted">Gowns $1,500–$6,000 · most $2,500–$3,000 · <a href="/faq/">Full FAQ</a></p>
+    </div>
+  </section>
+</Base>
+
+<style is:global>
+  .book-intro { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 2.5rem; }
+  .book-intro h1 { font-size: var(--fs-display); }
+  .assure { list-style: none; padding: 0; display: grid; gap: .6rem; font-size: .95rem; color: var(--muted); border-left: 1px solid var(--line); padding-left: 1.5rem; }
+  .assure li::before { content: '✦'; color: var(--brass); margin-right: .75rem; font-size: .7rem; }
+  @media (max-width: 900px) { .book-intro { grid-template-columns: 1fr; } }
+  .step-h { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; font-family: var(--sans); color: var(--ink); }
+  .step-h span { font-family: var(--serif); font-style: italic; font-size: 1.3rem; letter-spacing: 0; color: var(--brass-text); }
+  .appt { transition: box-shadow .4s var(--ease); }
+  .appt.highlight { box-shadow: inset 0 0 0 2px var(--brass); }
+  .sq { color: var(--muted); margin-top: .6rem; }
+  .appt.featured .sq { color: rgba(247,243,236,.6); }
+  .widget { position: relative; min-height: 760px; border: 1px solid var(--line); background: #fff; }
+  .widget iframe { position: relative; z-index: 1; width: 100%; height: 760px; border: 0; display: block; }
+  .widget-loading { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); }
+  @media (max-width: 700px) { .widget, .widget iframe { min-height: 900px; height: 900px; } }
+  .fallback { margin-top: 1rem; }
+  .fallback a { color: var(--ink); }
+  .notes { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2.5rem; border-top: 1px solid var(--line); padding-bottom: var(--section); }
+  .notes p + p { margin-top: .75rem; }
+  .notes a:not(.link) { color: var(--ink); }
+  @media (max-width: 900px) { .notes { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  // load the Square calendar as soon as the page is interactive (kept off the critical path)
+  const f = document.querySelector<HTMLIFrameElement>('[data-widget] iframe')!;
+  const load = () => { if (!f.src) f.src = f.dataset.src!; };
+  f.addEventListener('load', () => document.querySelector<HTMLElement>('[data-widget-loading]')!.remove(), { once: true });
+  if ('requestIdleCallback' in window) (window as any).requestIdleCallback(load, { timeout: 1200 }); else setTimeout(load, 300);
+  // highlight the appointment type a visitor arrived for (?appointment=vip)
+  const want = new URLSearchParams(location.search).get('appointment');
+  if (want) document.querySelector(`[data-appt="${CSS.escape(want)}"]`)?.classList.add('highlight');
+  if (typeof (window as any).gtag === 'function') (window as any).gtag('event', 'booking_page_view', { appointment: want || 'any' });
+</script>

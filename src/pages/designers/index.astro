@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+import Lines from '../../components/Lines.astro';
+import Pic from '../../components/Pic.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import gowns from '../../data/gowns.js';
+import { designers } from '../../data/designers.js';
+---
+<Base
+  title="European Wedding Dress Designers in Michigan"
+  description="Eva Lendel, Anna Sposa, DAMA Couture, Luce Sposa and our own Soirée collection — the European bridal houses at La Soirée, near Kalamazoo."
+  image="g/eva-lendel--jess--0"
+>
+  <section class="page-intro wrap">
+    <p class="eyebrow" data-reveal>Designers</p>
+    <Lines tag="h1" lines={['Five houses.', 'One <em>sensibility.</em>']} delay={0.1} />
+    <p class="lede" data-reveal style="--d:.3s; margin-top:1.75rem">We carry a handful of European ateliers in depth rather than dozens in passing — so you can see a designer’s full range, not a single sample.</p>
+  </section>
+
+  <div class="wrap houses">
+    {designers.map((d, i) => {
+      const count = gowns.filter((g) => g.designer === d.slug).length;
+      return (
+        <article class:list={['house', { flip: i % 2 }]} aria-labelledby={`h-${d.slug}`}>
+          <a class="house-media media" href={`/designers/${d.slug}/`} data-reveal="mask" data-cursor="Discover" tabindex="-1" aria-hidden="true">
+            <Pic k={d.hero} alt="" sizes="(min-width: 900px) 45vw, 100vw" eager={i === 0} pos="50% 20%" />
+          </a>
+          <div class="house-text" data-reveal style="--d:.15s">
+            <p class="caps muted">{String(i + 1).padStart(2, '0')} · {d.origin}</p>
+            <h2 id={`h-${d.slug}`} class="display"><a href={`/designers/${d.slug}/`}>{d.name}</a></h2>
+            <p class="serif house-line"><em>{d.line}</em></p>
+            <p class="body-copy">{d.intro}</p>
+            <dl class="house-meta">
+              <div><dt>Price range</dt><dd>{d.price}</dd></div>
+              <div><dt>In the salon</dt><dd>{count} gowns</dd></div>
+              {d.plus && <div><dt>Sizing</dt><dd>Plus sizes available</dd></div>}
+            </dl>
+            <a class="link" href={`/designers/${d.slug}/`}>Discover {d.name}</a>
+          </div>
+        </article>
+      );
+    })}
+  </div>
+
+  <FinalCTA image="g/luce-sposa--ashera--0" lines={['Meet them', '<em>in person.</em>']} pos="50% 25%" />
+</Base>
+
+<style is:global>
+  .page-intro h1 { font-size: var(--fs-display); }
+  .houses { display: grid; gap: var(--section); padding-block: var(--section-sm) var(--section); }
+  .house { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: clamp(1rem, 2.4vw, 2.5rem); align-items: center; }
+  .house-media { grid-column: 1 / span 6; aspect-ratio: 4/5; display: block; }
+  .house-text { grid-column: 8 / span 5; display: grid; gap: 1.4rem; justify-items: start; }
+  .flip .house-media { grid-column: 7 / span 6; grid-row: 1; }
+  .flip .house-text { grid-column: 1 / span 5; grid-row: 1; }
+  .house h2 { font-size: clamp(2.8rem, 5.5vw, 5.5rem); }
+  .house h2 a { text-decoration: none; }
+  .house h2 a:hover { font-style: italic; }
+  .house-line { font-size: 1.5rem; color: var(--brass-text); }
+  .house-meta { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; border-top: 1px solid var(--line); padding-top: 1.25rem; width: 100%; }
+  .house-meta dt { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .house-meta dd { margin: .25rem 0 0; font-family: var(--serif); font-size: 1.3rem; }
+  @media (max-width: 900px) {
+    .house-media, .house-text, .flip .house-media, .flip .house-text { grid-column: 1 / -1; grid-row: auto; }
+    .house-text { margin-top: 2rem; }
+  }
+</style>

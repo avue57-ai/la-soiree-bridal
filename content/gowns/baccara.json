@@ -1,0 +1,16 @@
+{
+  "name": "Baccara",
+  "designer": "eva-lendel",
+  "silhouette": "A-Line",
+  "neckline": "",
+  "images": [
+    "/media-source/gowns/eva-lendel--baccara--0.jpg",
+    "/media-source/gowns/eva-lendel--baccara--1.jpg",
+    "/media-source/gowns/eva-lendel--baccara--2.jpg",
+    "/media-source/gowns/eva-lendel--baccara--3.jpg",
+    "/media-source/gowns/eva-lendel--baccara--4.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/baccara/",
+  "order": 1
+}

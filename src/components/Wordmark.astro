@@ -1,0 +1,8 @@
+---
+// Typeset wordmark. Swap for the boutique's master logo SVG when supplied (see HANDOFF).
+const { tag = 'a' } = Astro.props;
+---
+<a class="wordmark" href="/" aria-label="La Soirée Bridal — home">
+  <span class="wm" aria-hidden="true">LA SOIRÉE</span>
+  <span class="wm-sub" aria-hidden="true">BRIDAL</span>
+</a>

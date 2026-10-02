@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import Pic from '../components/Pic.astro';
+---
+<Base title="Page not found" description="This page has moved. Explore the collection or book an appointment at La Soirée Bridal." noindex>
+  <section class="nf wrap">
+    <div class="nf-text">
+      <p class="eyebrow">404</p>
+      <h1 class="display">This page has <em>slipped away.</em></h1>
+      <p class="lede muted">The site has been redesigned, so some old links have moved. Everything you need is a click away.</p>
+      <div class="btn-row">
+        <a class="btn" href="/">Home</a>
+        <a class="btn btn-ghost" href="/collection/">The collection</a>
+        <a class="link" href="/book/">Book an appointment</a>
+      </div>
+    </div>
+    <figure class="media nf-img"><Pic k="g/anna-sposa--hypnolia--1" alt="" sizes="(min-width: 900px) 35vw, 80vw" eager /></figure>
+  </section>
+</Base>
+<style is:global>
+  .nf { min-height: 100svh; display: grid; grid-template-columns: 7fr 5fr; gap: 3rem; align-items: center; padding-top: var(--header-h); padding-bottom: 4rem; }
+  .nf-text { display: grid; gap: 2rem; justify-items: start; }
+  .nf h1 { font-size: var(--fs-display); max-width: 12ch; }
+  .nf-img { aspect-ratio: 2/3; }
+  @media (max-width: 800px) { .nf { grid-template-columns: 1fr; } .nf-img { display: none; } }
+</style>

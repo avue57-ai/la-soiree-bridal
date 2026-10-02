@@ -1,0 +1,63 @@
+---
+// Journal posts keep their original WordPress URLs (/YYYY/MM/DD/slug/) to preserve search rankings.
+import Base from '../../../../layouts/Base.astro';
+import Pic from '../../../../components/Pic.astro';
+import JournalCard from '../../../../components/JournalCard.astro';
+import posts from '../../../../data/posts.js';
+import { picHtml, src, has } from '../../../../lib/img.js';
+import { site } from '../../../../data/site.js';
+
+export function getStaticPaths() {
+  return posts.map((p) => {
+    const [, y, m, d, slug] = p.path.split('/');
+    return { params: { y, m, d, slug }, props: { post: p } };
+  });
+}
+const { post } = Astro.props;
+// Markdown images point at /media-source/… — swap each for a responsive <picture>
+let html = post.html.replace(/<img([^>]*?)src="(\/media-source\/[^"]+)"([^>]*?)\/?>/g, (m: string, a: string, path: string, b: string) => {
+  const alt = (/alt="([^"]*)"/.exec(a + b) || [])[1] || '';
+  return has(path) ? picHtml(path, alt) : m;
+});
+const date = new Date(post.date + 'T12:00:00');
+const nice = date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+const others = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
+const schema = [{
+  '@context': 'https://schema.org', '@type': 'BlogPosting', headline: post.title, datePublished: post.date,
+  author: { '@type': 'Organization', name: 'La Soirée Bridal' }, publisher: { '@id': `${site.url}/#boutique` },
+  image: post.cover ? new URL(src(post.cover, 'webp', 1200), site.url).href : undefined,
+  mainEntityOfPage: `${site.url}${post.path}`, description: post.description,
+}];
+---
+<Base title={post.seoTitle} description={post.description} image={post.cover} schema={schema}>
+  <article>
+    <header class="post-head wrap">
+      <p class="eyebrow"><a href="/journal/">Journal</a></p>
+      <h1 class="display post-title">{post.title}</h1>
+      <p class="caps muted"><time datetime={post.date}>{nice}</time> · {Math.max(1, Math.round(post.words / 220))} min read</p>
+    </header>
+    {post.cover && !post.html.includes(post.cover.split('/').pop()) && (
+      <div class="wrap"><figure class="media post-cover"><Pic k={post.cover} alt="" sizes="(min-width: 1000px) 60vw, 100vw" eager pos="50% 30%" /></figure></div>
+    )}
+    <div class="wrap section-sm"><div class="prose" set:html={html} /></div>
+    <aside class="wrap post-cta">
+      <p class="serif">Ready to try on gowns in person?</p>
+      <a class="btn" href="/book/" data-track="book_click" data-track-label={`journal_${post.slug}`}>Book an appointment <span class="arrow" aria-hidden="true"></span></a>
+    </aside>
+  </article>
+  <section class="section wrap" aria-labelledby="more-j">
+    <h2 id="more-j" class="h3" style="margin-bottom:2.5rem">More from the journal</h2>
+    <div class="more-j">{others.map((p) => <JournalCard post={p} />)}</div>
+  </section>
+</Base>
+
+<style is:global>
+  .post-head { padding-top: calc(var(--header-h) + clamp(3rem, 8vw, 7rem)); padding-bottom: 3rem; display: grid; gap: 1.5rem; justify-items: center; text-align: center; }
+  .post-head .eyebrow a { text-decoration: none; }
+  .post-title { font-size: clamp(2.4rem, 5vw, 4.75rem); max-width: 20ch; }
+  .post-cover { aspect-ratio: 16/9; max-width: 1100px; margin: 0 auto; }
+  .post-cta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; max-width: 52rem; border-block: 1px solid var(--line); padding-block: 2rem; }
+  .post-cta .serif { font-size: 1.6rem; }
+  .more-j { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.25rem, 3vw, 3rem); }
+  @media (max-width: 900px) { .more-j { grid-template-columns: 1fr; } }
+</style>

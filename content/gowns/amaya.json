@@ -1,0 +1,15 @@
+{
+  "name": "Amaya",
+  "designer": "eva-lendel",
+  "silhouette": "Ball Gown",
+  "neckline": "Straight",
+  "images": [
+    "/media-source/gowns/eva-lendel--amaya--0.jpg",
+    "/media-source/gowns/eva-lendel--amaya--1.jpg",
+    "/media-source/gowns/eva-lendel--amaya--2.jpg",
+    "/media-source/gowns/eva-lendel--amaya--3.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/amaya/",
+  "order": 9
+}

@@ -1,0 +1,12 @@
+---
+import Pic from './Pic.astro';
+const { post, sizes = '(min-width: 900px) 30vw, 90vw', big = false } = Astro.props;
+const date = new Date(post.date + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+---
+<article class:list={['journal-card', { big }]}>
+  <a href={post.path} data-cursor="Read">
+    <div class="media ratio-portrait"><Pic k={post.cover} alt="" sizes={sizes} /></div>
+    <p class="caps muted jc-date"><time datetime={post.date}>{date}</time></p>
+    <h3 class="h3 jc-title">{post.title}</h3>
+  </a>
+</article>

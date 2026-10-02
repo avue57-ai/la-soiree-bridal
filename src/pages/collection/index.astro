@@ -1,0 +1,184 @@
+---
+import Base from '../../layouts/Base.astro';
+import Lines from '../../components/Lines.astro';
+import GownCard from '../../components/GownCard.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import gowns from '../../data/gowns.js';
+import { designers } from '../../data/designers.js';
+
+const silhouettes = ['Ball Gown', 'A-Line', 'Mermaid', 'Sheath'];
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z]+/g, '-');
+// editorial order: interleave designers so the page reads like a lookbook, not a catalogue
+const byD = designers.map((d) => gowns.filter((g) => g.designer === d.slug));
+const ordered: any[] = [];
+for (let i = 0; ordered.length < gowns.length; i++) byD.forEach((list) => list[i] && ordered.push(list[i]));
+const schema = {
+  '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'The Collection — La Soirée Bridal',
+  url: 'https://lasoireebridal.com/collection/',
+  mainEntity: { '@type': 'ItemList', numberOfItems: ordered.length, itemListElement: ordered.map((g, i) => ({ '@type': 'ListItem', position: i + 1, url: `https://lasoireebridal.com/gowns/${g.slug}/`, name: g.name })) },
+};
+---
+<Base
+  title="Wedding Dresses near Kalamazoo, MI | The Collection"
+  description="Browse 80 European wedding gowns by designer and silhouette, save your favorites, and try them on by appointment near Kalamazoo, Michigan."
+  image="g/eva-lendel--palace--0"
+  schema={[schema]}
+>
+  <section class="page-intro wrap">
+    <p class="eyebrow" data-reveal>The collection · {gowns.length} gowns</p>
+    <Lines tag="h1" lines={['A lookbook,', 'not a <em>catalogue.</em>']} delay={0.1} />
+    <p class="lede" data-reveal style="--d:.3s; margin-top: 1.75rem">Every gown here hangs in the salon in Richland. Save the ones you love and bring the list to your appointment — your stylist will have them ready.</p>
+  </section>
+
+  <div class="filters-wrap" data-filters-bar>
+    <form class="wrap filters" data-filters aria-label="Filter gowns" onsubmit="return false">
+      <fieldset>
+        <legend class="sr-only">Designer</legend><span class="lbl caps" aria-hidden="true">Designer</span>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="designer" value="all" checked /><span>All</span></label>
+          {designers.map((d) => <label class="chip"><input type="radio" name="designer" value={d.slug} /><span>{d.name}</span></label>)}
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend class="sr-only">Silhouette</legend><span class="lbl caps" aria-hidden="true">Silhouette</span>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="silhouette" value="all" checked /><span>All</span></label>
+          {silhouettes.map((s) => (
+            <label class="chip">
+              <input type="radio" name="silhouette" value={slug(s)} />
+              <span><svg class="sil" viewBox="0 0 20 32" aria-hidden="true"><path d={({ 'Ball Gown': 'M8 2h4l1 9 6 19H1l6-19z', 'A-Line': 'M8 2h4l1 9 4 19H3l4-19z', 'Mermaid': 'M8 2h4l1 9-1 12 5 7H3l5-7-1-12z', 'Sheath': 'M8 2h4l1 9 0 19H7l0-19z' } as any)[s]} /></svg>{s}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+      <div class="filter-tail">
+        <label class="chip chip-saved"><input type="checkbox" name="saved" value="1" /><span>♡ Saved <b data-saved-count>0</b></span></label>
+        <p class="count caps" aria-live="polite"><span data-count>{gowns.length}</span> gowns</p>
+      </div>
+    </form>
+  </div>
+
+  <section class="wrap section-sm" aria-label="Gowns">
+    <ul class="lookbook" role="list" data-lookbook>
+      {ordered.map((g, i) => (
+        <li data-designer={g.designer} data-silhouette={slug(g.silhouette || '')} data-slug={g.slug} class="lb-item">
+          <GownCard gown={g} eager={i < 2} sizes="(min-width: 1100px) 23vw, (min-width: 700px) 31vw, 46vw" />
+          <button class="save" type="button" data-save={g.slug} aria-pressed="false">
+            <span class="sr-only">Save {g.name}</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.8c0 5.5-7.5 10.1-7.5 10.1Z" /></svg>
+          </button>
+        </li>
+      ))}
+    </ul>
+    <div class="empty" data-empty hidden>
+      <p class="h3 serif">Nothing here yet.</p>
+      <p class="muted">Try another designer or silhouette — or tap the heart on any gown to save it.</p>
+    </div>
+    <aside class="saved-cta" data-saved-cta hidden>
+      <p><span class="serif" style="font-size:1.5rem">Your shortlist is saved on this device.</span><br /><span class="small muted">Mention the names when you book and your stylist will pull them for you.</span></p>
+      <a class="btn" href="/book/" data-track="book_click" data-track-label="collection_saved">Book to try them on <span class="arrow" aria-hidden="true"></span></a>
+    </aside>
+    <p class="small muted note">Images courtesy of each designer. Gowns are shown as sample sizes in the boutique; colours, fabrics and details may vary when ordered.</p>
+  </section>
+
+  <FinalCTA image="g/eva-lendel--lanvee--0" lines={['See them', '<em>in person.</em>']} pos="50% 30%" />
+</Base>
+
+<style is:global>
+  .page-intro h1 { font-size: var(--fs-display); }
+  .filters-wrap { position: sticky; top: 0; z-index: 20; background: rgba(247,243,236,.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-block: 1px solid var(--line); transition: top .5s var(--ease); }
+  .site-header:not(.is-hidden) ~ main .filters-wrap { top: var(--header-h); }
+  .filters { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; align-items: center; padding-block: 1rem; }
+  fieldset { border: 0; padding: 0; margin: 0; display: flex; align-items: center; gap: 1rem; min-width: 0; }
+  .filters .lbl { color: var(--muted); font-size: .62rem; flex: none; }
+  .chips { display: flex; gap: .4rem; flex-wrap: wrap; }
+  .chip { position: relative; cursor: pointer; }
+  .chip input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .chip span { display: inline-flex; align-items: center; gap: .4rem; min-height: 38px; padding: 0 .95rem; border: 1px solid var(--line); border-radius: 999px; font-size: .78rem; letter-spacing: .04em; transition: background .3s, color .3s, border-color .3s; white-space: nowrap; }
+  .chip:hover span { border-color: var(--ink); }
+  .chip input:checked + span { background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+  .chip input:focus-visible + span { outline: 1.5px solid var(--ink); outline-offset: 3px; }
+  .sil { width: 10px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.2; }
+  .filter-tail { margin-left: auto; display: flex; align-items: center; gap: 1.25rem; }
+  .count { color: var(--muted); margin: 0; font-size: .64rem; }
+  @media (max-width: 900px) {
+    .filters { display: grid; gap: .6rem; padding-block: .75rem; padding-inline: 0; }
+    .filters fieldset { overflow-x: auto; scrollbar-width: none; padding-inline: var(--gutter); }
+    .filters fieldset::-webkit-scrollbar { display: none; }
+    .filters fieldset .chips { flex-wrap: nowrap; }
+    .filters .lbl { width: 5.5rem; }
+    .filter-tail { margin-left: 0; padding-inline: var(--gutter); justify-content: space-between; }
+    .chip span { min-height: 36px; padding: 0 .8rem; }
+  }
+
+  .lookbook { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(2.5rem, 4vw, 4rem) clamp(1rem, 2vw, 2rem); }
+  .lb-item { position: relative; }
+  .lb-item:nth-child(8n+2), .lb-item:nth-child(8n+7) { transform: translateY(clamp(1.5rem, 4vw, 3.5rem)); }
+  .lb-item[hidden] { display: none; }
+  .lookbook.filtered .lb-item { transform: none; }
+  @media (max-width: 1100px) { .lookbook { grid-template-columns: repeat(3, 1fr); } .lb-item:nth-child(n) { transform: none; } }
+  @media (max-width: 700px) { .lookbook { grid-template-columns: 1fr 1fr; } }
+  .save { position: absolute; top: .65rem; right: .65rem; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: rgba(247,243,236,.85); transition: background .3s, transform .3s; }
+  .save svg { width: 18px; height: 18px; fill: none; stroke: var(--ink); stroke-width: 1.2; }
+  .save[aria-pressed='true'] svg { fill: var(--ink); }
+  .save:hover { transform: scale(1.06); background: var(--ivory); }
+  .empty { padding: 5rem 0; text-align: center; display: grid; gap: .75rem; }
+  .saved-cta { margin-top: 4rem; padding: 2rem; border: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; }
+  .note { margin-top: 4rem; max-width: 40rem; }
+</style>
+
+<script>
+  const KEY = 'lsb-saved';
+  const read = (): string[] => { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; } };
+  const write = (v: string[]) => { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch {} };
+  const form = document.querySelector<HTMLFormElement>('[data-filters]')!;
+  const items = [...document.querySelectorAll<HTMLElement>('.lb-item')];
+  const list = document.querySelector('[data-lookbook]')!;
+  const countEl = document.querySelector('[data-count]')!;
+  const savedCount = document.querySelector('[data-saved-count]')!;
+  const empty = document.querySelector<HTMLElement>('[data-empty]')!;
+  const savedCta = document.querySelector<HTMLElement>('[data-saved-cta]')!;
+
+  // restore filters from URL (?designer=eva-lendel&silhouette=mermaid) — keeps old category links useful
+  const params = new URLSearchParams(location.search);
+  for (const k of ['designer', 'silhouette']) {
+    const v = params.get(k);
+    const input = v && form.querySelector<HTMLInputElement>(`input[name="${k}"][value="${CSS.escape(v)}"]`);
+    if (input) input.checked = true;
+  }
+  if (params.get('saved')) (form.querySelector('input[name="saved"]') as HTMLInputElement).checked = true;
+
+  function apply() {
+    const fd = new FormData(form);
+    const d = fd.get('designer'), s = fd.get('silhouette'), onlySaved = fd.get('saved');
+    const saved = read();
+    let n = 0;
+    for (const el of items) {
+      const ok = (d === 'all' || el.dataset.designer === d) && (s === 'all' || el.dataset.silhouette === s) && (!onlySaved || saved.includes(el.dataset.slug!));
+      el.hidden = !ok; if (ok) n++;
+    }
+    list.classList.toggle('filtered', d !== 'all' || s !== 'all' || !!onlySaved);
+    countEl.textContent = String(n);
+    empty.hidden = n > 0;
+    savedCta.hidden = saved.length === 0;
+    savedCount.textContent = String(saved.length);
+    const q = new URLSearchParams();
+    if (d !== 'all') q.set('designer', String(d));
+    if (s !== 'all') q.set('silhouette', String(s));
+    if (onlySaved) q.set('saved', '1');
+    history.replaceState(null, '', q.toString() ? `?${q}` : location.pathname);
+  }
+  form.addEventListener('change', apply);
+
+  document.querySelectorAll<HTMLButtonElement>('[data-save]').forEach((b) => {
+    const slug = b.dataset.save!;
+    const sync = () => b.setAttribute('aria-pressed', String(read().includes(slug)));
+    sync();
+    b.addEventListener('click', () => {
+      const s = read();
+      write(s.includes(slug) ? s.filter((x) => x !== slug) : [...s, slug]);
+      sync(); apply();
+    });
+  });
+  apply();
+</script>

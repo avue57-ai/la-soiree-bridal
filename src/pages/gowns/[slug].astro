@@ -1,0 +1,163 @@
+---
+import Base from '../../layouts/Base.astro';
+import Pic from '../../components/Pic.astro';
+import GownCard from '../../components/GownCard.astro';
+import gowns from '../../data/gowns.js';
+import { designerBySlug } from '../../data/designers.js';
+import { src } from '../../lib/img.js';
+import { site } from '../../data/site.js';
+
+export function getStaticPaths() {
+  return gowns.map((g) => ({ params: { slug: g.slug }, props: { gown: g } }));
+}
+const { gown } = Astro.props;
+const d = designerBySlug[gown.designer];
+const siblings = gowns.filter((g) => g.designer === gown.designer && g.slug !== gown.slug);
+const start = siblings.length ? gowns.indexOf(gown) % siblings.length : 0;
+const more = [...siblings.slice(start), ...siblings.slice(0, start)].slice(0, 4);
+const silSlug = gown.silhouette ? gown.silhouette.toLowerCase().replace(/[^a-z]+/g, '-') : null;
+const desc = `${gown.name} by ${d.name}${gown.silhouette ? ` — a ${gown.silhouette.toLowerCase()} wedding gown` : ''}. Try it on by appointment at La Soirée Bridal in Richland, near Kalamazoo, Michigan.`;
+const schema = [
+  {
+    '@context': 'https://schema.org', '@type': 'Product', name: `${gown.name} wedding gown`, brand: { '@type': 'Brand', name: d.name },
+    category: 'Wedding dress', image: gown.images.map((k: string) => new URL(src(k, 'webp', 1200), site.url).href),
+    url: `${site.url}/gowns/${gown.slug}/`, description: desc,
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Collection', item: `${site.url}/collection/` },
+      { '@type': 'ListItem', position: 2, name: d.name, item: `${site.url}/designers/${d.slug}/` },
+      { '@type': 'ListItem', position: 3, name: gown.name },
+    ],
+  },
+];
+---
+<Base title={`${gown.name} by ${d.name} | Wedding Gown`} description={desc} image={gown.images[0]} schema={schema}>
+  <article class="gown wrap">
+    <nav class="crumbs caps" aria-label="Breadcrumb">
+      <a href="/collection/">Collection</a> <span aria-hidden="true">/</span> <a href={`/designers/${d.slug}/`}>{d.name}</a> <span aria-hidden="true">/</span> <span aria-current="page">{gown.name}</span>
+    </nav>
+    <div class="gown-grid">
+      <div class="gallery" data-gallery>
+        {gown.images.map((k: string, i: number) => (
+          <button class:list={['g-frame', `g-${i}`]} type="button" data-open={i} data-cursor="Enlarge" aria-label={`Enlarge image ${i + 1} of ${gown.images.length}`}>
+            <Pic k={k} alt={i === 0 ? `${gown.name} wedding gown by ${d.name}` : `${gown.name} by ${d.name}, view ${i + 1}`} sizes={i === 0 ? '(min-width: 1000px) 55vw, 100vw' : '(min-width: 1000px) 27vw, 50vw'} eager={i === 0} />
+          </button>
+        ))}
+      </div>
+      <aside class="info">
+        <div class="info-inner">
+          <p class="eyebrow">{d.name}</p>
+          <h1 class="display">{gown.name}</h1>
+          <dl class="specs">
+            <div><dt>Designer</dt><dd><a href={`/designers/${d.slug}/`}>{d.name}</a> · {d.origin}</dd></div>
+            {gown.silhouette && <div><dt>Silhouette</dt><dd><a href={`/collection/?silhouette=${silSlug}`}>{gown.silhouette}</a></dd></div>}
+            {gown.neckline && <div><dt>Neckline</dt><dd>{gown.neckline}</dd></div>}
+            <div><dt>Designer price range</dt><dd>{d.price}</dd></div>
+            {d.plus && <div><dt>Sizing</dt><dd>Available in plus sizes</dd></div>}
+          </dl>
+          <p class="body-copy">Ask your stylist about pricing, ordering timelines and how this gown can be personalized — sleeves, overskirts and finishing details vary by designer.</p>
+          <div class="info-actions">
+            <a class="btn" href="/book/" data-track="book_click" data-track-label={`gown_${gown.slug}`}>Book to try it on <span class="arrow" aria-hidden="true"></span></a>
+            <button class="btn btn-ghost save-btn" type="button" data-save={gown.slug} aria-pressed="false"><span data-save-label>Save to shortlist</span></button>
+          </div>
+          <p class="small muted">Open by appointment in Richland, Michigan · <a href="/faq/">Sizing &amp; ordering questions</a></p>
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  {more.length > 0 && (
+    <section class="section-sm wrap more" aria-labelledby="more-title">
+      <div class="more-head">
+        <h2 id="more-title" class="h3">More from {d.name}</h2>
+        <a class="link" href={`/designers/${d.slug}/`}>The {d.name} collection</a>
+      </div>
+      <div class="more-grid">{more.map((g) => <GownCard gown={g} />)}</div>
+    </section>
+  )}
+
+  <dialog class="lightbox" data-lightbox aria-label={`${gown.name} gallery`}>
+    <button class="lb-close" type="button" data-close aria-label="Close gallery">×</button>
+    <button class="lb-nav lb-prev" type="button" data-prev aria-label="Previous image">‹</button>
+    <div class="lb-stage">
+      {gown.images.map((k: string, i: number) => <Pic k={k} alt={`${gown.name}, view ${i + 1}`} sizes="100vw" class="lb-slide" />)}
+    </div>
+    <button class="lb-nav lb-next" type="button" data-next aria-label="Next image">›</button>
+    <p class="lb-count caps" aria-live="polite"><span data-lb-i>1</span> / {gown.images.length}</p>
+  </dialog>
+</Base>
+
+<style is:global>
+  .gown { padding-top: calc(var(--header-h) + 2rem); }
+  .crumbs { color: var(--muted); font-size: .62rem; display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .crumbs a { text-decoration: none; } .crumbs a:hover { text-decoration: underline; }
+  .gown-grid { display: grid; grid-template-columns: 7fr 4fr; gap: clamp(2rem, 4vw, 5rem); align-items: start; }
+  .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(.5rem, 1vw, 1rem); }
+  .g-frame { display: block; position: relative; aspect-ratio: 2/3; overflow: hidden; background: var(--sand); cursor: zoom-in; }
+  .g-frame.g-0 { grid-column: 1 / -1; aspect-ratio: 4/5; }
+  .g-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; transition: transform 1.4s var(--ease-out); }
+  .g-frame:hover img { transform: scale(1.03); }
+  .info { position: sticky; top: calc(var(--header-h) + 2rem); }
+  .info-inner { display: grid; gap: 1.75rem; }
+  .info h1 { font-size: clamp(3rem, 6vw, 6rem); line-height: .95; }
+  .specs { border-top: 1px solid var(--line); }
+  .specs div { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; padding: .85rem 0; border-bottom: 1px solid var(--line); font-size: .95rem; }
+  .specs dt { font-size: .64rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); font-weight: 500; padding-top: .2rem; }
+  .specs dd { margin: 0; }
+  .specs a { text-underline-offset: 3px; }
+  .info-actions { display: grid; gap: .75rem; }
+  .info-actions .btn { width: 100%; }
+  @media (max-width: 1000px) {
+    .gown-grid { grid-template-columns: 1fr; }
+    .info { position: static; }
+    .gallery { grid-auto-flow: column; grid-auto-columns: 82%; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scrollbar-width: none; }
+    .gallery::-webkit-scrollbar { display: none; }
+    .g-frame, .g-frame.g-0 { grid-column: auto; aspect-ratio: 2/3; scroll-snap-align: center; }
+  }
+  .more-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; border-top: 1px solid var(--line); padding-top: 2.5rem; }
+  .more-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1rem, 2vw, 2rem); }
+  @media (max-width: 800px) { .more-grid { grid-template-columns: 1fr 1fr; } }
+
+  .lightbox { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgba(20,17,15,.97); color: var(--ivory); }
+  .lightbox::backdrop { background: rgba(20,17,15,.9); }
+  .lightbox[open] { display: grid; grid-template-columns: 64px 1fr 64px; align-items: center; }
+  .lb-stage { position: relative; height: 92dvh; }
+  .lb-stage .lb-slide { position: absolute; inset: 0; opacity: 0; transition: opacity .5s var(--ease); }
+  .lb-stage .lb-slide.on { opacity: 1; }
+  .lb-stage img { width: 100%; height: 100%; object-fit: contain; background: none !important; }
+  .lb-nav, .lb-close { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--line-light); font-size: 1.6rem; line-height: 1; display: grid; place-items: center; justify-self: center; color: var(--ivory); }
+  .lb-nav:hover, .lb-close:hover { background: var(--ivory); color: var(--ink); }
+  .lb-close { position: absolute; top: 1rem; right: 1rem; z-index: 2; }
+  .lb-count { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); color: rgba(247,243,236,.7); margin: 0; }
+  @media (max-width: 700px) { .lightbox[open] { grid-template-columns: 0 1fr 0; } .lb-nav { position: absolute; bottom: .75rem; } .lb-prev { left: 1rem; } .lb-next { right: 1rem; } }
+</style>
+
+<script>
+  const dlg = document.querySelector<HTMLDialogElement>('[data-lightbox]')!;
+  const slides = [...dlg.querySelectorAll<HTMLElement>('.lb-slide')];
+  const idx = dlg.querySelector('[data-lb-i]')!;
+  let cur = 0, opener: HTMLElement | null = null;
+  const show = (i: number) => { cur = (i + slides.length) % slides.length; slides.forEach((s, j) => s.classList.toggle('on', j === cur)); idx.textContent = String(cur + 1); };
+  document.querySelectorAll<HTMLElement>('[data-open]').forEach((b) => b.addEventListener('click', () => {
+    opener = b; slides.forEach((s) => s.querySelector('img')?.setAttribute('loading', 'eager'));
+    show(+b.dataset.open!); dlg.showModal();
+  }));
+  dlg.querySelector('[data-close]')!.addEventListener('click', () => dlg.close());
+  dlg.querySelector('[data-prev]')!.addEventListener('click', () => show(cur - 1));
+  dlg.querySelector('[data-next]')!.addEventListener('click', () => show(cur + 1));
+  dlg.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') show(cur + 1); if (e.key === 'ArrowLeft') show(cur - 1); });
+  dlg.addEventListener('close', () => opener?.focus());
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+  let x0 = 0; dlg.addEventListener('touchstart', (e) => (x0 = e.touches[0].clientX), { passive: true });
+  dlg.addEventListener('touchend', (e) => { const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1)); });
+
+  // shortlist
+  const KEY = 'lsb-saved';
+  const read = (): string[] => { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; } };
+  const b = document.querySelector<HTMLButtonElement>('[data-save]')!;
+  const label = b.querySelector('[data-save-label]')!;
+  const sync = () => { const on = read().includes(b.dataset.save!); b.setAttribute('aria-pressed', String(on)); label.textContent = on ? 'Saved to shortlist ♥' : 'Save to shortlist'; };
+  b.addEventListener('click', () => { const s = read(), k = b.dataset.save!; try { localStorage.setItem(KEY, JSON.stringify(s.includes(k) ? s.filter((x) => x !== k) : [...s, k])); } catch {} sync(); });
+  sync();
+</script>

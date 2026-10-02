@@ -1,0 +1,106 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Pic from '../components/Pic.astro';
+import Lines from '../components/Lines.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import { appointments } from '../data/site.js';
+
+const steps = [
+  { n: '01', t: 'Book', p: 'Choose a one-hour, two-hour or Champagne VIP appointment online. Bring up to 4 guests — or 6 for VIP. If you have favourites from the collection, mention them and we’ll have them waiting.' },
+  { n: '02', t: 'Arrive', p: 'The salon is reserved around your time. Settle into the lounge with your people while your stylist asks about the wedding, the venue and the feeling you want.' },
+  { n: '03', t: 'Explore', p: 'Walk the rails and pull 8–12 gowns that catch your eye. Your stylist adds a few you might not choose yourself — often the surprise of the day.' },
+  { n: '04', t: 'Find the dress', p: 'Your stylist helps you in and out of each gown, styles it with veils and accessories, and keeps the pace easy. No pressure, no other brides waiting.' },
+  { n: '05', t: 'Order', p: 'We take your measurements and order your size from the designer. Most gowns are made to order, so start 9–12 months before the wedding. Payment is made in full when you order.' },
+  { n: '06', t: 'Alterations & after', p: 'Plan 2–3 months for alterations once your gown arrives. We’ll recommend trusted local seamstresses and see you again to collect your gown.' },
+];
+---
+<Base
+  title="The Bridal Appointment Experience"
+  description="What to expect at your appointment: a private salon, a dedicated stylist, 8–12 European gowns of your choosing, and guidance through alterations."
+  header="transparent"
+  image="s/boutique-salon"
+>
+  <PageHero image="s/boutique-salon" eyebrow="The experience" lines={['Unhurried,', 'private, <em>yours.</em>']} lede="What happens from the moment you book to the day you take your gown home." pos="50% 55%" alt="Inside the La Soirée Bridal salon" />
+
+  <section class="section wrap">
+    <div class="sec-head">
+      <div class="sh-title">
+        <p class="eyebrow" data-reveal>Six steps</p>
+        <Lines class="h2" lines={['From first look', 'to <em>last fitting.</em>']} />
+      </div>
+      <div class="sh-aside body-copy" data-reveal>Every bride is different, but the shape of the visit is the same: plenty of time, one stylist, and only the people you invited.</div>
+    </div>
+    <ol class="steps" role="list">
+      {steps.map((s, i) => (
+        <li class="step" data-reveal style={`--d:${(i % 2) * 0.08}s`}>
+          <span class="n" aria-hidden="true">{s.n}</span>
+          <h3>{s.t}</h3>
+          <p>{s.p}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="ex-band">
+    <figure class="media" data-reveal="mask"><Pic k="s/boutique-rack" alt="Ivory lace gowns on the salon rail" sizes="(min-width: 800px) 40vw, 100vw" pos="50% 30%" /></figure>
+    <figure class="media" data-reveal="mask" style="--d:.1s"><Pic k="s/veil-back" alt="A pearl-scattered cathedral veil worn with a low-back gown" sizes="(min-width: 800px) 30vw, 60vw" /></figure>
+    <figure class="media" data-reveal="mask" style="--d:.2s"><Pic k="s/acc-earrings" alt="Floral pearl earrings displayed in the boutique" sizes="(min-width: 800px) 25vw, 40vw" /></figure>
+  </section>
+
+  <section class="section wrap" aria-labelledby="choose-title">
+    <div class="sec-head">
+      <div class="sh-title">
+        <p class="eyebrow" data-reveal>Appointments</p>
+        <Lines id="choose-title" class="h2" lines={['Choose your <em>time.</em>']} />
+      </div>
+      <div class="sh-aside body-copy" data-reveal>The appointment fee holds your private time with a stylist. Return visits for a second look, ordering or pickup are complimentary.</div>
+    </div>
+    <div class="appt-grid" data-reveal>
+      {appointments.map((a) => (
+        <div class:list={['appt', { featured: a.featured }]}>
+          {a.featured ? <span class="tag">Most requested</span> : <span class="tag" style="visibility:hidden">·</span>}
+          <h3 class="serif">{a.name}</h3>
+          <ul>{a.lines.map((l) => <li>{l}</li>)}</ul>
+          <p class="price">{a.price ? `$${a.price}` : 'Free'}<small>{a.minutes >= 60 ? `${a.minutes / 60} hr` : `${a.minutes} min`}</small></p>
+        </div>
+      ))}
+    </div>
+    <div class="btn-row" style="margin-top:2.5rem" data-reveal>
+      <a class="btn" href="/book/" data-track="book_click" data-track-label="experience">Book an appointment <span class="arrow" aria-hidden="true"></span></a>
+      <a class="link" href="/faq/">Read the FAQ</a>
+    </div>
+  </section>
+
+  <section class="section-sm bg-cream">
+    <div class="wrap grid-12 bring">
+      <div class="bring-head">
+        <p class="eyebrow" data-reveal>Before you come</p>
+        <Lines class="h2" lines={['What to <em>bring.</em>']} />
+      </div>
+      <ul class="bring-list" role="list">
+        <li data-reveal><span class="numeral">i.</span><div><strong>Nude or skin-tone undergarments.</strong> Silicone nipple covers, high-waisted shapewear or underwear — your stylist helps you in and out of each gown.</div></li>
+        <li data-reveal style="--d:.08s"><span class="numeral">ii.</span><div><strong>Your favourite people.</strong> Up to 4 guests (6 for VIP). We kindly ask no children under 12.</div></li>
+        <li data-reveal style="--d:.16s"><span class="numeral">iii.</span><div><strong>An open mind.</strong> Screenshots are welcome — but the silhouette you choose may surprise you.</div></li>
+      </ul>
+    </div>
+  </section>
+
+  <FinalCTA />
+</Base>
+
+<style is:global>
+  .ex-band { display: grid; grid-template-columns: 5fr 4fr 3fr; gap: clamp(.75rem, 1.5vw, 1.5rem); padding-inline: var(--gutter); align-items: end; }
+  .ex-band figure { margin: 0; }
+  .ex-band figure:nth-child(1) { aspect-ratio: 4/5; }
+  .ex-band figure:nth-child(2) { aspect-ratio: 3/4; margin-bottom: 5rem; }
+  .ex-band figure:nth-child(3) { aspect-ratio: 3/4; }
+  @media (max-width: 700px) { .ex-band { grid-template-columns: 1fr 1fr; } .ex-band figure:nth-child(1) { grid-column: 1 / -1; } .ex-band figure:nth-child(2) { margin-bottom: 0; } }
+  .bring { row-gap: 2.5rem; }
+  .bring-head { grid-column: 1 / span 4; }
+  .bring-list { grid-column: 6 / -1; list-style: none; padding: 0; border-top: 1px solid var(--line); }
+  .bring-list li { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding: 1.5rem 0; border-bottom: 1px solid var(--line); color: var(--muted); }
+  .bring-list strong { color: var(--ink); font-weight: 500; }
+  .bring-list .numeral { font-size: 1.4rem; color: var(--brass-text); }
+  @media (max-width: 900px) { .bring-head, .bring-list { grid-column: 1 / -1; } }
+</style>

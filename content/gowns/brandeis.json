@@ -1,0 +1,15 @@
+{
+  "name": "Brandeis",
+  "designer": "anna-sposa",
+  "silhouette": "Ball Gown",
+  "neckline": "Square",
+  "images": [
+    "/media-source/gowns/anna-sposa--brandeis--0.jpg",
+    "/media-source/gowns/anna-sposa--brandeis--1.jpg",
+    "/media-source/gowns/anna-sposa--brandeis--2.jpg",
+    "/media-source/gowns/anna-sposa--brandeis--3.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/brandeis/",
+  "order": 14
+}

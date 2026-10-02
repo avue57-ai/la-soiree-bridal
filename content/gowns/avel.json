@@ -1,0 +1,19 @@
+{
+  "name": "Avel",
+  "designer": "soiree",
+  "silhouette": "Ball Gown",
+  "neckline": "",
+  "images": [
+    "/media-source/gowns/soiree--avel--0.jpg",
+    "/media-source/gowns/soiree--avel--1.jpg",
+    "/media-source/gowns/soiree--avel--2.jpg",
+    "/media-source/gowns/soiree--avel--3.jpg",
+    "/media-source/gowns/soiree--avel--4.jpg",
+    "/media-source/gowns/soiree--avel--5.jpg",
+    "/media-source/gowns/soiree--avel--6.jpg",
+    "/media-source/gowns/soiree--avel--7.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/avel/",
+  "order": 4
+}

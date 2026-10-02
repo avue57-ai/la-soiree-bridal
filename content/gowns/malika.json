@@ -1,0 +1,15 @@
+{
+  "name": "Malika",
+  "designer": "dama-couture",
+  "silhouette": "A-Line",
+  "neckline": "V-Neck",
+  "images": [
+    "/media-source/gowns/dama-couture--malika--0.jpg",
+    "/media-source/gowns/dama-couture--malika--1.jpg",
+    "/media-source/gowns/dama-couture--malika--2.jpg",
+    "/media-source/gowns/dama-couture--malika--3.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/malika/",
+  "order": 10
+}

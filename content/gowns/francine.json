@@ -1,0 +1,14 @@
+{
+  "name": "Francine",
+  "designer": "luce-sposa",
+  "silhouette": "Ball Gown",
+  "neckline": "V-Neck",
+  "images": [
+    "/media-source/gowns/luce-sposa--francine--0.jpg",
+    "/media-source/gowns/luce-sposa--francine--1.jpg",
+    "/media-source/gowns/luce-sposa--francine--2.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/francine/",
+  "order": 4
+}

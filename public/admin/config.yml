@@ -1,0 +1,267 @@
+# La Soirée Bridal — site editor configuration (Sveltia CMS, Decap-compatible).
+# Every "Save" commits to GitHub; Netlify rebuilds and publishes the site in ~1–2 minutes.
+backend:
+  name: github
+  repo: avue57-ai/la-soiree-bridal
+  branch: main
+  commit_messages:
+    create: 'Add {{collection}} “{{slug}}”'
+    update: 'Update {{collection}} “{{slug}}”'
+    delete: 'Remove {{collection}} “{{slug}}”'
+    uploadMedia: 'Upload “{{path}}”'
+    deleteMedia: 'Delete “{{path}}”'
+
+site_url: https://la-soiree-bridal.netlify.app
+display_url: https://la-soiree-bridal.netlify.app
+logo_url: /icon-192.png
+
+# Default place for photos uploaded in the editor (journal images etc.)
+media_folder: media-source/uploads
+public_folder: /media-source/uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: '-'
+
+collections:
+  # ───────────────────────────────── GOWNS
+  - name: gowns
+    label: Gowns
+    label_singular: Gown
+    description: Every gown in the collection. The first photo is the cover. Delete a gown when it leaves the salon (or tick “Hide from site”).
+    folder: content/gowns
+    extension: json
+    format: json
+    create: true
+    delete: true
+    identifier_field: name
+    slug: '{{name}}'
+    summary: '{{name}} — {{designer}}'
+    sortable_fields: [name, designer, silhouette]
+    view_groups:
+      - { label: Designer, field: designer }
+    media_folder: /media-source/gowns
+    public_folder: /media-source/gowns
+    fields:
+      - { name: name, label: Gown name, widget: string }
+      - name: designer
+        label: Designer
+        widget: relation
+        collection: designers
+        value_field: '{{slug}}'
+        search_fields: [name]
+        display_fields: [name]
+      - name: silhouette
+        label: Silhouette
+        widget: select
+        options: [Ball Gown, A-Line, Mermaid, Sheath]
+      - name: neckline
+        label: Neckline (optional)
+        widget: select
+        required: false
+        options: [Sweetheart, V-Neck, Scoop, Square, Illusion, Straight]
+      - name: images
+        label: Photos
+        hint: First photo = cover. Drag to reorder. Portrait photos (2:3) look best; at least 1200 px wide.
+        widget: list
+        min: 1
+        field: { name: image, label: Photo, widget: image }
+      - name: order
+        label: Position within designer
+        hint: Lower numbers appear first. Leave blank to sort by name.
+        widget: number
+        value_type: int
+        required: false
+      - { name: hidden, label: Hide from site, widget: boolean, default: false, required: false }
+      - { name: silhouetteSource, widget: hidden, required: false }
+      - { name: legacyUrl, widget: hidden, required: false }
+
+  # ───────────────────────────────── DESIGNERS
+  - name: designers
+    label: Designers
+    label_singular: Designer
+    folder: content/designers
+    extension: json
+    format: json
+    create: true
+    delete: false
+    identifier_field: name
+    slug: '{{name}}'
+    summary: '{{name}} · {{price}}'
+    media_folder: /media-source/gowns
+    public_folder: /media-source/gowns
+    fields:
+      - { name: name, label: Name, widget: string }
+      - { name: origin, label: Origin, widget: string, hint: 'e.g. Lviv, Ukraine' }
+      - { name: founded, label: Founded (year), widget: string, required: false }
+      - { name: price, label: Price range, widget: string, hint: 'e.g. $2,000 – $3,500' }
+      - { name: plus, label: Available in plus sizes, widget: boolean, default: false }
+      - { name: line, label: One-line positioning, widget: string }
+      - { name: intro, label: Introduction, widget: text }
+      - { name: note, label: Short note, widget: text, required: false }
+      - { name: hero, label: Hero photo, widget: image }
+      - name: feature
+        label: Editorial photos (3)
+        widget: list
+        min: 1
+        max: 3
+        field: { name: image, label: Photo, widget: image }
+      - { name: order, label: Display order, widget: number, value_type: int, default: 9 }
+
+  # ───────────────────────────────── JOURNAL
+  - name: journal
+    label: Journal
+    label_singular: Post
+    folder: content/journal
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    identifier_field: title
+    slug: '{{year}}-{{month}}-{{day}}-{{fields.slug}}'
+    summary: '{{title}} ({{date}})'
+    sortable_fields: [date, title]
+    media_folder: /media-source/blog
+    public_folder: /media-source/blog
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: slug, label: Web address, widget: string, pattern: ['^[a-z0-9-]+$', 'Lowercase letters, numbers and dashes only'], hint: 'e.g. veil-styling-tips — the page will live at /YYYY/MM/DD/veil-styling-tips/' }
+      - { name: date, label: Publish date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, format: YYYY-MM-DD }
+      - { name: description, label: Summary (for Google & cards), widget: text, hint: 'One or two sentences, under 160 characters.' }
+      - { name: cover, label: Cover photo, widget: image }
+      - { name: seoTitle, label: Google title (optional), widget: string, required: false, hint: 'Shorter title for search results, under 60 characters.' }
+      - { name: draft, label: Draft (hide from site), widget: boolean, default: false, required: false }
+      - { name: body, label: Article, widget: markdown }
+
+  # ───────────────────────────────── SETTINGS
+  - name: settings
+    label: Settings
+    editor: { preview: false }
+    files:
+      - name: business
+        label: Business details
+        file: content/settings/business.json
+        format: json
+        fields:
+          - { name: name, label: Business name, widget: string }
+          - { name: legalName, widget: hidden }
+          - { name: url, widget: hidden }
+          - { name: phone, label: Phone (as displayed), widget: string }
+          - { name: phoneHref, label: Phone link, widget: string, hint: 'tel: then +1 and digits, e.g. tel:+12692200440' }
+          - { name: email, label: Email, widget: string }
+          - name: address
+            label: Address
+            widget: object
+            fields:
+              - { name: street, label: Street, widget: string }
+              - { name: suite, label: Suite, widget: string, required: false }
+              - { name: city, label: City, widget: string }
+              - { name: region, label: State (short), widget: string }
+              - { name: regionLong, label: State (full), widget: string }
+              - { name: zip, label: ZIP, widget: string }
+              - { name: country, widget: hidden }
+          - name: geo
+            widget: object
+            label: Map coordinates
+            collapsed: true
+            fields:
+              - { name: lat, widget: number, value_type: float }
+              - { name: lng, widget: number, value_type: float }
+          - { name: mapsUrl, label: Google Maps directions link, widget: string }
+          - { name: opened, widget: hidden }
+          - name: hours
+            label: Appointment hours
+            widget: list
+            summary: '{{label}}: {{time}}'
+            fields:
+              - { name: label, label: Days (as shown), widget: string }
+              - { name: time, label: Hours (as shown), widget: string, hint: 'e.g. 10 am – 7 pm, or Closed' }
+              - { name: days, label: Days (for Google), widget: select, multiple: true, options: [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday] }
+              - { name: opens, label: Opens (24h, for Google), widget: string, required: false, hint: 'e.g. 10:00' }
+              - { name: closes, label: Closes (24h, for Google), widget: string, required: false, hint: 'e.g. 19:00' }
+              - { name: closed, label: Closed these days, widget: boolean, default: false, required: false }
+          - { name: priceRange, label: Gown price range, widget: string }
+          - name: booking
+            label: Booking links (Square)
+            widget: object
+            collapsed: true
+            fields:
+              - { name: page, widget: hidden }
+              - { name: squareServices, label: Square booking page, widget: string }
+              - { name: squareWidget, label: Square booking widget (embedded calendar), widget: string }
+              - { name: manage, label: Manage bookings link, widget: string }
+          - name: shop
+            label: Online boutique links (Square)
+            widget: object
+            collapsed: true
+            fields:
+              - { name: home, label: Shop home, widget: string }
+              - { name: sampleSale, label: Sample sale, widget: string }
+              - { name: veils, label: Veils, widget: string }
+              - { name: accessories, label: Accessories, widget: string }
+          - name: social
+            label: Social links
+            widget: object
+            collapsed: true
+            fields:
+              - { name: instagram, label: Instagram, widget: string }
+              - { name: instagramHandle, label: Instagram handle, widget: string }
+              - { name: facebook, label: Facebook, widget: string }
+              - { name: pinterest, label: Pinterest, widget: string }
+              - { name: tiktok, label: TikTok, widget: string }
+          - { name: ga4, label: Google Analytics ID, widget: string, required: false }
+
+      - name: appointments
+        label: Appointment menu & prices
+        file: content/settings/appointments.json
+        format: json
+        fields:
+          - name: appointments
+            label: Appointments
+            hint: Keep these in sync with the appointment types in Square.
+            widget: list
+            summary: '{{name}} — ${{price}}'
+            fields:
+              - { name: id, label: ID, widget: string, hint: 'short code, e.g. vip — used in links' }
+              - { name: name, label: Name on website, widget: string }
+              - { name: square, label: Name in Square calendar, widget: string }
+              - { name: price, label: Price ($), widget: number, value_type: int }
+              - { name: minutes, label: Length (minutes), widget: number, value_type: int }
+              - { name: guests, label: Guests allowed, widget: number, value_type: int, required: false }
+              - { name: lines, label: Bullet points, widget: list, field: { name: line, widget: string } }
+              - { name: featured, label: Highlight as “Most requested”, widget: boolean, default: false, required: false }
+
+      - name: faq
+        label: FAQ
+        file: content/settings/faq.json
+        format: json
+        fields:
+          - name: groups
+            label: Sections
+            widget: list
+            summary: '{{group}}'
+            fields:
+              - { name: group, label: Section title, widget: string }
+              - { name: id, label: Section ID, widget: string, hint: 'lowercase, used for #links' }
+              - name: items
+                label: Questions
+                widget: list
+                summary: '{{q}}'
+                fields:
+                  - { name: q, label: Question, widget: string }
+                  - { name: a, label: Answer, widget: text, hint: 'Use **double asterisks** for bold.' }
+
+      - name: testimonials
+        label: Testimonials
+        file: content/settings/testimonials.json
+        format: json
+        fields:
+          - name: testimonials
+            label: Testimonials (homepage)
+            widget: list
+            summary: '{{name}}'
+            fields:
+              - { name: quote, label: Quote (word for word), widget: text }
+              - { name: name, label: Name (first name + initial), widget: string }
+              - { name: source, label: Source, widget: string, hint: 'e.g. Google review' }

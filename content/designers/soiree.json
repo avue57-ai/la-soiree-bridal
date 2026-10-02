@@ -1,0 +1,17 @@
+{
+  "name": "Soirée",
+  "origin": "The house collection",
+  "founded": "",
+  "price": "$1,500 – $3,500",
+  "plus": true,
+  "line": "Our own European collection.",
+  "intro": "Soirée is La Soirée’s private collection — gowns we select for their construction and detail, at a gentler price. The same European sensibility, edited by us for the way our brides actually shop.",
+  "note": "Considered design, beautifully priced.",
+  "hero": "/media-source/gowns/soiree--rosario--0.jpg",
+  "feature": [
+    "/media-source/gowns/soiree--elison--0.jpg",
+    "/media-source/gowns/soiree--iraida--0.jpg",
+    "/media-source/gowns/soiree--coraila--0.jpg"
+  ],
+  "order": 5
+}

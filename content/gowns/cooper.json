@@ -1,0 +1,14 @@
+{
+  "name": "Cooper",
+  "designer": "eva-lendel",
+  "silhouette": "Ball Gown",
+  "neckline": "Scoop",
+  "images": [
+    "/media-source/gowns/eva-lendel--cooper--0.jpg",
+    "/media-source/gowns/eva-lendel--cooper--1.jpg",
+    "/media-source/gowns/eva-lendel--cooper--2.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/cooper/",
+  "order": 5
+}

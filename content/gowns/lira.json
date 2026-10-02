@@ -1,0 +1,14 @@
+{
+  "name": "Lira",
+  "designer": "eva-lendel",
+  "silhouette": "Mermaid",
+  "neckline": "Sweetheart",
+  "images": [
+    "/media-source/gowns/eva-lendel--lira--0.jpg",
+    "/media-source/gowns/eva-lendel--lira--1.jpg",
+    "/media-source/gowns/eva-lendel--lira--2.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/lira/",
+  "order": 24
+}

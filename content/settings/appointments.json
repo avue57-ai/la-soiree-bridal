@@ -1,0 +1,56 @@
+{
+  "appointments": [
+    {
+      "id": "vip",
+      "name": "The Champagne VIP",
+      "square": "2 Hour VIP Appointment with Champagne",
+      "price": 125,
+      "minutes": 120,
+      "guests": 6,
+      "lines": [
+        "The entire boutique, reserved for you",
+        "Champagne for you and your guests",
+        "You + up to 6 guests",
+        "Two unhurried hours"
+      ],
+      "featured": true
+    },
+    {
+      "id": "two-hour",
+      "name": "The Two-Hour Appointment",
+      "square": "2 Hour Appointment (No Champagne)",
+      "price": 50,
+      "minutes": 120,
+      "guests": 4,
+      "lines": [
+        "A dedicated stylist",
+        "You + up to 4 guests",
+        "Time to try every silhouette"
+      ]
+    },
+    {
+      "id": "one-hour",
+      "name": "The One-Hour Appointment",
+      "square": "1 Hour Appointment",
+      "price": 25,
+      "minutes": 60,
+      "guests": 4,
+      "lines": [
+        "A dedicated stylist",
+        "You + up to 4 guests",
+        "Ideal if you know what you love"
+      ]
+    },
+    {
+      "id": "return",
+      "name": "Return Visit",
+      "square": "Other Appointment (Dress pickup | 2nd appt)",
+      "price": 0,
+      "minutes": 30,
+      "guests": null,
+      "lines": [
+        "Second look, gown purchase or dress pickup"
+      ]
+    }
+  ]
+}

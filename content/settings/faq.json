@@ -1,0 +1,112 @@
+{
+  "groups": [
+    {
+      "group": "Appointments",
+      "id": "appointments",
+      "items": [
+        {
+          "q": "Do I need an appointment?",
+          "a": "Yes. The boutique is open by appointment only, so your stylist’s attention is entirely yours. Appointments run from one to two hours."
+        },
+        {
+          "q": "Which appointment should I book?",
+          "a": "The **One-Hour** ($25) suits brides who already know what they love. The **Two-Hour** ($50) gives you time to try every silhouette. The **Champagne VIP** ($125) reserves the entire boutique for two hours, with champagne for you and up to 6 guests."
+        },
+        {
+          "q": "How many guests can I bring?",
+          "a": "Up to 4 guests for a standard appointment and up to 6 for a VIP appointment. We kindly ask that no children under 12 attend."
+        },
+        {
+          "q": "Do I choose the gowns I try on?",
+          "a": "Yes. You’ll choose roughly 8–12 gowns from the showroom, and your stylist will add a few she thinks you shouldn’t miss."
+        },
+        {
+          "q": "What should I bring?",
+          "a": "Nude or skin-tone undergarments (silicone nipple covers, high-waisted shapewear or underwear) — your stylist will help you in and out of each gown. Bring the people whose opinion you trust, and an open mind; brides are often surprised by the silhouette they choose."
+        },
+        {
+          "q": "Can I come back for a second look?",
+          "a": "Of course. Book the complimentary 30-minute Return Visit for a second look, to place your order, or to collect your gown."
+        }
+      ]
+    },
+    {
+      "group": "Gowns & Sizing",
+      "id": "gowns",
+      "items": [
+        {
+          "q": "What do your gowns cost?",
+          "a": "Gowns range from $1,500 to $6,000, with most between $2,500 and $3,000."
+        },
+        {
+          "q": "How does bridal sizing work?",
+          "a": "Bridal sizing runs about two sizes smaller than street sizing — if you usually wear a 6, expect a bridal 10 or larger. Every designer sizes differently, and your stylist will measure you to order the right size."
+        },
+        {
+          "q": "What size are the boutique samples?",
+          "a": "Most of our samples are sizes 10–16."
+        },
+        {
+          "q": "Do you carry plus sizes?",
+          "a": "Yes. Eva Lendel, Luce Sposa and our Soirée collection are available in plus sizes."
+        }
+      ]
+    },
+    {
+      "group": "Ordering",
+      "id": "ordering",
+      "items": [
+        {
+          "q": "When should I start shopping?",
+          "a": "Nine to twelve months before your wedding. Most gowns are made to order — the designer begins your gown once you place the order — and you’ll want time for alterations afterwards."
+        },
+        {
+          "q": "Is my gown made to measure?",
+          "a": "Most gowns are made to order, not made to measure: they’re produced in a standard size and then tailored to you by a seamstress."
+        }
+      ]
+    },
+    {
+      "group": "Alterations",
+      "id": "alterations",
+      "items": [
+        {
+          "q": "Will my gown need alterations?",
+          "a": "Almost certainly. Very few gowns fit perfectly on arrival. Allow an additional 2–3 months for alterations."
+        },
+        {
+          "q": "Do you offer alterations?",
+          "a": "We don’t offer in-house alterations, but we’re happy to recommend trusted seamstresses in the area."
+        }
+      ]
+    },
+    {
+      "group": "Payment",
+      "id": "payment",
+      "items": [
+        {
+          "q": "What is your payment policy?",
+          "a": "Payment is made in full when you place your order."
+        },
+        {
+          "q": "What is your refund policy?",
+          "a": "All sales are final — no refunds or exchanges. You’ll review and sign a sales agreement when you order."
+        }
+      ]
+    },
+    {
+      "group": "VIP",
+      "id": "vip",
+      "items": [
+        {
+          "q": "What is a VIP appointment?",
+          "a": "Two hours with the entire boutique reserved for you and up to 6 guests, with champagne. It is $125 and is booked like any other appointment."
+        },
+        {
+          "q": "Can I book a private appointment?",
+          "a": "Yes — the Champagne VIP is our private appointment. No other bride shops while you’re here."
+        }
+      ]
+    }
+  ]
+}

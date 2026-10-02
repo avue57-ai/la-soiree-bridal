@@ -1,0 +1,16 @@
+{
+  "name": "Hugo",
+  "designer": "eva-lendel",
+  "silhouette": "Ball Gown",
+  "neckline": "Sweetheart",
+  "images": [
+    "/media-source/gowns/eva-lendel--hugo--0.jpg",
+    "/media-source/gowns/eva-lendel--hugo--1.jpg",
+    "/media-source/gowns/eva-lendel--hugo--2.jpg",
+    "/media-source/gowns/eva-lendel--hugo--3.jpg",
+    "/media-source/gowns/eva-lendel--hugo--4.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/hugo/",
+  "order": 6
+}

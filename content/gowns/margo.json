@@ -1,0 +1,15 @@
+{
+  "name": "Margo",
+  "designer": "dama-couture",
+  "silhouette": "A-Line",
+  "neckline": "",
+  "images": [
+    "/media-source/gowns/dama-couture--margo--0.jpg",
+    "/media-source/gowns/dama-couture--margo--1.jpg",
+    "/media-source/gowns/dama-couture--margo--2.jpg",
+    "/media-source/gowns/dama-couture--margo--3.jpg"
+  ],
+  "silhouetteSource": "visual",
+  "legacyUrl": "/product/margo/",
+  "order": 9
+}

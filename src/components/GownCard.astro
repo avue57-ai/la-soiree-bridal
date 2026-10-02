@@ -1,0 +1,20 @@
+---
+import Pic from './Pic.astro';
+import { designerBySlug } from '../data/designers.js';
+interface Props { gown: any; sizes?: string; eager?: boolean; showMeta?: boolean; class?: string }
+const { gown, sizes = '(min-width: 1100px) 24vw, (min-width: 700px) 33vw, 50vw', eager = false, showMeta = true, class: cls } = Astro.props;
+const d = designerBySlug[gown.designer];
+const alt2 = gown.images[1];
+---
+<a class:list={['gown-card', cls]} href={`/gowns/${gown.slug}/`} data-cursor="View">
+  <div class="gown-media">
+    <Pic k={gown.images[0]} alt={`${gown.name} wedding gown by ${d.name}`} sizes={sizes} eager={eager} />
+    {alt2 && <Pic k={alt2} alt="" sizes={sizes} class="alt" />}
+  </div>
+  {showMeta && (
+    <div class="gown-meta">
+      <span class="gown-name serif">{gown.name}</span>
+      <span class="gown-designer">{d.name}</span>
+    </div>
+  )}
+</a>

@@ -1,0 +1,16 @@
+{
+  "name": "Andrea",
+  "designer": "dama-couture",
+  "silhouette": "Ball Gown",
+  "neckline": "Illusion",
+  "images": [
+    "/media-source/gowns/dama-couture--andrea--0.jpg",
+    "/media-source/gowns/dama-couture--andrea--1.jpg",
+    "/media-source/gowns/dama-couture--andrea--2.jpg",
+    "/media-source/gowns/dama-couture--andrea--3.jpg",
+    "/media-source/gowns/dama-couture--andrea--4.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/andrea/",
+  "order": 7
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Kasia",
+  "designer": "soiree",
+  "silhouette": "Ball Gown",
+  "neckline": "Sweetheart",
+  "images": [
+    "/media-source/gowns/soiree--kasia--0.jpg",
+    "/media-source/gowns/soiree--kasia--1.jpg",
+    "/media-source/gowns/soiree--kasia--2.jpg",
+    "/media-source/gowns/soiree--kasia--3.jpg",
+    "/media-source/gowns/soiree--kasia--4.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/kasia/",
+  "order": 8
+}

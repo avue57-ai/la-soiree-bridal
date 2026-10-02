@@ -1,0 +1,55 @@
+---
+import Base from '../../layouts/Base.astro';
+import Lines from '../../components/Lines.astro';
+import Pic from '../../components/Pic.astro';
+import JournalCard from '../../components/JournalCard.astro';
+import posts from '../../data/posts.js';
+const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date));
+// lead with the most useful evergreen guide rather than simply the newest post
+const lead = sorted.find((p) => p.slug === 'wedding-dress-shopping-guide') ?? sorted[0];
+const rest = sorted.filter((p) => p !== lead);
+const leadDate = new Date(lead.date + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+---
+<Base
+  title="Journal | Wedding Dress Advice"
+  description="Wedding dress advice from our stylists: your first appointment, gowns by venue and body shape, alterations, undergarments and accessories."
+  image={lead.cover}
+>
+  <section class="page-intro wrap">
+    <p class="eyebrow" data-reveal>The journal</p>
+    <Lines tag="h1" lines={['Notes from', 'the <em>salon.</em>']} delay={0.1} />
+  </section>
+
+  <section class="wrap">
+    <a class="lead" href={lead.path} data-cursor="Read">
+      <div class="media lead-img" data-reveal="mask"><Pic k={lead.cover} alt="" sizes="(min-width: 900px) 55vw, 100vw" eager /></div>
+      <div class="lead-text" data-reveal style="--d:.15s">
+        <p class="caps muted">Start here · {leadDate}</p>
+        <h2 class="h2">{lead.title}</h2>
+        <p class="body-copy">{lead.description}</p>
+        <span class="link">Read the guide</span>
+      </div>
+    </a>
+  </section>
+
+  <section class="wrap section">
+    <ul class="j-grid" role="list">
+      {rest.map((p, i) => <li data-reveal style={`--d:${(i % 3) * 0.08}s`}><JournalCard post={p} /></li>)}
+    </ul>
+  </section>
+</Base>
+
+<style is:global>
+  .page-intro h1 { font-size: var(--fs-display); }
+  .lead { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(2rem, 4vw, 4rem); align-items: center; text-decoration: none; }
+  .lead-img { aspect-ratio: 4/3; }
+  .lead-img img { transition: transform 1.4s var(--ease-out); }
+  .lead:hover .lead-img img { transform: scale(1.03); }
+  .lead-text { display: grid; gap: 1.25rem; justify-items: start; }
+  .lead-text .h2 { font-size: clamp(2rem, 3.4vw, 3.4rem); }
+  @media (max-width: 900px) { .lead { grid-template-columns: 1fr; } }
+  .j-grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4rem clamp(1.25rem, 3vw, 3rem); }
+  .j-grid li:nth-child(3n+2) { margin-top: 4rem; }
+  @media (max-width: 900px) { .j-grid { grid-template-columns: 1fr 1fr; } .j-grid li:nth-child(n) { margin-top: 0; } }
+  @media (max-width: 600px) { .j-grid { grid-template-columns: 1fr; } }
+</style>

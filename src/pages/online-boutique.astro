@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import Lines from '../components/Lines.astro';
+import Pic from '../components/Pic.astro';
+import { site } from '../data/site.js';
+const cats = [
+  { t: 'Sample Sale', d: 'Boutique samples, ready to take home — at sample prices.', href: site.shop.sampleSale, k: 's/boutique-rack', pos: '50% 35%' },
+  { t: 'Veils', d: 'Cathedral, pearl-scattered and embroidered veils to finish the look.', href: site.shop.veils, k: 's/veil-back', pos: '50% 30%' },
+  { t: 'Accessories', d: 'Bridal jewelry, hair pieces, ring boxes and vow books.', href: site.shop.accessories, k: 's/acc-pearls', pos: '50% 50%' },
+  { t: 'Little White Dresses', d: 'For the rehearsal, the shower, the bachelorette and the after-party.', href: site.shop.home, k: 's/boutique-lwd', pos: '50% 40%' },
+];
+---
+<Base
+  title="Shop Sample Gowns, Veils & Accessories"
+  description="Shop La Soirée Bridal online: sample-sale gowns, veils, bridal jewelry and little white dresses from our boutique in Richland, near Kalamazoo."
+  image="s/acc-pearls"
+>
+  <section class="page-intro wrap">
+    <p class="eyebrow" data-reveal>Online boutique</p>
+    <Lines tag="h1" lines={['The finishing', '<em>touches.</em>']} delay={0.1} />
+    <p class="lede" data-reveal style="--d:.3s; margin-top:1.75rem">A small edit of sample gowns, veils and accessories you can buy online. For new gowns, the experience begins with an appointment.</p>
+  </section>
+
+  <section class="wrap section-sm">
+    <ul class="shop-grid" role="list">
+      {cats.map((c, i) => (
+        <li data-reveal style={`--d:${(i % 2) * 0.1}s`}>
+          <a href={c.href} target="_blank" rel="noopener" data-cursor="Shop" data-track="shop_click" data-track-label={c.t}>
+            <div class="media"><Pic k={c.k} alt="" sizes="(min-width: 800px) 45vw, 100vw" pos={c.pos} /></div>
+            <div class="shop-meta">
+              <h2 class="h3">{c.t}</h2>
+              <p class="muted">{c.d}</p>
+              <span class="link">Shop {c.t.toLowerCase()}<span class="sr-only"> (opens our Square store in a new tab)</span></span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="small muted" style="margin-top:3rem">Checkout is handled securely by Square. Questions about an item? <a href="/contact/">Contact us</a>.</p>
+  </section>
+
+  <section class="section bg-cream center">
+    <div class="wrap wrap-narrow stack">
+      <p class="eyebrow">Looking for your wedding gown?</p>
+      <h2 class="h2">New gowns are shown <em>by appointment.</em></h2>
+      <div class="btn-row" style="justify-content:center"><a class="btn" href="/book/" data-track="book_click" data-track-label="shop_page">Book an appointment</a><a class="link" href="/collection/">Browse the collection</a></div>
+    </div>
+  </section>
+</Base>
+
+<style is:global>
+  .page-intro h1 { font-size: var(--fs-display); }
+  .shop-grid { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem clamp(1rem, 3vw, 3rem); }
+  .shop-grid li:nth-child(even) { margin-top: 5rem; }
+  .shop-grid a { display: block; text-decoration: none; }
+  .shop-grid .media { aspect-ratio: 4/5; }
+  .shop-grid .media img { transition: transform 1.4s var(--ease-out); }
+  .shop-grid a:hover .media img { transform: scale(1.04); }
+  .shop-meta { display: grid; gap: .6rem; padding-top: 1.4rem; justify-items: start; }
+  @media (max-width: 700px) { .shop-grid { grid-template-columns: 1fr; } .shop-grid li:nth-child(even) { margin-top: 0; } }
+</style>

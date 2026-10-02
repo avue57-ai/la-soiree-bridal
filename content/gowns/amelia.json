@@ -1,0 +1,16 @@
+{
+  "name": "Amelia",
+  "designer": "soiree",
+  "silhouette": "A-Line",
+  "neckline": "V-Neck",
+  "images": [
+    "/media-source/gowns/soiree--amelia--0.jpg",
+    "/media-source/gowns/soiree--amelia--1.jpg",
+    "/media-source/gowns/soiree--amelia--2.jpg",
+    "/media-source/gowns/soiree--amelia--3.jpg",
+    "/media-source/gowns/soiree--amelia--4.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/amelia/",
+  "order": 21
+}

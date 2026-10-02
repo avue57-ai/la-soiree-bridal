@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Pic from '../components/Pic.astro';
+import Lines from '../components/Lines.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+---
+<Base
+  title="About the Boutique"
+  description="A woman-owned bridal salon in Richland, Michigan, opened in 2022 to give brides near Kalamazoo an intimate way to discover European gowns."
+  header="transparent"
+  image="s/boutique-florals"
+>
+  <PageHero image="s/boutique-florals" eyebrow="About La Soirée" lines={['An evening', '<em>affair.</em>']} lede="Why we built a bridal salon the way we wished one existed." pos="50% 55%" alt="Blush florals on a white console inside the boutique" />
+
+  <section class="section wrap grid-12 story">
+    <div class="story-lead">
+      <p class="eyebrow" data-reveal>The name</p>
+      <p class="serif lead-quote" data-reveal>A <em>soirée</em> is an elegant evening gathering — a fancy affair. It felt like the right name for a place where a bride and her closest people can take their time, pour a glass and enjoy one of the best afternoons of the engagement.</p>
+    </div>
+    <div class="story-body body-copy" data-reveal style="--d:.15s">
+      <p>La Soirée opened its doors on September 1, 2022, after a long summer of renovating and furnishing a 3,000-square-foot space in Richland, just outside Kalamazoo.</p>
+      <p>We started with a simple observation: shopping for a wedding gown is often louder, faster and more crowded than it should be. So we designed the opposite — a light-filled salon with private dressing rooms and a lounge, open by appointment only, where every bride has a dedicated stylist and the space revolves around her.</p>
+      <p>Then we built a collection to match. We travel to see designers’ collections in person and choose European houses for their construction, their detail and their point of view — gowns you are unlikely to see in every other shop. Alongside them sits Soirée, our own private collection.</p>
+      <p>We are a woman-owned boutique, and we are from here. The West Michigan community — our brides, their mothers, their friends — means a great deal to us.</p>
+    </div>
+  </section>
+
+  <section class="about-band">
+    <figure class="media ab-1" data-reveal="mask"><Pic k="s/boutique-salon" alt="The main salon at La Soirée Bridal" sizes="(min-width: 800px) 55vw, 100vw" /></figure>
+    <figure class="media ab-2" data-reveal="mask" style="--d:.1s"><Pic k="s/boutique-sign" alt="A bride in a white jumpsuit and heart sunglasses beneath the La Soirée Bridal sign" sizes="(min-width: 800px) 30vw, 60vw" pos="50% 30%" /></figure>
+  </section>
+
+  <section class="section wrap">
+    <div class="sec-head">
+      <div class="sh-title">
+        <p class="eyebrow" data-reveal>What we believe</p>
+        <Lines class="h2" lines={['Fewer gowns, chosen', 'with <em>more care.</em>']} />
+      </div>
+    </div>
+    <div class="beliefs">
+      <div data-reveal><h3 class="h3">The bride sets the pace.</h3><p class="muted">One to two hours, one stylist, no one waiting for your fitting room. If you need another look, come back — return visits are on us.</p></div>
+      <div data-reveal style="--d:.08s"><h3 class="h3">Honesty over pressure.</h3><p class="muted">We’ll tell you how sizing really works, how long ordering takes and what alterations involve, before you commit to anything.</p></div>
+      <div data-reveal style="--d:.16s"><h3 class="h3">Beyond the gown.</h3><p class="muted">Veils, jewelry, ring boxes, vow books and little white dresses for the rehearsal, the shower and the after-party.</p></div>
+    </div>
+  </section>
+
+  <FinalCTA image="s/boutique-display" lines={['Come and', '<em>see us.</em>']} pos="50% 40%" />
+</Base>
+
+<style is:global>
+  .story { row-gap: 3rem; align-items: start; }
+  .story-lead { grid-column: 1 / span 6; display: grid; gap: 2rem; }
+  .lead-quote { font-size: clamp(1.7rem, 2.8vw, 2.7rem); line-height: 1.28; }
+  .story-body { grid-column: 8 / -1; padding-top: 3.5rem; }
+  @media (max-width: 900px) { .story-lead, .story-body { grid-column: 1 / -1; padding-top: 0; } }
+  .about-band { display: grid; grid-template-columns: 7fr 4fr; gap: clamp(.75rem, 1.5vw, 1.5rem); padding-inline: var(--gutter); align-items: end; }
+  .about-band figure { margin: 0; }
+  .ab-1 { aspect-ratio: 1; } .ab-2 { aspect-ratio: 3/4; margin-bottom: -4rem !important; }
+  @media (max-width: 700px) { .about-band { grid-template-columns: 1fr; } .ab-2 { width: 70%; justify-self: end; margin-top: -6rem !important; margin-bottom: 0 !important; } }
+  .beliefs { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 3rem); }
+  .beliefs > div { border-top: 1px solid var(--line); padding-top: 1.75rem; display: grid; gap: 1rem; align-content: start; }
+  @media (max-width: 900px) { .beliefs { grid-template-columns: 1fr; } }
+</style>

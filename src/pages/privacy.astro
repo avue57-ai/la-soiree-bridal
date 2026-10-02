@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site.js';
+---
+<Base title="Privacy" description="How La Soirée Bridal handles the information you share through this website.">
+  <section class="page-intro wrap"><p class="eyebrow">Privacy</p><h1 class="display" style="font-size:var(--fs-h2)">Your information</h1></section>
+  <div class="wrap section-sm"><div class="prose" style="margin-inline:0">
+    <p>We collect only what you choose to send us: the details you enter in our contact form, and the details you enter when booking through our appointment provider, Square. We use them to reply to you and to manage your appointment. We don’t sell your information.</p>
+    <p>This site uses Google Analytics to understand, in aggregate, how visitors use it. Analytics loads only after you interact with the page and respects your browser’s Do Not Track setting.</p>
+    <p>Gowns you “save” in the collection are stored only in your own browser on your device.</p>
+    <p>Online purchases and appointment bookings are processed by Square under <a href="https://squareup.com/us/en/legal/general/privacy" rel="noopener" target="_blank">Square’s privacy policy</a>.</p>
+    <p>Questions? Email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+  </div></div>
+</Base>

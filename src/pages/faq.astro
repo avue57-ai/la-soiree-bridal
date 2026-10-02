@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import Lines from '../components/Lines.astro';
+import Pic from '../components/Pic.astro';
+import { faq } from '../data/faq.js';
+import { site } from '../data/site.js';
+const strip = (s: string) => s.replace(/<[^>]+>/g, '');
+const schema = [{
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faq.flatMap((g) => g.items.map((i) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: strip(i.a) } }))),
+}];
+---
+<Base
+  title="Bridal Appointment & Wedding Dress FAQ"
+  description="Appointments, guests, gown prices ($1,500–$6,000), bridal sizing, ordering timelines, alterations and payment — answered before you visit."
+  schema={schema}
+  image="s/boutique-rack-ivory"
+>
+  <section class="page-intro wrap faq-intro">
+    <div>
+      <p class="eyebrow" data-reveal>Questions</p>
+      <Lines tag="h1" lines={['Good to know', '<em>before you visit.</em>']} delay={0.1} />
+    </div>
+    <nav class="faq-toc" aria-label="FAQ topics" data-reveal style="--d:.3s">
+      {faq.map((g) => <a href={`#${g.id}`}>{g.group}</a>)}
+    </nav>
+  </section>
+
+  <div class="wrap faq-grid">
+    <div class="faq-body">
+      {faq.map((g) => (
+        <section class="faq-group" id={g.id} aria-labelledby={`${g.id}-h`}>
+          <h2 id={`${g.id}-h`} class="caps faq-h">{g.group}</h2>
+          <div class="acc">
+            {g.items.map((i) => (
+              <details>
+                <summary>{i.q}<span class="pm" aria-hidden="true"></span></summary>
+                <div class="ans"><p set:html={i.a} /></div>
+              </details>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+    <aside class="faq-aside">
+      <div class="media ratio-portrait"><Pic k="s/boutique-rack-ivory" alt="Ivory gowns hanging in the boutique" sizes="(min-width: 1000px) 28vw, 0px" /></div>
+      <p class="serif" style="font-size:1.6rem; line-height:1.25">Still wondering about something?</p>
+      <p class="muted small">Call <a href={site.phoneHref}>{site.phone}</a>, email <a href={`mailto:${site.email}`}>{site.email}</a>, or send a note.</p>
+      <div class="btn-row">
+        <a class="btn" href="/book/" data-track="book_click" data-track-label="faq">Book an appointment</a>
+        <a class="link" href="/contact/">Contact us</a>
+      </div>
+    </aside>
+  </div>
+</Base>
+
+<style is:global>
+  .faq-intro { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 2rem; }
+  .faq-intro h1 { font-size: var(--fs-display); }
+  .faq-toc { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: flex-end; max-width: 26rem; }
+  .faq-toc a { font-size: .74rem; letter-spacing: .08em; text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: .55rem 1rem; min-height: 40px; display: inline-flex; align-items: center; transition: background .3s, color .3s; }
+  .faq-toc a:hover { background: var(--ink); color: var(--ivory); }
+  @media (max-width: 900px) { .faq-intro { grid-template-columns: 1fr; } .faq-toc { justify-content: flex-start; } }
+  .faq-grid { display: grid; grid-template-columns: 7fr 1fr 4fr; padding-bottom: var(--section); }
+  .faq-body { grid-column: 1; display: grid; gap: 4rem; }
+  .faq-h { color: var(--brass-text); font-size: .7rem; margin-bottom: .5rem; font-family: var(--sans); }
+  .faq-aside { grid-column: 3; position: sticky; top: calc(var(--header-h) + 2rem); align-self: start; display: grid; gap: 1.25rem; }
+  .faq-aside a:not(.btn):not(.link) { color: var(--ink); }
+  @media (max-width: 1000px) { .faq-grid { grid-template-columns: 1fr; } .faq-aside { grid-column: 1; position: static; margin-top: 4rem; } .faq-aside .media { display: none; } }
+</style>

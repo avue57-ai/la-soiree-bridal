@@ -1,0 +1,15 @@
+---
+import Pic from './Pic.astro';
+import Lines from './Lines.astro';
+interface Props { image: string; eyebrow?: string; lines: string[]; lede?: string; pos?: string; short?: boolean; alt?: string }
+const { image, eyebrow, lines, lede, pos = '50% 35%', short = false, alt = '' } = Astro.props;
+---
+<section class:list={['page-hero', { short }]}>
+  <div class="media"><Pic k={image} alt={alt} sizes="100vw" eager pos={pos} imgClass="kenburns" /></div>
+  <div class="wrap content">
+    {eyebrow && <p class="eyebrow" data-reveal>{eyebrow}</p>}
+    <Lines lines={lines} tag="h1" delay={0.1} />
+    {lede && <p class="lede" data-reveal style="--d:.35s">{lede}</p>}
+    <slot />
+  </div>
+</section>

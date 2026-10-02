@@ -1,0 +1,16 @@
+{
+  "name": "Shadow",
+  "designer": "eva-lendel",
+  "silhouette": "Mermaid",
+  "neckline": "",
+  "images": [
+    "/media-source/gowns/eva-lendel--shadow--0.jpg",
+    "/media-source/gowns/eva-lendel--shadow--1.jpg",
+    "/media-source/gowns/eva-lendel--shadow--2.jpg",
+    "/media-source/gowns/eva-lendel--shadow--3.jpg",
+    "/media-source/gowns/eva-lendel--shadow--4.jpg"
+  ],
+  "silhouetteSource": "visual",
+  "legacyUrl": "",
+  "order": 25
+}

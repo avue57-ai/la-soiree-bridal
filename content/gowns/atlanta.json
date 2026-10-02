@@ -1,0 +1,17 @@
+{
+  "name": "Atlanta",
+  "designer": "eva-lendel",
+  "silhouette": "Mermaid",
+  "neckline": "Scoop",
+  "images": [
+    "/media-source/gowns/eva-lendel--atlanta--0.jpg",
+    "/media-source/gowns/eva-lendel--atlanta--1.jpg",
+    "/media-source/gowns/eva-lendel--atlanta--2.jpg",
+    "/media-source/gowns/eva-lendel--atlanta--3.jpg",
+    "/media-source/gowns/eva-lendel--atlanta--4.jpg",
+    "/media-source/gowns/eva-lendel--atlanta--5.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/atlanta/",
+  "order": 19
+}

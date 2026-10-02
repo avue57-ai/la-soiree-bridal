@@ -1,0 +1,16 @@
+{
+  "name": "Envy",
+  "designer": "eva-lendel",
+  "silhouette": "Sheath",
+  "neckline": "Scoop",
+  "images": [
+    "/media-source/gowns/eva-lendel--envy--0.jpg",
+    "/media-source/gowns/eva-lendel--envy--1.jpg",
+    "/media-source/gowns/eva-lendel--envy--2.jpg",
+    "/media-source/gowns/eva-lendel--envy--3.jpg",
+    "/media-source/gowns/eva-lendel--envy--4.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/envy/",
+  "order": 10
+}

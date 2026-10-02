@@ -1,0 +1,14 @@
+{
+  "name": "Elvira",
+  "designer": "soiree",
+  "silhouette": "Ball Gown",
+  "neckline": "",
+  "images": [
+    "/media-source/gowns/soiree--elvira--0.jpg",
+    "/media-source/gowns/soiree--elvira--1.jpg",
+    "/media-source/gowns/soiree--elvira--2.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/elvira/",
+  "order": 12
+}

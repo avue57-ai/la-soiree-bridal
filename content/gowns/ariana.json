@@ -1,0 +1,15 @@
+{
+  "name": "Ariana",
+  "designer": "dama-couture",
+  "silhouette": "A-Line",
+  "neckline": "V-Neck",
+  "images": [
+    "/media-source/gowns/dama-couture--ariana--0.jpg",
+    "/media-source/gowns/dama-couture--ariana--1.jpg",
+    "/media-source/gowns/dama-couture--ariana--2.jpg",
+    "/media-source/gowns/dama-couture--ariana--3.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/ariana/",
+  "order": 4
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Dita",
+  "designer": "eva-lendel",
+  "silhouette": "A-Line",
+  "neckline": "Straight",
+  "images": [
+    "/media-source/gowns/eva-lendel--dita--0.jpg",
+    "/media-source/gowns/eva-lendel--dita--1.jpg",
+    "/media-source/gowns/eva-lendel--dita--2.jpg",
+    "/media-source/gowns/eva-lendel--dita--3.jpg",
+    "/media-source/gowns/eva-lendel--dita--4.jpg",
+    "/media-source/gowns/eva-lendel--dita--5.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/dita/",
+  "order": 16
+}

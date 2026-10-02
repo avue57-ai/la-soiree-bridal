@@ -1,0 +1,24 @@
+{
+  "name": "la-soiree-bridal",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "images": "node scripts/optimize-images.mjs",
+    "build": "node scripts/optimize-images.mjs && astro build",
+    "preview": "astro preview",
+    "check": "node scripts/check.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.6.0",
+    "@fontsource-variable/bodoni-moda": "^5.2.0",
+    "@fontsource-variable/jost": "^5.2.0",
+    "astro": "^5.14.0",
+    "marked": "^18.0.14",
+    "sharp": "^0.34.0"
+  },
+  "devDependencies": {
+    "turndown": "^7.2.4"
+  }
+}

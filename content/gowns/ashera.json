@@ -1,0 +1,18 @@
+{
+  "name": "Ashera",
+  "designer": "luce-sposa",
+  "silhouette": "Ball Gown",
+  "neckline": "Scoop",
+  "images": [
+    "/media-source/gowns/luce-sposa--ashera--0.jpg",
+    "/media-source/gowns/luce-sposa--ashera--1.jpg",
+    "/media-source/gowns/luce-sposa--ashera--2.jpg",
+    "/media-source/gowns/luce-sposa--ashera--3.jpg",
+    "/media-source/gowns/luce-sposa--ashera--4.jpg",
+    "/media-source/gowns/luce-sposa--ashera--5.jpg",
+    "/media-source/gowns/luce-sposa--ashera--6.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/ashera/",
+  "order": 2
+}

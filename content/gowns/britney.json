@@ -1,0 +1,15 @@
+{
+  "name": "Britney",
+  "designer": "soiree",
+  "silhouette": "Ball Gown",
+  "neckline": "",
+  "images": [
+    "/media-source/gowns/soiree--britney--0.jpg",
+    "/media-source/gowns/soiree--britney--1.jpg",
+    "/media-source/gowns/soiree--britney--2.jpg",
+    "/media-source/gowns/soiree--britney--3.jpg"
+  ],
+  "silhouetteSource": "visual",
+  "legacyUrl": "",
+  "order": 19
+}

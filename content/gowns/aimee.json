@@ -1,0 +1,16 @@
+{
+  "name": "Aimee",
+  "designer": "eva-lendel",
+  "silhouette": "Ball Gown",
+  "neckline": "Scoop",
+  "images": [
+    "/media-source/gowns/eva-lendel--aimee--0.jpg",
+    "/media-source/gowns/eva-lendel--aimee--1.jpg",
+    "/media-source/gowns/eva-lendel--aimee--2.jpg",
+    "/media-source/gowns/eva-lendel--aimee--3.jpg",
+    "/media-source/gowns/eva-lendel--aimee--4.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/aimee/",
+  "order": 2
+}

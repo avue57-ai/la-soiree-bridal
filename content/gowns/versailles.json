@@ -1,0 +1,15 @@
+{
+  "name": "Versailles",
+  "designer": "soiree",
+  "silhouette": "Ball Gown",
+  "neckline": "Scoop",
+  "images": [
+    "/media-source/gowns/soiree--versailles--0.jpg",
+    "/media-source/gowns/soiree--versailles--1.jpg",
+    "/media-source/gowns/soiree--versailles--2.jpg",
+    "/media-source/gowns/soiree--versailles--3.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/versailes/",
+  "order": 2
+}

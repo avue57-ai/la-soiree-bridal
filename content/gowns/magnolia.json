@@ -1,0 +1,16 @@
+{
+  "name": "Magnolia",
+  "designer": "soiree",
+  "silhouette": "Ball Gown",
+  "neckline": "",
+  "images": [
+    "/media-source/gowns/soiree--magnolia--0.jpg",
+    "/media-source/gowns/soiree--magnolia--1.jpg",
+    "/media-source/gowns/soiree--magnolia--2.jpg",
+    "/media-source/gowns/soiree--magnolia--3.jpg",
+    "/media-source/gowns/soiree--magnolia--4.jpg"
+  ],
+  "silhouetteSource": "visual",
+  "legacyUrl": "",
+  "order": 17
+}

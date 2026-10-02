@@ -1,0 +1,17 @@
+{
+  "name": "Natalie",
+  "designer": "soiree",
+  "silhouette": "A-Line",
+  "neckline": "Illusion",
+  "images": [
+    "/media-source/gowns/soiree--natalie--0.jpg",
+    "/media-source/gowns/soiree--natalie--1.jpg",
+    "/media-source/gowns/soiree--natalie--2.jpg",
+    "/media-source/gowns/soiree--natalie--3.jpg",
+    "/media-source/gowns/soiree--natalie--4.jpg",
+    "/media-source/gowns/soiree--natalie--5.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/natalie/",
+  "order": 5
+}

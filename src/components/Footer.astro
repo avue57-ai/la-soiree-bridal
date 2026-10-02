@@ -1,0 +1,50 @@
+---
+import { site } from '../data/site.js';
+import Wordmark from './Wordmark.astro';
+import Social from './Social.astro';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer on-dark" data-hide-bookbar>
+  <div class="wrap footer-top">
+    <div class="footer-brand">
+      <Wordmark />
+      <p>A private bridal salon for curated European gowns. Richland, Michigan — minutes from Kalamazoo, about an hour from Grand Rapids.</p>
+      <Social />
+    </div>
+    <div>
+      <h2>Visit</h2>
+      <address style="font-style:normal; line-height:1.8">
+        {site.address.street}, <span style="white-space:nowrap">{site.address.suite}</span><br />
+        {site.address.city}, {site.address.regionLong} {site.address.zip}
+      </address>
+      <p style="margin-top:.8rem">By appointment only</p>
+      <p style="margin-top:.8rem"><a href={site.mapsUrl} rel="noopener" target="_blank">Get directions<span class="sr-only"> (opens Google Maps)</span></a></p>
+    </div>
+    <div>
+      <h2>Explore</h2>
+      <ul role="list">
+        <li><a href="/collection/">The Collection</a></li>
+        <li><a href="/designers/">Designers</a></li>
+        <li><a href="/experience/">The Experience</a></li>
+        <li><a href="/vip/">VIP Appointments</a></li>
+        <li><a href="/online-boutique/">Online Boutique</a></li>
+        <li><a href="/journal/">Journal</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Boutique</h2>
+      <ul role="list">
+        <li><a href="/book/">Book an appointment</a></li>
+        <li><a href="/faq/">Questions</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href={site.phoneHref}>{site.phone}</a></li>
+        <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© {year} La Soirée Bridal · Bridal boutique serving Kalamazoo &amp; West Michigan</span>
+    <span><a href="/privacy/">Privacy</a></span>
+  </div>
+</footer>

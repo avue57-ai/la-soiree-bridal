@@ -1,0 +1,15 @@
+{
+  "name": "Claire",
+  "designer": "dama-couture",
+  "silhouette": "A-Line",
+  "neckline": "V-Neck",
+  "images": [
+    "/media-source/gowns/dama-couture--claire--0.jpg",
+    "/media-source/gowns/dama-couture--claire--1.jpg",
+    "/media-source/gowns/dama-couture--claire--2.jpg",
+    "/media-source/gowns/dama-couture--claire--3.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/claire/",
+  "order": 2
+}

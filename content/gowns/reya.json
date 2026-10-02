@@ -1,0 +1,15 @@
+{
+  "name": "Reya",
+  "designer": "eva-lendel",
+  "silhouette": "Ball Gown",
+  "neckline": "Straight",
+  "images": [
+    "/media-source/gowns/eva-lendel--reya--0.jpg",
+    "/media-source/gowns/eva-lendel--reya--1.jpg",
+    "/media-source/gowns/eva-lendel--reya--2.jpg",
+    "/media-source/gowns/eva-lendel--reya--3.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/reya/",
+  "order": 3
+}

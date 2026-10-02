@@ -1,0 +1,17 @@
+{
+  "name": "Cordelia",
+  "designer": "luce-sposa",
+  "silhouette": "Ball Gown",
+  "neckline": "Sweetheart",
+  "images": [
+    "/media-source/gowns/luce-sposa--cordelia--0.jpg",
+    "/media-source/gowns/luce-sposa--cordelia--1.jpg",
+    "/media-source/gowns/luce-sposa--cordelia--2.jpg",
+    "/media-source/gowns/luce-sposa--cordelia--3.jpg",
+    "/media-source/gowns/luce-sposa--cordelia--4.jpg",
+    "/media-source/gowns/luce-sposa--cordelia--5.jpg"
+  ],
+  "silhouetteSource": "site",
+  "legacyUrl": "/product/cordeila/",
+  "order": 1
+}

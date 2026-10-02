@@ -1,0 +1,47 @@
+---
+// Horizontal, snap-scrolling lookbook. Works with trackpad, touch, keyboard (focusable track) and buttons.
+const { label = 'Gallery' } = Astro.props;
+---
+<div class="rail" data-rail>
+  <div class="rail-track" tabindex="0" role="region" aria-label={`${label} — scroll horizontally`} data-rail-track>
+    <slot />
+  </div>
+  <div class="wrap rail-controls">
+    <div class="rail-progress" aria-hidden="true"><span data-rail-progress></span></div>
+    <button class="rail-btn" type="button" data-rail-prev aria-label="Previous">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M15 5l-7 7 7 7" /></svg>
+    </button>
+    <button class="rail-btn" type="button" data-rail-next aria-label="Next">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M9 5l7 7-7 7" /></svg>
+    </button>
+  </div>
+</div>
+<script>
+  document.querySelectorAll('[data-rail]').forEach((rail) => {
+    const track = rail.querySelector<HTMLElement>('[data-rail-track]')!;
+    const prev = rail.querySelector<HTMLButtonElement>('[data-rail-prev]')!;
+    const next = rail.querySelector<HTMLButtonElement>('[data-rail-next]')!;
+    const bar = rail.querySelector<HTMLElement>('[data-rail-progress]')!;
+    const step = () => (track.firstElementChild as HTMLElement)?.getBoundingClientRect().width * 1.5 || 400;
+    const smooth = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: smooth as ScrollBehavior }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: smooth as ScrollBehavior }));
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      const p = max > 0 ? track.scrollLeft / max : 1;
+      bar.style.width = `${Math.max(8, p * 100)}%`;
+      prev.disabled = track.scrollLeft < 4;
+      next.disabled = track.scrollLeft > max - 4;
+    };
+    track.addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
+    update();
+    // drag to scroll with a mouse
+    let down = false, x0 = 0, s0 = 0, moved = false;
+    track.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') return; down = true; moved = false; x0 = e.clientX; s0 = track.scrollLeft; track.style.scrollSnapType = 'none'; });
+    addEventListener('pointermove', (e) => { if (!down) return; const dx = e.clientX - x0; if (Math.abs(dx) > 5) moved = true; track.scrollLeft = s0 - dx; });
+    addEventListener('pointerup', () => { if (!down) return; down = false; track.style.scrollSnapType = ''; });
+    track.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    track.addEventListener('dragstart', (e) => e.preventDefault());
+  });
+</script>

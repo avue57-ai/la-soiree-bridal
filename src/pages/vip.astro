@@ -1,0 +1,103 @@
+---
+import Base from '../layouts/Base.astro';
+import Pic from '../components/Pic.astro';
+import Lines from '../components/Lines.astro';
+import { appointments } from '../data/site.js';
+const vip = appointments.find((a) => a.id === 'vip')!;
+const schema = [{
+  '@context': 'https://schema.org', '@type': 'Service', name: 'Champagne VIP bridal appointment', serviceType: 'Private bridal appointment',
+  provider: { '@id': 'https://lasoireebridal.com/#boutique' }, areaServed: 'West Michigan',
+  offers: { '@type': 'Offer', price: String(vip.price), priceCurrency: 'USD', url: 'https://lasoireebridal.com/book/' },
+  description: 'Two hours with the entire boutique reserved for the bride and up to 6 guests, with champagne.',
+}];
+---
+<Base
+  title="Champagne VIP Bridal Appointment"
+  description="Reserve the entire La Soirée Bridal boutique for two hours: champagne, you plus 6 guests and every gown within reach. $125, near Kalamazoo, Michigan."
+  header="transparent"
+  image="s/champagne"
+  schema={schema}
+>
+  <section class="vip-hero on-dark">
+    <div class="vh-bg" aria-hidden="true"><Pic k="s/chandelier" alt="" sizes="100vw" eager /></div>
+    <div class="wrap vh-grid">
+      <div class="vh-text">
+        <p class="eyebrow" data-reveal>The Champagne VIP</p>
+        <Lines tag="h1" class="vh-title" lines={['The entire', 'boutique.', '<em>Just yours.</em>']} delay={0.1} />
+        <p class="lede" data-reveal style="--d:.4s">For two hours we close the salon to everyone but you and the people you love. The champagne is poured, the rails are yours, and nobody is waiting for the next fitting room.</p>
+        <div class="btn-row" data-reveal style="--d:.5s">
+          <a class="btn btn-light" href="/book/?appointment=vip" data-track="book_click" data-track-label="vip_hero">Book the VIP · ${vip.price} <span class="arrow" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <figure class="vh-img media" data-reveal="mask" style="--d:.2s"><Pic k="s/champagne" alt="Champagne glasses raised by a bride and her guests" sizes="(min-width: 900px) 38vw, 90vw" eager /></figure>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="incl-title">
+    <div class="sec-head">
+      <div class="sh-title">
+        <p class="eyebrow" data-reveal>What’s included</p>
+        <Lines id="incl-title" class="h2" lines={['An upgrade you’ll', '<em>remember.</em>']} />
+      </div>
+    </div>
+    <div class="facts incl" style="--n:4" data-reveal>
+      <div class="fact"><span class="big">Champagne</span><span class="lbl">Poured for your party</span></div>
+      <div class="fact"><span class="big">You + 6</span><span class="lbl">Guests (no children under 12)</span></div>
+      <div class="fact"><span class="big">Entire</span><span class="lbl">Boutique reserved for you</span></div>
+      <div class="fact"><span class="big">2 hours</span><span class="lbl">Private time · ${vip.price}</span></div>
+    </div>
+  </section>
+
+  <section class="section-sm wrap grid-12 who">
+    <figure class="who-img media" data-reveal="mask"><Pic k="s/boutique-salon" alt="The boutique salon prepared for a private appointment" sizes="(min-width: 900px) 50vw, 100vw" /></figure>
+    <div class="who-text">
+      <p class="eyebrow" data-reveal>Who it’s for</p>
+      <h2 class="h2" data-reveal>For the bride bringing her <em>whole circle.</em></h2>
+      <ul class="who-list" role="list">
+        <li data-reveal>Mothers, sisters and best friends who all want to be there — up to 6 guests instead of 4.</li>
+        <li data-reveal style="--d:.06s">Brides who’d rather not share the salon, even for a moment.</li>
+        <li data-reveal style="--d:.12s">A first look worth celebrating — or a final decision worth toasting.</li>
+        <li data-reveal style="--d:.18s">Families travelling in from Grand Rapids, Lansing and beyond, making a day of it.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section bg-cream" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-title">
+          <p class="eyebrow" data-reveal>How to book</p>
+          <Lines id="how-title" class="h2" lines={['Three steps to', 'your <em>afternoon.</em>']} />
+        </div>
+      </div>
+      <ol class="steps" role="list">
+        <li class="step" data-reveal><span class="n">01</span><h3>Choose the VIP</h3><p>On the booking page, select “2 Hour VIP Appointment with Champagne”.</p></li>
+        <li class="step" data-reveal><span class="n">02</span><h3>Pick your time</h3><p>Choose a date and time that works for your party. You’ll receive a confirmation from Square.</p></li>
+        <li class="step" data-reveal><span class="n">03</span><h3>Tell us about you</h3><p>Share your wedding date, venue and any gowns you’ve saved — we’ll prepare the salon around you.</p></li>
+      </ol>
+      <div class="btn-row" style="margin-top:3rem" data-reveal>
+        <a class="btn" href="/book/?appointment=vip" data-track="book_click" data-track-label="vip_how">Book the Champagne VIP <span class="arrow" aria-hidden="true"></span></a>
+        <a class="link" href="/experience/">Compare appointments</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style is:global>
+  .vip-hero { position: relative; overflow: hidden; background: #1a1613; --mask-bg: #1a1613; padding-top: calc(var(--header-h) + clamp(3rem, 7vw, 6rem)); padding-bottom: var(--section-sm); }
+  .vh-bg { position: absolute; inset: 0; opacity: .28; }
+  .vh-bg img { width: 100%; height: 100%; object-fit: cover; filter: sepia(.55) contrast(1.05); }
+  .vh-grid { position: relative; display: grid; grid-template-columns: repeat(12, 1fr); column-gap: clamp(1rem, 2.4vw, 2.5rem); row-gap: 3rem; align-items: center; }
+  .vh-text { grid-column: 1 / span 7; display: grid; gap: 2rem; justify-items: start; }
+  .vh-title { font-size: var(--fs-display); color: #f3e9d8; line-height: .98; }
+  .vh-img { grid-column: 9 / -1; aspect-ratio: 3/4; }
+  @media (max-width: 900px) { .vh-text, .vh-img { grid-column: 1 / -1; } .vh-img { width: 78%; justify-self: end; } }
+  .incl .big { font-size: clamp(1.8rem, 3vw, 2.8rem); }
+  .who { align-items: center; row-gap: 3rem; }
+  .who-img { grid-column: 1 / span 6; aspect-ratio: 1; }
+  .who-text { grid-column: 8 / -1; display: grid; gap: 1.75rem; }
+  .who-list { list-style: none; padding: 0; border-top: 1px solid var(--line); }
+  .who-list li { padding: 1.1rem 0 1.1rem 2rem; border-bottom: 1px solid var(--line); color: var(--muted); position: relative; }
+  .who-list li::before { content: '✦'; position: absolute; left: 0; color: var(--brass); font-size: .8rem; top: 1.3rem; }
+  @media (max-width: 900px) { .who-img, .who-text { grid-column: 1 / -1; } }
+</style>

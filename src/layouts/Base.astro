@@ -1,0 +1,133 @@
+---
+import '@fontsource-variable/bodoni-moda/opsz.css';
+import '@fontsource-variable/bodoni-moda/opsz-italic.css';
+import '@fontsource-variable/jost/wght.css';
+import '../styles/global.css';
+import '../styles/components.css';
+import bodoniUrl from '@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-opsz-normal.woff2?url';
+import jostUrl from '@fontsource-variable/jost/files/jost-latin-wght-normal.woff2?url';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site.js';
+import { has } from '../lib/img.js';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;          // manifest key for social card
+  header?: 'transparent' | 'solid';
+  schema?: object[];
+  noindex?: boolean;
+  bookBar?: boolean;
+  preload?: { href: string; as: string; type?: string; media?: string; imagesrcset?: string; imagesizes?: string }[];
+}
+const { title, description, image = 's/boutique-salon', header = 'solid', schema = [], noindex = false, bookBar = true, preload = [] } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const fullTitle = title.includes('La Soirée') || title.length > 42 ? title : `${title} | La Soirée Bridal`;
+const ogImage = has(image) ? new URL(`/og/${image}.jpg`, site.url).href : undefined;
+
+const business = {
+  '@context': 'https://schema.org',
+  '@type': ['ClothingStore', 'LocalBusiness'],
+  '@id': `${site.url}/#boutique`,
+  name: site.name,
+  alternateName: 'La Soiree Bridal',
+  description: 'Private bridal boutique in Richland, Michigan, near Kalamazoo, offering curated European wedding gowns by appointment.',
+  url: site.url + '/',
+  telephone: '+1-269-220-0440',
+  email: site.email,
+  image: ogImage,
+  priceRange: '$1,500–$6,000',
+  currenciesAccepted: 'USD',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: `${site.address.street}, ${site.address.suite}`,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    postalCode: site.address.zip,
+    addressCountry: site.address.country,
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
+  hasMap: site.mapsUrl,
+  openingHoursSpecification: site.hours.filter((h) => !h.closed).map((h) => ({
+    '@type': 'OpeningHoursSpecification', dayOfWeek: h.days, opens: h.opens, closes: h.closes,
+  })),
+  areaServed: ['Kalamazoo', 'Portage', 'Battle Creek', 'Grand Rapids', 'West Michigan', 'Southwest Michigan'].map((n) => ({ '@type': 'Place', name: n })),
+  brand: ['Eva Lendel', 'Anna Sposa', 'DAMA Couture', 'Luce Sposa', 'Soirée'].map((n) => ({ '@type': 'Brand', name: n })),
+  sameAs: [site.social.instagram, site.social.facebook, site.social.pinterest, site.social.tiktok],
+  potentialAction: { '@type': 'ReserveAction', target: site.url + site.booking.page, name: 'Book a bridal appointment' },
+};
+const website = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${site.url}/#website`, url: site.url + '/', name: site.name, publisher: { '@id': `${site.url}/#boutique` } };
+const ld = [business, website, ...schema];
+---
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta name="theme-color" content="#f7f3ec" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="La Soirée Bridal" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_US" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {ogImage && <meta property="og:image:width" content="1200" />}
+    {ogImage && <meta property="og:image:height" content="630" />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+    <link rel="preload" href={bodoniUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={jostUrl} as="font" type="font/woff2" crossorigin />
+    {preload.map((p) => <link rel="preload" {...p} />)}
+
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    {ld.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Header mode={header} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    {bookBar && (
+      <div class="book-bar" data-book-bar>
+        <a class="btn" href="/book/" data-track="book_click" data-track-label="mobile_bar">Book an appointment</a>
+      </div>
+    )}
+    <div class="cursor" aria-hidden="true"><span></span></div>
+    <script>
+      import '../scripts/site.js';
+    </script>
+    <script is:inline define:vars={{ ga: site.ga4 }}>
+      // GA4 loads after first interaction or idle — keeps it off the critical path.
+      (function () {
+        if (!ga || navigator.doNotTrack === '1') return;
+        var loaded = false;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', ga);
+        function load() {
+          if (loaded) return; loaded = true;
+          var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ga; document.head.appendChild(s);
+        }
+        ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (e) { addEventListener(e, load, { once: true, passive: true }); });
+        (window.requestIdleCallback || setTimeout)(function () { setTimeout(load, 3500); });
+      })();
+    </script>
+  </body>
+</html>

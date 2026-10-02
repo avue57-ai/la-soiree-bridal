@@ -1,0 +1,84 @@
+{
+  "name": "La Soirée Bridal",
+  "legalName": "La Soiree Bridal",
+  "url": "https://lasoireebridal.com",
+  "phone": "269-220-0440",
+  "phoneHref": "tel:+12692200440",
+  "email": "hello@lasoireebridal.com",
+  "address": {
+    "street": "8880 N 32nd Street",
+    "suite": "Suite 1",
+    "city": "Richland",
+    "region": "MI",
+    "regionLong": "Michigan",
+    "zip": "49083",
+    "country": "US"
+  },
+  "geo": {
+    "lat": 42.38921,
+    "lng": -85.454659
+  },
+  "mapsUrl": "https://www.google.com/maps/dir/?api=1&destination=8880+N+32nd+Street+Suite+1+Richland+MI+49083",
+  "opened": "2022-09-01",
+  "hours": [
+    {
+      "days": [
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "10:00",
+      "closes": "21:30",
+      "label": "Tuesday – Friday",
+      "time": "10 am – 9:30 pm"
+    },
+    {
+      "days": [
+        "Saturday"
+      ],
+      "opens": "10:00",
+      "closes": "19:00",
+      "label": "Saturday",
+      "time": "10 am – 7 pm"
+    },
+    {
+      "days": [
+        "Sunday"
+      ],
+      "opens": "10:00",
+      "closes": "16:00",
+      "label": "Sunday",
+      "time": "10 am – 4 pm"
+    },
+    {
+      "days": [
+        "Monday"
+      ],
+      "closed": true,
+      "label": "Monday",
+      "time": "Closed"
+    }
+  ],
+  "priceRange": "$1,500 – $6,000",
+  "booking": {
+    "page": "/book/",
+    "squareServices": "https://book.squareup.com/appointments/qbvq4uh8cnhpeq/location/L4VWQKEDAHVN1/services",
+    "squareWidget": "https://app.squareup.com/appointments/buyer/widget/qbvq4uh8cnhpeq/L4VWQKEDAHVN1",
+    "manage": "https://book.squareup.com/appointments/qbvq4uh8cnhpeq/location/L4VWQKEDAHVN1/services"
+  },
+  "shop": {
+    "home": "https://la-soiree-bridal.square.site/s/shop",
+    "sampleSale": "https://la-soiree-bridal.square.site/shop/samplesale/5",
+    "veils": "https://la-soiree-bridal.square.site/shop/veils/CFS5YS4CJQJT6U6DE2XLQPX2",
+    "accessories": "https://la-soiree-bridal.square.site/shop/accessories/3"
+  },
+  "social": {
+    "instagram": "https://www.instagram.com/lasoireebridal/",
+    "instagramHandle": "@lasoireebridal",
+    "facebook": "https://www.facebook.com/La-Soir%C3%A9e-Bridal-105758525447493",
+    "pinterest": "https://www.pinterest.com/LaSoireeBridal/",
+    "tiktok": "https://www.tiktok.com/@lasoireebridal"
+  },
+  "ga4": "G-DSSRN1351Q"
+}
