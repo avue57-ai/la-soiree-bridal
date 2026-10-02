@@ -4,15 +4,19 @@ Static site built with [Astro](https://astro.build). No CMS, no database, no plu
 
 ## Everyday edits
 
+**Non-technical edits happen in the site editor at `/admin/`** — see `EDITING.md`. Every save commits to GitHub and Netlify republishes in about 1 minute.
+
+The tables below are for developers editing files directly.
+
 | To change… | Edit this file |
 |---|---|
-| Phone, email, address, hours, social links, booking & shop links | `src/data/site.js` |
-| Appointment types and prices shown on the site | `src/data/site.js` → `appointments` |
-| Designers (copy, price ranges, plus-size flag, hero images) | `src/data/designers.js` |
-| Gowns (add / remove / silhouette) | `src/data/gowns.json` + photos in `media-source/gowns/` |
-| FAQ | `src/data/faq.js` |
-| Testimonials | `src/data/testimonials.js` |
-| Journal posts | `src/data/posts.json` |
+| Phone, email, address, hours, social links, booking & shop links | `content/settings/business.json` |
+| Appointment types and prices shown on the site | `content/settings/business.json` → `appointments` |
+| Designers (copy, price ranges, plus-size flag, hero images) | `content/designers/*.json` |
+| Gowns (add / remove / silhouette) | `content/gowns/*.json` + photos in `media-source/gowns/` |
+| FAQ | `content/settings/faq.json` |
+| Testimonials | `content/settings/testimonials.json` |
+| Journal posts | `content/journal/*.md` |
 
 ### Add a gown
 1. Put the photos in `media-source/gowns/` named `designer--gownname--0.jpg`, `--1.jpg`, … (`0` is the cover). Designer slugs: `eva-lendel`, `anna-sposa`, `dama-couture`, `luce-sposa`, `soiree`.
