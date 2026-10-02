@@ -11,7 +11,7 @@
     "/media-source/gowns/eva-lendel--shadow--4.jpg"
   ],
   "order": 25,
-  "hidden": true,
+  "hidden": false,
   "silhouetteSource": "visual",
   "legacyUrl": ""
 }
