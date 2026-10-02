@@ -10,7 +10,8 @@
     "/media-source/gowns/eva-lendel--shadow--3.jpg",
     "/media-source/gowns/eva-lendel--shadow--4.jpg"
   ],
+  "order": 25,
+  "hidden": true,
   "silhouetteSource": "visual",
-  "legacyUrl": "",
-  "order": 25
+  "legacyUrl": ""
 }
