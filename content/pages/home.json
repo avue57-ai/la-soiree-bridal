@@ -1,0 +1,308 @@
+{
+  "title": "Home",
+  "path": "/",
+  "header": "transparent",
+  "meta": {
+    "title": "La Soirée Bridal | Kalamazoo, Michigan Bridal Boutique",
+    "description": "Private bridal salon near Kalamazoo, Michigan. European wedding gowns by Eva Lendel, Anna Sposa, DAMA Couture and Luce Sposa, by appointment.",
+    "ogKey": "s/boutique-salon"
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero-video",
+      "eyebrow": "Richland, MI · By appointment",
+      "headline": [
+        "For the bride who",
+        "wants something *different.*"
+      ],
+      "sub": "European bridal gowns. Private appointments.\nAn experience entirely your own.",
+      "primaryCta": {
+        "label": "Book an appointment",
+        "href": "/book/",
+        "track": "hero"
+      },
+      "secondaryCta": {
+        "label": "Explore the collection",
+        "href": "/collection/"
+      }
+    },
+    {
+      "id": "statement",
+      "type": "statement-split",
+      "eyebrow": "La Soirée",
+      "headline": [
+        "Your dress should",
+        "feel as unforgettable",
+        "as the moment",
+        "you *find it.*"
+      ],
+      "body": [
+        "La Soirée is a small, private bridal salon outside Kalamazoo. We carry a tightly edited collection of European gowns — chosen for their construction, their detail and the way they move — and we show them one bride at a time.",
+        "No crowded showroom. No rush. Just you, the people you love, and a stylist whose only job that afternoon is you."
+      ],
+      "link": {
+        "label": "Our story",
+        "href": "/about/"
+      },
+      "imageA": {
+        "key": "s/boutique-display",
+        "alt": "A lace gown displayed on a form beside a wall of white flowers inside La Soirée Bridal",
+        "pos": "50% 40%"
+      },
+      "imageB": {
+        "key": "s/boutique-bodice",
+        "alt": "Close view of a beaded lace bodice on the boutique rail"
+      }
+    },
+    {
+      "id": "pillars",
+      "type": "pillars",
+      "eyebrow": "The La Soirée experience",
+      "headline": [
+        "Three things",
+        "we never *compromise.*"
+      ],
+      "items": [
+        {
+          "numeral": "I",
+          "title": "Private",
+          "body": "Appointments are scheduled so the salon revolves around one bride — never a crowded showroom floor.",
+          "image": {
+            "key": "s/boutique-interior",
+            "alt": "The salon floor at La Soirée Bridal with chandeliers and gowns on brass rails",
+            "pos": "45% 50%"
+          }
+        },
+        {
+          "numeral": "II",
+          "title": "Curated",
+          "body": "European houses chosen for construction, detail and something you won’t see in every other shop.",
+          "image": {
+            "key": "s/boutique-rack",
+            "alt": "Lace and tulle gowns hanging on the boutique rail",
+            "pos": "50% 30%"
+          }
+        },
+        {
+          "numeral": "III",
+          "title": "Personal",
+          "body": "A dedicated stylist, the gowns you choose plus a few she knows you shouldn’t miss.",
+          "image": {
+            "key": "s/boutique-florals",
+            "alt": "Pink and blush florals arranged on a white console in the boutique",
+            "pos": "50% 55%"
+          }
+        }
+      ]
+    },
+    {
+      "id": "collection",
+      "type": "collection-rail",
+      "eyebrow": "The collection",
+      "headline": [
+        "Gowns with a",
+        "*point of view.*"
+      ],
+      "body": "Sculpted satin, hand-placed lace, overskirts that turn one gown into two. Most of our gowns are $2,500–$3,000; the full range is $1,500–$6,000.",
+      "railLabel": "Featured gowns",
+      "gowns": [
+        "jess",
+        "hypnolia",
+        "margo",
+        "cordelia",
+        "palace",
+        "konstantsia",
+        "claire",
+        "rosario",
+        "lika",
+        "savina",
+        "procella",
+        "elison"
+      ],
+      "cta": {
+        "label": "Explore the collection",
+        "href": "/collection/"
+      }
+    },
+    {
+      "id": "designers",
+      "type": "designer-index",
+      "eyebrow": "Our designers",
+      "headline": [
+        "From Europe,",
+        "with *intention.*"
+      ],
+      "body": "Five houses from Ukraine and Poland — chosen for artistry, fit and fabric rather than volume."
+    },
+    {
+      "id": "appointment",
+      "type": "appointment-feature",
+      "eyebrow": "Your appointment",
+      "headline": [
+        "Your appointment.",
+        "Your people.",
+        "Your *moment.*"
+      ],
+      "lede": "Bring the people whose opinion matters. Choose eight to twelve gowns from the salon, and let your stylist add the few she knows you shouldn’t leave without trying.",
+      "facts": [
+        {
+          "big": "1",
+          "label": "Dedicated stylist"
+        },
+        {
+          "big": "4",
+          "label": "Guests welcome"
+        },
+        {
+          "big": "1–2",
+          "unit": " hrs",
+          "label": "Unhurried time"
+        }
+      ],
+      "primaryCta": {
+        "label": "Book your appointment",
+        "href": "/book/",
+        "track": "appointment_section"
+      },
+      "secondaryCta": {
+        "label": "What to expect",
+        "href": "/experience/"
+      },
+      "image": {
+        "key": "s/boutique-salon",
+        "alt": "",
+        "pos": "50% 55%"
+      }
+    },
+    {
+      "id": "vip",
+      "type": "vip-teaser",
+      "eyebrow": "The Champagne VIP",
+      "headline": [
+        "Make an",
+        "afternoon *of it.*"
+      ],
+      "lede": "The entire boutique, closed to everyone but you and your party. Champagne poured, two unhurried hours, every gown within reach.",
+      "facts": [
+        {
+          "term": "Champagne",
+          "detail": "poured for your party"
+        },
+        {
+          "term": "You + 6",
+          "detail": "guests"
+        },
+        {
+          "term": "The boutique",
+          "detail": "reserved entirely for you"
+        },
+        {
+          "term": "2 hours",
+          "detail": "· $125"
+        }
+      ],
+      "cta": {
+        "label": "Explore VIP appointments",
+        "href": "/vip/"
+      },
+      "backgroundImage": {
+        "key": "s/chandelier",
+        "alt": ""
+      },
+      "image": {
+        "key": "s/champagne",
+        "alt": "Champagne glasses raised in a toast"
+      }
+    },
+    {
+      "id": "proof",
+      "type": "proof",
+      "eyebrow": "In their words",
+      "srHeading": "What brides say about La Soirée",
+      "image": {
+        "key": "s/boutique-rack-ivory",
+        "alt": "Ivory lace gowns on the boutique rail",
+        "pos": "50% 40%"
+      },
+      "instagramLabel": "Our brides on Instagram"
+    },
+    {
+      "id": "salon",
+      "type": "salon-mosaic",
+      "eyebrow": "The salon",
+      "headline": [
+        "A bridal salon designed",
+        "to feel entirely *yours.*"
+      ],
+      "body": "3,000 square feet of light, chandeliers and gowns on brass rails — with private dressing rooms and a lounge for the people you bring.",
+      "images": [
+        {
+          "key": "s/boutique-lounge",
+          "alt": "The guest lounge: tufted white armchair, sofa and a marble table with blush flowers"
+        },
+        {
+          "key": "s/boutique-flowers",
+          "alt": "Blush flowers and a gown displayed in the boutique"
+        },
+        {
+          "key": "s/boutique-rail",
+          "alt": "A rail of embellished ivory gowns"
+        },
+        {
+          "key": "s/acc-pearls",
+          "alt": "Pearl and crystal bridal hair accessories on a glass shelf"
+        },
+        {
+          "key": "s/boutique-gowns",
+          "alt": "Ivory gowns hanging side by side"
+        }
+      ],
+      "footNote": "minutes from Kalamazoo and Portage · about an hour from Grand Rapids",
+      "link": {
+        "label": "Plan your visit",
+        "href": "/contact/"
+      }
+    },
+    {
+      "id": "journal",
+      "type": "journal-teaser",
+      "eyebrow": "The journal",
+      "headline": [
+        "Before you *visit.*"
+      ],
+      "allLink": {
+        "label": "All articles",
+        "href": "/journal/"
+      },
+      "posts": [
+        "wedding-dress-shopping-guide",
+        "wedding-gowns-based-on-venue",
+        "bridal-alterations"
+      ]
+    },
+    {
+      "id": "final-cta",
+      "type": "final-cta",
+      "eyebrow": "Open by appointment",
+      "headline": [
+        "Your dress",
+        "is *waiting.*"
+      ],
+      "image": {
+        "key": "s/editorial-staircase",
+        "alt": "",
+        "pos": "68% 50%"
+      },
+      "primaryCta": {
+        "label": "Book your appointment",
+        "href": "/book/",
+        "track": "final_cta"
+      },
+      "secondaryCta": {
+        "label": "Ask us a question",
+        "href": "/contact/"
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "routes": [
+    "/collection/",
+    "/designers/",
+    "/experience/",
+    "/vip/",
+    "/about/",
+    "/journal/",
+    "/online-boutique/",
+    "/book/",
+    "/faq/",
+    "/contact/",
+    "/privacy/"
+  ]
+}

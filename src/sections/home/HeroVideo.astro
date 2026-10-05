@@ -1,0 +1,34 @@
+---
+import Lines from '../../components/Lines.astro';
+import { em } from '../../lib/text.js';
+const { s } = Astro.props;
+const sub = s.sub.split('\n');
+---
+<section class="hero on-dark" aria-labelledby="hero-title">
+  <div class="hero-media" data-hero-media>
+    <picture>
+      <source media="(min-width: 768px)" type="image/avif" srcset="/video/poster-1280.avif" />
+      <source media="(min-width: 768px)" type="image/webp" srcset="/video/poster-1280.webp" />
+      <source type="image/avif" srcset="/video/poster-720.avif" />
+      <img src="/video/poster-720.webp" alt="" width="720" height="1280" fetchpriority="high" class="hero-poster" />
+    </picture>
+    <video class="hero-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"
+      data-src-desktop="/video/hero-1280.mp4" data-src-mobile="/video/hero-720x1280.mp4"></video>
+  </div>
+  <div class="wrap hero-content">
+    <p class="eyebrow hero-eyebrow">{s.eyebrow}</p>
+    <Lines tag="h1" id="hero-title" class="hero-title" lines={s.headline.map(em)} delay={0.25} />
+    <div class="hero-foot">
+      <p class="hero-sub">{sub.map((l, i) => <Fragment>{i > 0 && <br />}{l}</Fragment>)}</p>
+      <div class="btn-row">
+        <a class="btn btn-light" href={s.primaryCta.href} data-track={s.primaryCta.track ? 'book_click' : undefined} data-track-label={s.primaryCta.track}>{s.primaryCta.label} <span class="arrow" aria-hidden="true"></span></a>
+        <a class="link hero-link" href={s.secondaryCta.href}>{s.secondaryCta.label}</a>
+      </div>
+    </div>
+  </div>
+  <button class="hero-pause" type="button" data-video-toggle aria-pressed="false" hidden>
+    <span class="sr-only">Pause background video</span>
+    <svg viewBox="0 0 16 16" aria-hidden="true"><rect class="i-pause" x="4" y="3" width="2" height="10" /><rect class="i-pause" x="10" y="3" width="2" height="10" /><path class="i-play" d="M5 3l8 5-8 5z" /></svg>
+  </button>
+  <a class="scroll-cue" href="#statement" aria-label="Scroll to content"><span></span></a>
+</section>

@@ -1,0 +1,23 @@
+---
+import Pic from '../../components/Pic.astro';
+import Lines from '../../components/Lines.astro';
+import { em } from '../../lib/text.js';
+const { s } = Astro.props;
+---
+<section class="appt-feature on-dark" aria-labelledby="appt-title">
+  <div class="media af-media"><Pic k={s.image.key} alt={s.image.alt} sizes="100vw" pos={s.image.pos} imgClass="af-img" /></div>
+  <div class="wrap af-content">
+    <p class="eyebrow" data-reveal>{s.eyebrow}</p>
+    <Lines id="appt-title" class="display" lines={s.headline.map(em)} />
+    <p class="lede" data-reveal style="--d:.2s">{s.lede}</p>
+    <div class="facts" style={`--n:${s.facts.length};--d:.3s`} data-reveal>
+      {s.facts.map((f) => (
+        <div class="fact"><span class="big">{f.big}{f.unit && <small style="font-size:.4em">{f.unit}</small>}</span><span class="lbl">{f.label}</span></div>
+      ))}
+    </div>
+    <div class="btn-row" data-reveal style="--d:.35s">
+      <a class="btn btn-light" href={s.primaryCta.href} data-track={s.primaryCta.track ? 'book_click' : undefined} data-track-label={s.primaryCta.track}>{s.primaryCta.label} <span class="arrow" aria-hidden="true"></span></a>
+      <a class="link" href={s.secondaryCta.href}>{s.secondaryCta.label}</a>
+    </div>
+  </div>
+</section>

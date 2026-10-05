@@ -1,11 +1,11 @@
 ---
-import { nav, site } from '../data/site.js';
+import { navigationData as navigation, site } from '../data/site.js';
 import Wordmark from './Wordmark.astro';
 const { mode = 'solid' } = Astro.props;
 const path = Astro.url.pathname;
 const isCurrent = (href: string) => path === href || (href !== '/' && path.startsWith(href));
-const left = nav.slice(0, 3);
-const right = nav.slice(3);
+const { left, right, cta, menuCtaLabel } = navigation.header;
+const menuItems = [...(navigation.menu?.before ?? []), ...left, ...right, ...(navigation.menu?.after ?? [])];
 ---
 <header class:list={['site-header', mode === 'transparent' ? 'is-transparent' : 'is-solid']} data-header data-mode={mode}>
   <div class="wrap bar">
@@ -22,7 +22,7 @@ const right = nav.slice(3);
       <nav class="nav-primary" aria-label="Secondary">
         {right.map((l) => <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>)}
       </nav>
-      <a class="btn" href="/book/" data-track="book_click" data-track-label="header">Book</a>
+      <a class="btn" href={cta.href} data-track="book_click" data-track-label="header">{cta.label}</a>
     </div>
   </div>
 </header>
@@ -30,13 +30,13 @@ const right = nav.slice(3);
 <div class="menu" id="site-menu" data-menu aria-label="Site menu" role="dialog" aria-modal="true" inert>
   <nav aria-label="Menu">
     <ol>
-      {[{ href: '/', label: 'Home' }, ...nav, { href: '/online-boutique/', label: 'Shop' }].map((l, i) => (
+      {menuItems.map((l, i) => (
         <li><a href={l.href} aria-current={isCurrent(l.href) && l.href !== '/' ? 'page' : undefined}><small>{String(i + 1).padStart(2, '0')}</small>{l.label}</a></li>
       ))}
     </ol>
   </nav>
   <div class="menu-foot">
-    <a class="btn btn-light" href="/book/" data-track="book_click" data-track-label="menu">Book an appointment</a>
+    <a class="btn btn-light" href={cta.href} data-track="book_click" data-track-label="menu">{menuCtaLabel}</a>
     <div>{site.address.street}, <span style="white-space:nowrap">{site.address.suite}</span> · {site.address.city}, {site.address.regionLong}</div>
     <div><a href={site.phoneHref}>{site.phone}</a> · <a href={`mailto:${site.email}`}>{site.email}</a></div>
   </div>

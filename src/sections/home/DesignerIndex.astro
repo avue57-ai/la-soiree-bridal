@@ -1,0 +1,30 @@
+---
+import Pic from '../../components/Pic.astro';
+import Lines from '../../components/Lines.astro';
+import { designers } from '../../data/designers.js';
+import { em } from '../../lib/text.js';
+const { s } = Astro.props;
+---
+<section class="section designers-index" aria-labelledby="designers-title">
+  <div class="wrap grid-12">
+    <div class="di-head">
+      <p class="eyebrow" data-reveal>{s.eyebrow}</p>
+      <Lines id="designers-title" class="h2" lines={s.headline.map(em)} />
+      <p class="body-copy" data-reveal style="--d:.2s">{s.body}</p>
+    </div>
+    <ul class="di-list" role="list" data-designer-list>
+      {designers.map((d, i) => (
+        <li data-reveal style={`--d:${i * 0.06}s`}>
+          <a href={`/designers/${d.slug}/`} data-img={i} data-cursor="Discover">
+            <span class="di-name serif">{d.name}</span>
+            <span class="di-origin">{d.origin}</span>
+            <span class="di-price">{d.price}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div class="di-preview media" aria-hidden="true">
+      {designers.map((d, i) => <Pic k={d.hero} alt="" sizes="30vw" class={i === 0 ? 'on' : ''} />)}
+    </div>
+  </div>
+</section>

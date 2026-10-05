@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "astro dev",
     "images": "node scripts/optimize-images.mjs",
-    "build": "node scripts/optimize-images.mjs && astro build",
+    "build": "node scripts/validate-content.mjs && node scripts/optimize-images.mjs && astro build",
     "preview": "astro preview",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "validate": "node scripts/validate-content.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",

@@ -5,11 +5,6 @@ import appts from '../../content/settings/appointments.json';
 export const site = business;
 export const appointments = appts.appointments;
 
-export const nav = [
-  { href: '/collection/', label: 'Collection' },
-  { href: '/designers/', label: 'Designers' },
-  { href: '/experience/', label: 'The Experience' },
-  { href: '/vip/', label: 'VIP' },
-  { href: '/about/', label: 'About' },
-  { href: '/journal/', label: 'Journal' },
-];
+import navigation from '../../content/settings/navigation.json';
+export const navigationData = navigation;
+export const nav = [...navigation.header.left, ...navigation.header.right];
