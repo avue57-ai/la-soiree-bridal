@@ -4,10 +4,10 @@ import PageHero from '../components/PageHero.astro';
 import Pic from '../components/Pic.astro';
 import Lines from '../components/Lines.astro';
 import FinalCTA from '../components/FinalCTA.astro';
-import { appointments } from '../data/site.js';
+import { appointments, facts } from '../data/site.js';
 
 const steps = [
-  { n: '01', t: 'Book', p: 'Choose a one-hour, two-hour or Champagne VIP appointment online. Bring up to 4 guests — or 6 for VIP. If you have favourites from the collection, mention them and we’ll have them waiting.' },
+  { n: '01', t: 'Book', p: 'Choose a one-hour, two-hour or Champagne VIP appointment online. Bring up to ' + facts.guests + ' guests — or ' + facts.vipGuests + ' for VIP. If you have favourites from the collection, mention them and we’ll have them waiting.' },
   { n: '02', t: 'Arrive', p: 'The salon is reserved around your time. Settle into the lounge with your people while your stylist asks about the wedding, the venue and the feeling you want.' },
   { n: '03', t: 'Explore', p: 'Walk the rails and pull 8–12 gowns that catch your eye. Your stylist adds a few you might not choose yourself — often the surprise of the day.' },
   { n: '04', t: 'Find the dress', p: 'Your stylist helps you in and out of each gown, styles it with veils and accessories, and keeps the pace easy. No pressure, no other brides waiting.' },
@@ -80,7 +80,7 @@ const steps = [
       </div>
       <ul class="bring-list" role="list">
         <li data-reveal><span class="numeral">i.</span><div><strong>Nude or skin-tone undergarments.</strong> Silicone nipple covers, high-waisted shapewear or underwear — your stylist helps you in and out of each gown.</div></li>
-        <li data-reveal style="--d:.08s"><span class="numeral">ii.</span><div><strong>Your favourite people.</strong> Up to 4 guests (6 for VIP). We kindly ask no children under 12.</div></li>
+        <li data-reveal style="--d:.08s"><span class="numeral">ii.</span><div><strong>Your favourite people.</strong> Up to {facts.guests} guests ({facts.vipGuests} for VIP). We kindly ask no children under 12.</div></li>
         <li data-reveal style="--d:.16s"><span class="numeral">iii.</span><div><strong>An open mind.</strong> Screenshots are welcome — but the silhouette you choose may surprise you.</div></li>
       </ul>
     </div>

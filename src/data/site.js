@@ -5,11 +5,15 @@ import appts from '../../content/settings/appointments.json';
 export const site = business;
 export const appointments = appts.appointments;
 
-export const nav = [
-  { href: '/collection/', label: 'Collection' },
-  { href: '/designers/', label: 'Designers' },
-  { href: '/experience/', label: 'The Experience' },
-  { href: '/vip/', label: 'VIP' },
-  { href: '/about/', label: 'About' },
-  { href: '/journal/', label: 'Journal' },
-];
+import navigation from '../../content/settings/navigation.json';
+export const navigationData = navigation;
+export const nav = [...navigation.header.left, ...navigation.header.right];
+
+// Facts that appear in prose across the site, derived so a change in settings reaches every page.
+const byId = (id) => appointments.find((a) => a.id === id);
+export const facts = {
+  guests: byId('two-hour').guests,
+  vipGuests: byId('vip').guests,
+  vipPrice: byId('vip').price,
+  priceRange: site.priceRange.replace(/ /g, ''),
+};

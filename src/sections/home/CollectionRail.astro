@@ -1,0 +1,28 @@
+---
+import Lines from '../../components/Lines.astro';
+import GownCard from '../../components/GownCard.astro';
+import Rail from '../../components/Rail.astro';
+import gowns from '../../data/gowns.js';
+import { em } from '../../lib/text.js';
+const { s } = Astro.props;
+const featured = s.gowns.map((slug) => gowns.find((g) => g.slug === slug)).filter(Boolean);
+---
+<section class="section collection-teaser bg-cream" aria-labelledby="collection-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sh-title">
+        <p class="eyebrow" data-reveal>{s.eyebrow}</p>
+        <Lines id="collection-title" class="h2" lines={s.headline.map(em)} />
+      </div>
+      <div class="sh-aside" data-reveal style="--d:.2s">
+        <p class="body-copy">{s.body}</p>
+      </div>
+    </div>
+  </div>
+  <Rail label={s.railLabel}>
+    {featured.map((g) => <GownCard gown={g} sizes="(min-width: 1100px) 26vw, (min-width: 700px) 40vw, 72vw" />)}
+  </Rail>
+  <div class="wrap" style="margin-top: 2.5rem">
+    <a class="btn btn-ghost" href={s.cta.href}>{s.cta.label} <span class="arrow" aria-hidden="true"></span></a>
+  </div>
+</section>

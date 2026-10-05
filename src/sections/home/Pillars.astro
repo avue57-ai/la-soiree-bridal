@@ -1,0 +1,28 @@
+---
+import Img from '../../components/Img.astro';
+import Lines from '../../components/Lines.astro';
+import { em } from '../../lib/text.js';
+const { s } = Astro.props;
+---
+<section class="section-sm pillars" aria-labelledby="pillars-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sh-title">
+        <p class="eyebrow" data-reveal>{s.eyebrow}</p>
+        <Lines id="pillars-title" class="h2" lines={s.headline.map(em)} />
+      </div>
+    </div>
+    <ol class="pillar-list" role="list">
+      {s.items.map((p, i) => (
+        <li class="pillar" data-reveal style={`--d:${i * 0.12}s`}>
+          <div class="media pillar-media"><Img image={p.image} sizes="(min-width: 900px) 30vw, 88vw" /></div>
+          <div class="pillar-text">
+            <span class="numeral pillar-n" aria-hidden="true">{p.numeral}</span>
+            <h3 class="h3">{p.title}</h3>
+            <p class="muted">{p.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

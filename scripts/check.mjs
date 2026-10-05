@@ -37,11 +37,16 @@ for (const f of files) {
   for (const m of html.matchAll(/<img\b[^>]*>/g)) { imgs++; if (!/\salt(=|\s|>)/.test(m[0])) problems.push(`${rel}: <img> without alt`); }
   for (const m of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     const u = m[1].replace(/&amp;/g, '&');
-    if (/^(https?:|mailto:|tel:|#|data:|javascript:)/.test(u) || u.startsWith('//')) continue;
+    if (/^(https?:|mailto:|tel:|#|data:|javascript:)/.test(u) || u.startsWith('//') || u.startsWith('/.netlify/images?')) continue;
     links++;
     if (!(await exists(u))) problems.push(`${rel}: broken link ${u}`);
   }
-  for (const m of html.matchAll(/srcset="([^"]+)"/g)) for (const part of m[1].split(',')) { const u = part.trim().split(' ')[0]; if (u.startsWith('/') && !(await exists(u))) problems.push(`${rel}: missing image ${u}`); }
+  for (const m of html.matchAll(/srcset="([^"]+)"/g)) for (const part of m[1].split(',')) { const u = part.trim().split(' ')[0]; if (u.startsWith('/') && !u.startsWith('/.netlify/images?') && !(await exists(u))) problems.push(`${rel}: missing image ${u}`); }
+}
+// Routes declared in content/settings/routes.json (links the editor may use) must exist in the build.
+{
+  const { routes } = JSON.parse(await readFile('content/settings/routes.json', 'utf8'));
+  for (const r of routes) if (!(await exists(r))) problems.push(`routes.json lists ${r}, which is not in the build`);
 }
 console.log(`${files.length} pages · ${links} internal links · ${imgs} images checked`);
 if (problems.length) { console.log(problems.join('\n')); process.exitCode = 1; } else console.log('✓ no problems found');

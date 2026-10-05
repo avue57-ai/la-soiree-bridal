@@ -1,0 +1,114 @@
+{
+  "header": {
+    "left": [
+      {
+        "label": "Collection",
+        "href": "/collection/"
+      },
+      {
+        "label": "Designers",
+        "href": "/designers/"
+      },
+      {
+        "label": "The Experience",
+        "href": "/experience/"
+      }
+    ],
+    "right": [
+      {
+        "label": "VIP",
+        "href": "/vip/"
+      },
+      {
+        "label": "About",
+        "href": "/about/"
+      },
+      {
+        "label": "Journal",
+        "href": "/journal/"
+      }
+    ],
+    "cta": {
+      "label": "Book",
+      "href": "/book/"
+    },
+    "menuCtaLabel": "Book an appointment"
+  },
+  "menu": {
+    "before": [
+      {
+        "label": "Home",
+        "href": "/"
+      }
+    ],
+    "after": [
+      {
+        "label": "Shop",
+        "href": "/online-boutique/"
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "A private bridal salon for curated European gowns. Richland, Michigan — minutes from Kalamazoo, about an hour from Grand Rapids.",
+    "columns": [
+      {
+        "title": "Explore",
+        "links": [
+          {
+            "label": "The Collection",
+            "href": "/collection/"
+          },
+          {
+            "label": "Designers",
+            "href": "/designers/"
+          },
+          {
+            "label": "The Experience",
+            "href": "/experience/"
+          },
+          {
+            "label": "VIP Appointments",
+            "href": "/vip/"
+          },
+          {
+            "label": "Online Boutique",
+            "href": "/online-boutique/"
+          },
+          {
+            "label": "Journal",
+            "href": "/journal/"
+          }
+        ]
+      },
+      {
+        "title": "Boutique",
+        "withContact": true,
+        "links": [
+          {
+            "label": "Book an appointment",
+            "href": "/book/"
+          },
+          {
+            "label": "Questions",
+            "href": "/faq/"
+          },
+          {
+            "label": "About",
+            "href": "/about/"
+          },
+          {
+            "label": "Contact",
+            "href": "/contact/"
+          }
+        ]
+      }
+    ],
+    "legal": [
+      {
+        "label": "Privacy",
+        "href": "/privacy/"
+      }
+    ],
+    "bottomLine": "© {year} La Soirée Bridal · Bridal boutique serving Kalamazoo & West Michigan"
+  }
+}

@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Lines from '../components/Lines.astro';
-import { appointments, site } from '../data/site.js';
+import { appointments, site, facts } from '../data/site.js';
 ---
 <Base
   title="Book a Bridal Appointment"
@@ -61,7 +61,7 @@ import { appointments, site } from '../data/site.js';
   <section class="wrap section-sm notes" data-hide-bookbar>
     <div>
       <h2 class="caps step-h"><span>03</span> Before you arrive</h2>
-      <p class="muted">Bring nude or skin-tone undergarments and up to 4 guests (6 for VIP; no children under 12). If you’ve saved gowns from the collection, tell us their names in the booking notes.</p>
+      <p class="muted">Bring nude or skin-tone undergarments and up to {facts.guests} guests ({facts.vipGuests} for VIP; no children under 12). If you’ve saved gowns from the collection, tell us their names in the booking notes.</p>
     </div>
     <div>
       <p class="caps muted" style="font-size:.64rem">Find us</p>
@@ -70,7 +70,7 @@ import { appointments, site } from '../data/site.js';
     </div>
     <div>
       <p class="caps muted" style="font-size:.64rem">Good to know</p>
-      <p class="muted">Gowns $1,500–$6,000 · most $2,500–$3,000 · <a href="/faq/">Full FAQ</a></p>
+      <p class="muted">Gowns {facts.priceRange} · most $2,500–$3,000 · <a href="/faq/">Full FAQ</a></p>
     </div>
   </section>
 </Base>

@@ -1,0 +1,5 @@
+{
+  "standard": "1.0",
+  "sections": ["hero-video", "statement-split", "pillars", "collection-rail", "designer-index", "appointment-feature", "vip-teaser", "proof", "salon-mosaic", "journal-teaser", "final-cta", "rich-text", "cta-banner"],
+  "assets": { "siteId": "la-soiree", "base": "" }
+}

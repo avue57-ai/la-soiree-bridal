@@ -1,0 +1,32 @@
+---
+import Img from '../../components/Img.astro';
+import Lines from '../../components/Lines.astro';
+import { site } from '../../data/site.js';
+import { em } from '../../lib/text.js';
+const { s } = Astro.props;
+const [m1, m2, m3, m4, m5] = s.images;
+---
+<section class="section boutique bg-cream" aria-labelledby="boutique-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sh-title">
+        <p class="eyebrow" data-reveal>{s.eyebrow}</p>
+        <Lines id="boutique-title" class="h2" lines={s.headline.map(em)} />
+      </div>
+      <div class="sh-aside" data-reveal style="--d:.2s">
+        <p class="body-copy">{s.body}</p>
+      </div>
+    </div>
+    <div class="mosaic">
+      <figure class="m1 media" data-reveal="mask"><Img image={m1} sizes="(min-width: 900px) 58vw, 100vw" /></figure>
+      <figure class="m2 media" data-reveal="mask" style="--d:.1s"><Img image={m2} sizes="(min-width: 900px) 30vw, 50vw" /></figure>
+      <figure class="m3 media" data-reveal="mask" style="--d:.2s"><Img image={m3} sizes="(min-width: 900px) 24vw, 50vw" /></figure>
+      <figure class="m4 media" data-reveal="mask" style="--d:.25s"><Img image={m4} sizes="(min-width: 900px) 20vw, 50vw" /></figure>
+      <figure class="m5 media" data-reveal="mask" style="--d:.3s"><Img image={m5} sizes="(min-width: 900px) 24vw, 50vw" /></figure>
+    </div>
+    <div class="boutique-foot" data-reveal>
+      <p class="small muted">{site.address.street}, {site.address.suite}, {site.address.city} · {s.footNote}</p>
+      <a class="link" href={s.link.href}>{s.link.label}</a>
+    </div>
+  </div>
+</section>

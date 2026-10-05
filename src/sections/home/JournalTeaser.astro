@@ -1,0 +1,22 @@
+---
+import Lines from '../../components/Lines.astro';
+import JournalCard from '../../components/JournalCard.astro';
+import posts from '../../data/posts.js';
+import { em } from '../../lib/text.js';
+const { s } = Astro.props;
+const journal = s.posts.map((slug) => posts.find((p) => p.slug === slug)).filter(Boolean);
+---
+<section class="section journal-teaser" aria-labelledby="journal-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sh-title">
+        <p class="eyebrow" data-reveal>{s.eyebrow}</p>
+        <Lines id="journal-title" class="h2" lines={s.headline.map(em)} />
+      </div>
+      <div class="sh-aside" data-reveal><a class="link" href={s.allLink.href}>{s.allLink.label}</a></div>
+    </div>
+    <div class="jt-grid">
+      {journal.map((p, i) => <div data-reveal style={`--d:${i * 0.1}s`}><JournalCard post={p} /></div>)}
+    </div>
+  </div>
+</section>

@@ -2,18 +2,18 @@
 import Base from '../layouts/Base.astro';
 import Pic from '../components/Pic.astro';
 import Lines from '../components/Lines.astro';
-import { appointments } from '../data/site.js';
+import { appointments, facts } from '../data/site.js';
 const vip = appointments.find((a) => a.id === 'vip')!;
 const schema = [{
   '@context': 'https://schema.org', '@type': 'Service', name: 'Champagne VIP bridal appointment', serviceType: 'Private bridal appointment',
   provider: { '@id': 'https://lasoireebridal.com/#boutique' }, areaServed: 'West Michigan',
   offers: { '@type': 'Offer', price: String(vip.price), priceCurrency: 'USD', url: 'https://lasoireebridal.com/book/' },
-  description: 'Two hours with the entire boutique reserved for the bride and up to 6 guests, with champagne.',
+  description: 'Two hours with the entire boutique reserved for the bride and up to ' + facts.vipGuests + ' guests, with champagne.',
 }];
 ---
 <Base
   title="Champagne VIP Bridal Appointment"
-  description="Reserve the entire La Soirée Bridal boutique for two hours: champagne, you plus 6 guests and every gown within reach. $125, near Kalamazoo, Michigan."
+  description={`Reserve the entire La Soirée Bridal boutique for two hours: champagne, you plus ${facts.vipGuests} guests and every gown within reach. $${facts.vipPrice}, near Kalamazoo, Michigan.`}
   header="transparent"
   image="s/champagne"
   schema={schema}
@@ -42,7 +42,7 @@ const schema = [{
     </div>
     <div class="facts incl" style="--n:4" data-reveal>
       <div class="fact"><span class="big">Champagne</span><span class="lbl">Poured for your party</span></div>
-      <div class="fact"><span class="big">You + 6</span><span class="lbl">Guests (no children under 12)</span></div>
+      <div class="fact"><span class="big">You + {facts.vipGuests}</span><span class="lbl">Guests (no children under 12)</span></div>
       <div class="fact"><span class="big">Entire</span><span class="lbl">Boutique reserved for you</span></div>
       <div class="fact"><span class="big">2 hours</span><span class="lbl">Private time · ${vip.price}</span></div>
     </div>
@@ -54,7 +54,7 @@ const schema = [{
       <p class="eyebrow" data-reveal>Who it’s for</p>
       <h2 class="h2" data-reveal>For the bride bringing her <em>whole circle.</em></h2>
       <ul class="who-list" role="list">
-        <li data-reveal>Mothers, sisters and best friends who all want to be there — up to 6 guests instead of 4.</li>
+        <li data-reveal>Mothers, sisters and best friends who all want to be there — up to {facts.vipGuests} guests instead of {facts.guests}.</li>
         <li data-reveal style="--d:.06s">Brides who’d rather not share the salon, even for a moment.</li>
         <li data-reveal style="--d:.12s">A first look worth celebrating — or a final decision worth toasting.</li>
         <li data-reveal style="--d:.18s">Families travelling in from Grand Rapids, Lansing and beyond, making a day of it.</li>

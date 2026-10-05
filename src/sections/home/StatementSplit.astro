@@ -1,0 +1,24 @@
+---
+import Img from '../../components/Img.astro';
+import Lines from '../../components/Lines.astro';
+import { em } from '../../lib/text.js';
+const { s } = Astro.props;
+---
+<section class="section statement" id="statement" aria-labelledby="statement-title">
+  <div class="wrap grid-12">
+    <div class="st-text">
+      <p class="eyebrow" data-reveal>{s.eyebrow}</p>
+      <Lines id="statement-title" class="display st-title" lines={s.headline.map(em)} />
+      <div class="body-copy st-copy" data-reveal style="--d:.2s">
+        {s.body.map((p) => <p>{p}</p>)}
+      </div>
+      <a class="link" href={s.link.href} data-reveal style="--d:.3s">{s.link.label}</a>
+    </div>
+    <figure class="st-img-a media" data-reveal="mask">
+      <Img image={s.imageA} sizes="(min-width: 900px) 34vw, 70vw" />
+    </figure>
+    <figure class="st-img-b media" data-reveal="mask" style="--d:.15s">
+      <Img image={s.imageB} sizes="(min-width: 900px) 18vw, 40vw" />
+    </figure>
+  </div>
+</section>
