@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import Lines from '../components/Lines.astro';
 import Pic from '../components/Pic.astro';
 import { faq } from '../data/faq.js';
-import { site } from '../data/site.js';
+import { site, facts } from '../data/site.js';
 const strip = (s: string) => s.replace(/<[^>]+>/g, '');
 const schema = [{
   '@context': 'https://schema.org', '@type': 'FAQPage',
@@ -12,7 +12,7 @@ const schema = [{
 ---
 <Base
   title="Bridal Appointment & Wedding Dress FAQ"
-  description="Appointments, guests, gown prices ($1,500–$6,000), bridal sizing, ordering timelines, alterations and payment — answered before you visit."
+  description={`Appointments, guests, gown prices (${facts.priceRange}), bridal sizing, ordering timelines, alterations and payment — answered before you visit.`}
   schema={schema}
   image="s/boutique-rack-ivory"
 >
