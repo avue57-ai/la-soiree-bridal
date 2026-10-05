@@ -8,7 +8,9 @@ const cfg = JSON.parse(readFileSync(cfgPath, 'utf8'));
 cfg.assets.base = base;
 writeFileSync(cfgPath, JSON.stringify(cfg, null, 2) + '\n');
 let toml = readFileSync('netlify.toml', 'utf8').replace(/\n# BEGIN assistant-images[\s\S]*# END assistant-images\n?/, '');
+// The portal shows this site in a preview pane, so only the portal may frame it. (Replaces the older X-Frame-Options header.)
+toml = toml.replace(/^\s*X-Frame-Options = "SAMEORIGIN"\n/m, '');
 const host = new URL(base).host.replace(/\./g, '\\\\.');
-toml += `\n# BEGIN assistant-images\n[images]\n  remote_images = ["https://${host}/assets/${cfg.assets.siteId}/.*"]\n# END assistant-images\n`;
+toml += `\n# BEGIN assistant-images\n[images]\n  remote_images = ["https://${host}/assets/${cfg.assets.siteId}/.*"]\n\n[[headers]]\n  for = "/*"\n  [headers.values]\n    Content-Security-Policy = "frame-ancestors 'self' ${base}"\n# END assistant-images\n`;
 writeFileSync('netlify.toml', toml);
-console.log(`asset base set to ${base}`);
+console.log(`asset base set to ${base}; framing allowed for the portal only`);
