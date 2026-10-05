@@ -1,11 +1,11 @@
 ---
-import Pic from '../../components/Pic.astro';
+import Img from '../../components/Img.astro';
 import Lines from '../../components/Lines.astro';
 import { em } from '../../lib/text.js';
 const { s } = Astro.props;
 ---
 <section class="section vip-teaser on-dark" aria-labelledby="vip-title">
-  <div class="vip-bg" aria-hidden="true"><Pic k={s.backgroundImage.key} alt="" sizes="100vw" /></div>
+  <div class="vip-bg" aria-hidden="true"><Img image={s.backgroundImage} sizes="100vw" /></div>
   <div class="wrap grid-12 vt-grid">
     <div class="vt-text">
       <p class="eyebrow" data-reveal>{s.eyebrow}</p>
@@ -19,7 +19,7 @@ const { s } = Astro.props;
       </div>
     </div>
     <figure class="vt-img media" data-reveal="mask">
-      <Pic k={s.image.key} alt={s.image.alt} sizes="(min-width: 900px) 34vw, 90vw" />
+      <Img image={s.image} sizes="(min-width: 900px) 34vw, 90vw" />
     </figure>
   </div>
 </section>

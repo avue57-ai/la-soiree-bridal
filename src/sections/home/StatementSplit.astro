@@ -1,5 +1,5 @@
 ---
-import Pic from '../../components/Pic.astro';
+import Img from '../../components/Img.astro';
 import Lines from '../../components/Lines.astro';
 import { em } from '../../lib/text.js';
 const { s } = Astro.props;
@@ -15,10 +15,10 @@ const { s } = Astro.props;
       <a class="link" href={s.link.href} data-reveal style="--d:.3s">{s.link.label}</a>
     </div>
     <figure class="st-img-a media" data-reveal="mask">
-      <Pic k={s.imageA.key} alt={s.imageA.alt} sizes="(min-width: 900px) 34vw, 70vw" pos={s.imageA.pos} />
+      <Img image={s.imageA} sizes="(min-width: 900px) 34vw, 70vw" />
     </figure>
     <figure class="st-img-b media" data-reveal="mask" style="--d:.15s">
-      <Pic k={s.imageB.key} alt={s.imageB.alt} sizes="(min-width: 900px) 18vw, 40vw" pos={s.imageB.pos} />
+      <Img image={s.imageB} sizes="(min-width: 900px) 18vw, 40vw" />
     </figure>
   </div>
 </section>

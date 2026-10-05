@@ -12,6 +12,8 @@ Content, layout order, navigation and colours live in data files. Code renders t
 | Business details, hours, links | `content/settings/business.json` | |
 | Appointment menu, FAQ, testimonials | `content/settings/{appointments,faq,testimonials}.json` | |
 | Gowns, designers | `content/gowns/*.json`, `content/designers/*.json` | |
+| Which section types this site can display, and where uploaded photos are served from | `content/settings/site.json` | A page using a type not listed here is rejected. |
+| New pages (any path not used by code) | `content/pages/<name>.json` | Rendered by `src/pages/[...slug].astro`, listed in the sitemap automatically. |
 | Pages rendered by code (valid link targets) | `content/settings/routes.json` | `npm run check` confirms each exists in the build. |
 
 Text fields are plain text. `*word*` makes emphasis. HTML is rejected.
@@ -22,7 +24,11 @@ The hero video, fonts, CSS, and the copy on the About, Experience, VIP, Book, Co
 
 ## Section types (`src/sections/`)
 
-`hero-video`, `statement-split`, `pillars`, `collection-rail`, `designer-index`, `appointment-feature`, `vip-teaser`, `proof`, `salon-mosaic`, `journal-teaser`, `final-cta`. To add one: write the component, list it in `src/sections/registry.js`, and add its schema to the platform schemas, then re-bundle (below).
+Home page: `hero-video`, `statement-split`, `pillars`, `collection-rail`, `designer-index`, `appointment-feature`, `vip-teaser`, `proof`, `salon-mosaic`, `journal-teaser`, `final-cta`. Any page: `rich-text`, `cta-banner` (headline, text, button, optional photo). To add one: write the component, list it in `src/sections/registry.js`, and add its schema to the platform schemas, then re-bundle (below).
+
+## Photos
+
+A section image is either a built-in key (`{ "key": "s/boutique-salon", "alt": "..." }`) or a photo uploaded through the assistant (`{ "asset": "ast_...", "alt": "...", "w": 3000, "h": 2000 }`). Uploaded photos are served by the portal and resized by Netlify's image CDN. After the portal is deployed, run `node scripts/set-asset-base.mjs https://<portal>` once; it records the address in `site.json` and allows it in `netlify.toml`. The build stops with a clear message if an uploaded photo is used before that.
 
 ## Checks
 

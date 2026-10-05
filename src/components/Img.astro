@@ -1,0 +1,9 @@
+---
+// One component for content images: a built-in key ({key, alt, pos}) or an uploaded photo ({asset, alt, w, h}).
+import Pic from './Pic.astro';
+import AssetPic from './AssetPic.astro';
+const { image, sizes = '100vw', class: cls, eager = false, imgClass } = Astro.props;
+---
+{image.asset
+  ? <AssetPic asset={image} sizes={sizes} class={cls} eager={eager} imgClass={imgClass} />
+  : <Pic k={image.key} alt={image.alt} sizes={sizes} pos={image.pos} class={cls} eager={eager} imgClass={imgClass} />}

@@ -1,5 +1,5 @@
 ---
-import Pic from '../../components/Pic.astro';
+import Img from '../../components/Img.astro';
 import { testimonials } from '../../data/testimonials.js';
 import { site } from '../../data/site.js';
 const { s } = Astro.props;
@@ -7,7 +7,7 @@ const { s } = Astro.props;
 <section class="section proof" aria-labelledby="proof-title">
   <div class="wrap grid-12">
     <figure class="proof-img media" data-reveal="mask">
-      <Pic k={s.image.key} alt={s.image.alt} sizes="(min-width: 900px) 45vw, 100vw" pos={s.image.pos} />
+      <Img image={s.image} sizes="(min-width: 900px) 45vw, 100vw" />
     </figure>
     <div class="proof-text">
       <p class="eyebrow" data-reveal>{s.eyebrow}</p>

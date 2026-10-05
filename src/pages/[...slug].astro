@@ -1,0 +1,18 @@
+---
+// Pages created from content/pages/*.json (everything except the home page, which has its own route).
+import Base from '../layouts/Base.astro';
+import { sections } from '../sections/registry.js';
+
+export function getStaticPaths() {
+  const pages = Object.values(import.meta.glob('../../content/pages/*.json', { eager: true, import: 'default' }));
+  return pages.filter((p) => p.path !== '/').map((p) => ({ params: { slug: p.path.replace(/^\/|\/$/g, '') }, props: { page: p } }));
+}
+const { page } = Astro.props;
+---
+<Base title={page.meta.title} description={page.meta.description} header="solid" image={page.meta.ogKey}>
+  <section class="page-intro wrap"><h1 class="display" style="font-size:var(--fs-h2)">{page.title}</h1></section>
+  {page.sections.filter((s) => !s.hidden).map((s) => {
+    const Section = sections[s.type];
+    return Section ? <Section s={s} /> : null;
+  })}
+</Base>

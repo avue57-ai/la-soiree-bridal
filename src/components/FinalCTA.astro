@@ -1,14 +1,16 @@
 ---
-import Pic from './Pic.astro';
+import Img from './Img.astro';
+import { assetRatio } from '../lib/asset.js';
 import Lines from './Lines.astro';
 import { site } from '../data/site.js';
 import { ratio } from '../lib/img.js';
-interface Props { image?: string; lines?: string[]; pos?: string; eyebrow?: string; primaryCta?: { label: string; href: string; track?: string }; secondaryCta?: { label: string; href: string } }
+interface Props { image?: string | { key?: string; asset?: string; alt: string; w?: number; h?: number; pos?: string }; lines?: string[]; pos?: string; eyebrow?: string; primaryCta?: { label: string; href: string; track?: string }; secondaryCta?: { label: string; href: string } }
 const { image = 'g/anna-sposa--maritam--0', lines = ['Your dress', 'is <em>waiting.</em>'], pos = '50% 30%', eyebrow = 'Open by appointment', primaryCta = { label: 'Book your appointment', href: '/book/', track: 'final_cta' }, secondaryCta = { label: 'Ask us a question', href: '/contact/' } } = Astro.props;
-const split = ratio(image) < 1.1; // portrait imagery sits beside the copy instead of under it
+const imageObj = typeof image === 'string' ? { key: image, alt: '' } : image;
+const split = (imageObj.asset ? assetRatio(imageObj) : ratio(imageObj.key)) < 1.1; // portrait imagery sits beside the copy instead of under it
 ---
 <section class:list={['final-cta on-dark', { split }]} aria-labelledby="final-cta-title" data-hide-bookbar>
-  <div class="media fc-media"><Pic k={image} alt="" sizes={split ? '(min-width: 900px) 45vw, 100vw' : '100vw'} pos={pos} imgClass="fc-img" /></div>
+  <div class="media fc-media"><Img image={{ ...imageObj, pos }} sizes={split ? '(min-width: 900px) 45vw, 100vw' : '100vw'} imgClass="fc-img" /></div>
   <div class="wrap fc-content">
     <p class="eyebrow">{eyebrow}</p>
     <Lines lines={lines} class="display" id="final-cta-title" />

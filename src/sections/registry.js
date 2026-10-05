@@ -10,9 +10,12 @@ import Proof from './home/Proof.astro';
 import SalonMosaic from './home/SalonMosaic.astro';
 import JournalTeaser from './home/JournalTeaser.astro';
 import FinalCta from './home/FinalCta.astro';
+import RichText from './generic/RichText.astro';
+import CtaBanner from './generic/CtaBanner.astro';
 
 export const sections = {
   'hero-video': HeroVideo, 'statement-split': StatementSplit, pillars: Pillars, 'collection-rail': CollectionRail,
   'designer-index': DesignerIndex, 'appointment-feature': AppointmentFeature, 'vip-teaser': VipTeaser, proof: Proof,
   'salon-mosaic': SalonMosaic, 'journal-teaser': JournalTeaser, 'final-cta': FinalCta,
+  'rich-text': RichText, 'cta-banner': CtaBanner,
 };

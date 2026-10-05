@@ -1,11 +1,11 @@
 ---
-import Pic from '../../components/Pic.astro';
+import Img from '../../components/Img.astro';
 import Lines from '../../components/Lines.astro';
 import { em } from '../../lib/text.js';
 const { s } = Astro.props;
 ---
 <section class="appt-feature on-dark" aria-labelledby="appt-title">
-  <div class="media af-media"><Pic k={s.image.key} alt={s.image.alt} sizes="100vw" pos={s.image.pos} imgClass="af-img" /></div>
+  <div class="media af-media"><Img image={s.image} sizes="100vw" imgClass="af-img" /></div>
   <div class="wrap af-content">
     <p class="eyebrow" data-reveal>{s.eyebrow}</p>
     <Lines id="appt-title" class="display" lines={s.headline.map(em)} />

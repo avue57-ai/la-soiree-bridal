@@ -1,0 +1,11 @@
+---
+// Responsive <picture> for a photo uploaded through the assistant. Same output shape as Pic, sourced from the image CDN.
+import { assetSrcset, assetSrc } from '../lib/asset.js';
+interface Props { asset: { asset: string; alt: string; w: number; h: number; pos?: string }; sizes?: string; class?: string; eager?: boolean; imgClass?: string; fetchpriority?: 'high' | 'low' | 'auto' }
+const { asset: a, sizes = '100vw', class: cls, eager = false, imgClass, fetchpriority } = Astro.props;
+---
+<picture class={cls}>
+  <source type="image/avif" srcset={assetSrcset(a, 'avif')} sizes={sizes} />
+  <source type="image/webp" srcset={assetSrcset(a, 'webp')} sizes={sizes} />
+  <img src={assetSrc(a, 'jpg')} width={a.w} height={a.h} alt={a.alt} loading={eager ? 'eager' : 'lazy'} decoding={eager ? 'sync' : 'async'} fetchpriority={fetchpriority ?? (eager ? 'high' : undefined)} class={imgClass} style={a.pos ? `object-position:${a.pos};` : undefined} />
+</picture>

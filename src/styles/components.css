@@ -132,3 +132,10 @@
   .gown-name { font-size: 1.2rem; }
   .gown-designer { text-align: left; font-size: .6rem; }
 }
+
+/* generic section: banner with headline, text, button and optional photo */
+.cta-banner .cb-inner { display: grid; gap: 2rem; align-items: center; }
+.cta-banner .cb-inner.has-img { grid-template-columns: 1fr; }
+@media (min-width: 900px) { .cta-banner .cb-inner.has-img { grid-template-columns: 1.1fr .9fr; gap: 4rem; } }
+.cta-banner .cb-text > * + * { margin-top: 1.25rem; }
+.cta-banner .cb-img { margin: 0; }

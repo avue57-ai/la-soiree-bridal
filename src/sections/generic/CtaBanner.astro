@@ -1,0 +1,16 @@
+---
+import Lines from '../../components/Lines.astro';
+import Img from '../../components/Img.astro';
+import { em } from '../../lib/text.js';
+const { s } = Astro.props;
+---
+<section class="section-sm cta-banner bg-cream">
+  <div class:list={['wrap', 'cb-inner', { 'has-img': s.image }]}>
+    <div class="cb-text">
+      <Lines class="h2" lines={[em(s.headline)]} />
+      {s.body && <p class="body-copy">{s.body}</p>}
+      <a class="btn btn-ghost" href={s.cta.href}>{s.cta.label} <span class="arrow" aria-hidden="true"></span></a>
+    </div>
+    {s.image && <figure class="cb-img media"><Img image={s.image} sizes="(min-width: 900px) 40vw, 100vw" /></figure>}
+  </div>
+</section>

@@ -3,4 +3,4 @@ import FinalCTA from '../../components/FinalCTA.astro';
 import { em } from '../../lib/text.js';
 const { s } = Astro.props;
 ---
-<FinalCTA image={s.image.key} pos={s.image.pos} lines={s.headline.map(em)} eyebrow={s.eyebrow} primaryCta={s.primaryCta} secondaryCta={s.secondaryCta} />
+<FinalCTA image={s.image} pos={s.image.pos} lines={s.headline.map(em)} eyebrow={s.eyebrow} primaryCta={s.primaryCta} secondaryCta={s.secondaryCta} />

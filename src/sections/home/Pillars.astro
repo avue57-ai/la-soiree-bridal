@@ -1,5 +1,5 @@
 ---
-import Pic from '../../components/Pic.astro';
+import Img from '../../components/Img.astro';
 import Lines from '../../components/Lines.astro';
 import { em } from '../../lib/text.js';
 const { s } = Astro.props;
@@ -15,7 +15,7 @@ const { s } = Astro.props;
     <ol class="pillar-list" role="list">
       {s.items.map((p, i) => (
         <li class="pillar" data-reveal style={`--d:${i * 0.12}s`}>
-          <div class="media pillar-media"><Pic k={p.image.key} alt={p.image.alt} sizes="(min-width: 900px) 30vw, 88vw" pos={p.image.pos} /></div>
+          <div class="media pillar-media"><Img image={p.image} sizes="(min-width: 900px) 30vw, 88vw" /></div>
           <div class="pillar-text">
             <span class="numeral pillar-n" aria-hidden="true">{p.numeral}</span>
             <h3 class="h3">{p.title}</h3>

@@ -1,5 +1,5 @@
 ---
-import Pic from '../../components/Pic.astro';
+import Img from '../../components/Img.astro';
 import Lines from '../../components/Lines.astro';
 import { site } from '../../data/site.js';
 import { em } from '../../lib/text.js';
@@ -18,11 +18,11 @@ const [m1, m2, m3, m4, m5] = s.images;
       </div>
     </div>
     <div class="mosaic">
-      <figure class="m1 media" data-reveal="mask"><Pic k={m1.key} alt={m1.alt} sizes="(min-width: 900px) 58vw, 100vw" /></figure>
-      <figure class="m2 media" data-reveal="mask" style="--d:.1s"><Pic k={m2.key} alt={m2.alt} sizes="(min-width: 900px) 30vw, 50vw" /></figure>
-      <figure class="m3 media" data-reveal="mask" style="--d:.2s"><Pic k={m3.key} alt={m3.alt} sizes="(min-width: 900px) 24vw, 50vw" /></figure>
-      <figure class="m4 media" data-reveal="mask" style="--d:.25s"><Pic k={m4.key} alt={m4.alt} sizes="(min-width: 900px) 20vw, 50vw" /></figure>
-      <figure class="m5 media" data-reveal="mask" style="--d:.3s"><Pic k={m5.key} alt={m5.alt} sizes="(min-width: 900px) 24vw, 50vw" /></figure>
+      <figure class="m1 media" data-reveal="mask"><Img image={m1} sizes="(min-width: 900px) 58vw, 100vw" /></figure>
+      <figure class="m2 media" data-reveal="mask" style="--d:.1s"><Img image={m2} sizes="(min-width: 900px) 30vw, 50vw" /></figure>
+      <figure class="m3 media" data-reveal="mask" style="--d:.2s"><Img image={m3} sizes="(min-width: 900px) 24vw, 50vw" /></figure>
+      <figure class="m4 media" data-reveal="mask" style="--d:.25s"><Img image={m4} sizes="(min-width: 900px) 20vw, 50vw" /></figure>
+      <figure class="m5 media" data-reveal="mask" style="--d:.3s"><Img image={m5} sizes="(min-width: 900px) 24vw, 50vw" /></figure>
     </div>
     <div class="boutique-foot" data-reveal>
       <p class="small muted">{site.address.street}, {site.address.suite}, {site.address.city} · {s.footNote}</p>
